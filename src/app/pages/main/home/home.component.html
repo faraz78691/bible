@@ -1,0 +1,160 @@
+<div class="ct_middle_cnt">
+    <section class="mb-5" *ngIf="isActiveLabel()?.length > 0">
+      
+     <div class="d-flex align-items-center flex-wrap mb-4 justify-content-between gap-2">
+         <h2 class="mb-0 ct_h2">Search Results Verse</h2>
+         <a  class="ct_page_link" (click)="clearResults()">Clear Results</a>
+     </div>
+     <div class="ct_verse_bg" style="background-color:#3a0d0f;">
+         <img src="assets/img/verse_day1.jpg">
+         <div class="ct_verse_overlay">
+             <div class="ct_verse_head">
+                 <h4 class="mb-0">  {{isActiveLabel()[0]?.verse_number}}</h4>
+                 <p>
+                    {{isActiveLabel()[0]?.verse}}
+                 </p>
+                
+              <div class="ct_socials_bottom_position">
+                 <div class="d-flex align-items-end gap-3">
+                     <div class="ct_share_main">
+                         <i class="fa-solid fa-share-nodes"></i>
+                         <ul class="ct_animated_socials">
+                             <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                             <li> <a href="#"><i class="fa-solid fa-envelope"></i></a> </li> 
+                             <li> <a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                             <li> <a href="#"><i class="fa-brands fa-square-instagram"></i></a></li>
+                             <li><a href="#"><i class="fa-brands fa-pinterest-p"></i></a></li>
+                             <li><a href="#"><i class="fa-brands fa-digg"></i></a></li>
+                             <li><a href="#"><i class="fa-brands fa-stumbleupon"></i></a></li>
+                             <li> <a href="#"><i class="fa-brands fa-reddit"></i></a></li>
+                         </ul>
+                        </div>
+                        
+                  </div>
+                 <div class="d-flex align-items-end gap-3">
+                     <div>
+                         <button class="ct_custom_btn py-2 px-3 w-auto" data-bs-toggle="modal" data-bs-target="#ct_save_verse_modal" style="margin-top: 10px;"><i class="fa-solid fa-floppy-disk me-2"></i> Save Verse</button>
+                        </div>
+                     <div class="ct_customize_btn12">
+                        <button class="ct_custom_btn" (click)="customize = !customize"><i class="fa-regular fa-pen-to-square me-2" ></i> Customize</button>
+                    </div>
+                 </div>
+              </div>
+
+                
+             </div>
+
+            
+         </div>
+     </div>
+     <div class="ct_bottom_customize" *ngIf="customize">
+     
+         <label for="">Edit Verse No</label>
+         <ckeditor class="ct_ol_padd" [editor]="Editor" (change)="onEditorChange($event)" (ready)="onReady($event)" ></ckeditor>
+         <button class="ct_custom_btn w-auto mt-3 py-2">Save</button>
+     </div>
+    </section>
+    <section class="mb-5" *ngIf="verseDay$ | async as verses" >
+     <div class="d-flex align-items-center flex-wrap mb-4 justify-content-between gap-2">
+         <h2 class="mb-0 ct_h2">Bible Verse of the Day</h2>
+         <a href="bible-chapter.html" class="ct_page_link">Read whole chapter</a>
+     </div>
+     <div class="ct_verse_bg" style="background-color:#3a0d0f;">
+         <img src="assets/img/verse_day1.jpg">
+         <div class="ct_verse_overlay">
+             <div class="ct_verse_head">
+                 <h4 class="mb-0">{{verses.data.verse_number}}</h4>
+                 <p>
+                    {{verses.data.verse}}
+                 </p>
+                
+              <div class="ct_socials_bottom_position">
+                 <div class="d-flex align-items-end gap-3">
+                     <div class="ct_share_main">
+                         <i class="fa-solid fa-share-nodes"></i>
+                         <ul class="ct_animated_socials">
+                             <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                             <li> <a href="#"><i class="fa-solid fa-envelope"></i></a> </li> 
+                             <li> <a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                             <li> <a href="#"><i class="fa-brands fa-square-instagram"></i></a></li>
+                             <li><a href="#"><i class="fa-brands fa-pinterest-p"></i></a></li>
+                             <li><a href="#"><i class="fa-brands fa-digg"></i></a></li>
+                             <li><a href="#"><i class="fa-brands fa-stumbleupon"></i></a></li>
+                             <li> <a href="#"><i class="fa-brands fa-reddit"></i></a></li>
+                         </ul>
+                        </div>
+                        
+                  </div>
+                 <div class="d-flex align-items-end gap-3">
+                     <div>
+                         <button class="ct_custom_btn py-2 px-3 w-auto" data-bs-toggle="modal" data-bs-target="#ct_save_verse_modal" style="margin-top: 10px;"><i class="fa-solid fa-floppy-disk me-2"></i> Save Verse</button>
+                        </div>
+                     <div class="ct_customize_btn12">
+                        <button class="ct_custom_btn" (click)="customize = !customize"><i class="fa-regular fa-pen-to-square me-2" ></i> Customize</button>
+                    </div>
+                 </div>
+              </div>
+
+                
+             </div>
+
+            
+         </div>
+     </div>
+     <div class="ct_bottom_customize" *ngIf="customize">
+     
+         
+        <ckeditor class="ct_ol_padd" [editor]="Editor"  (change)="onEditorChange($event)" (ready)="onReady($event)" ></ckeditor>
+         <button class="ct_custom_btn w-auto mt-3 py-2">Save</button>
+     </div>
+    </section>
+
+
+    <section class="mb-3">
+     <div class="container">
+         <div class="col-md-12">
+             <div class="ct_banner_small">
+                 <img src="assets/img/verse_day2.jpg" alt="">
+             </div>
+         </div>
+
+     </div>
+    </section>
+    <section>
+     <div class="container">
+         <div class="col-md-12">
+             <div class="ct_banner_big">
+                 <img src="assets/img/verse_day2.jpg" alt="">
+             </div>
+         </div>
+
+     </div>
+    </section>
+
+
+    
+
+
+ </div>
+
+ <div class="modal fade" id="ct_save_verse_modal" tabindex="-1" aria-labelledby="ct_save_verse_modalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body border-0 pt-0">
+            <div class="ct_saved_verse_modal">
+                <h4 class="mb-4 text-center"><strong>Save Verse</strong></h4>
+                <form >
+                    <textarea rows="4" class="form-control" placeholder="Please add a note" [(ngModel)]="notes"></textarea>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn-secondary ct_custom_btn text-dark py-2 px-4  w-auto" style="background-color: #eee;" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="ct_custom_btn py-2 px-4 w-auto" (click)="saveVerse()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>

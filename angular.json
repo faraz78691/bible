@@ -5,7 +5,11 @@
   "projects": {
     "bibleWebApp": {
       "projectType": "application",
-      "schematics": {},
+      "schematics":  {
+        "@schematics/angular:component": {
+          "standalone": true
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -94,5 +98,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "0942b8b5-b82d-4522-8de8-bb03a25fa196"
   }
 }
