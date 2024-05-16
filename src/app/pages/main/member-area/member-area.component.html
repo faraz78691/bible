@@ -1,46 +1,57 @@
-    <div class="ct_middle_cnt">
-        <div class="ct_custom_tabs">
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="pills-Saved-Verses-tab" data-bs-toggle="pill" data-bs-target="#pills-Saved-Verses" type="button" role="tab" aria-controls="pills-Saved-Verses" aria-selected="true">Saved Verses</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-Notes-tab" data-bs-toggle="pill" data-bs-target="#pills-Notes" type="button" role="tab" aria-controls="pills-Notes" aria-selected="false">Notes</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-Saved-Edited-Verses-tab" data-bs-toggle="pill" data-bs-target="#pills-Saved-Edited-Verses" type="button" role="tab" aria-controls="pills-Saved-Edited-Verses" aria-selected="false">Saved Edited Verses</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-Friends-Email-List-tab" data-bs-toggle="pill" data-bs-target="#pills-Friends-Email-List" type="button" role="tab" aria-controls="pills-Friends-Email-List" aria-selected="false">Friends Email List</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-Saved-Searches-tab" data-bs-toggle="pill" data-bs-target="#pills-Saved-Searches" type="button" role="tab" aria-controls="pills-Saved-Searches" aria-selected="false">Saved Searches</button>
-                </li>
-            
-            
-            </ul>
-            <div class="tab-content mt-5" id="pills-tabContent"> 
-                <div class="tab-pane fade show active" id="pills-Saved-Verses" role="tabpanel" aria-labelledby="pills-Saved-Verses-tab" *ngIf="savedverse$ | async as savedVerse">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12" *ngFor="let items of savedVerse.data">
-                            <div class="ct_verse_bg mb-4" style="background-color:#3a0d0f;">
-                                <img src="img/verse_day1.jpg">
-                                <div class="ct_verse_overlay">
-                                    <span class="ct_saved_verse_date">{{items.created_at}}</span>
-                                    <div class="ct_verse_head">
-                                        <h4 class="mb-0">{{items.verse_number}}</h4>
-                                        <p>
-                                            {{items.verse}}
-                                        </p>
+<div class="ct_middle_cnt">
+    <div class="ct_custom_tabs">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-Saved-Verses-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-Saved-Verses" type="button" role="tab" aria-controls="pills-Saved-Verses"
+                    aria-selected="true">Saved Verses</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-Notes-tab" data-bs-toggle="pill" data-bs-target="#pills-Notes"
+                    type="button" role="tab" aria-controls="pills-Notes" aria-selected="false">Notes</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-Saved-Edited-Verses-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-Saved-Edited-Verses" type="button" role="tab"
+                    aria-controls="pills-Saved-Edited-Verses" aria-selected="false">Saved Edited Verses</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-Friends-Email-List-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-Friends-Email-List" type="button" role="tab"
+                    aria-controls="pills-Friends-Email-List" aria-selected="false">Friends Email List</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-Saved-Searches-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-Saved-Searches" type="button" role="tab" aria-controls="pills-Saved-Searches"
+                    aria-selected="false">Saved Searches</button>
+            </li>
+
+
+        </ul>
+        <div class="tab-content mt-5" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-Saved-Verses" role="tabpanel"
+                aria-labelledby="pills-Saved-Verses-tab" *ngIf="savedverse$ | async as savedVerse">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12" *ngFor="let items of savedVerse.data">
+                        <div class="ct_verse_bg mb-4" style="background-color:#3a0d0f;">
+                            <img src="img/verse_day1.jpg">
+                            <div class="ct_verse_overlay">
+                                <span class="ct_saved_verse_date">{{items.created_at}}</span>
+                                <div class="ct_verse_head">
+                                    <h4 class="mb-0">{{items.verse_number}}</h4>
+                                    <p>
+                                        {{items.verse}}
+                                    </p>
                                     <div class="ct_socials_bottom_position">
                                         <div class="d-flex align-items-center">
                                             <div class="ct_share_main">
                                                 <i class="fa-solid fa-share-nodes"></i>
                                                 <ul class="ct_animated_socials">
                                                     <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                                    <li> <a href="#"><i class="fa-solid fa-envelope"></i></a> </li> 
+                                                    <li> <a href="#"><i class="fa-solid fa-envelope"></i></a> </li>
                                                     <li> <a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
-                                                    <li> <a href="#"><i class="fa-brands fa-square-instagram"></i></a></li>
+                                                    <li> <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
+                                                    </li>
                                                     <li><a href="#"><i class="fa-brands fa-pinterest-p"></i></a></li>
                                                     <li><a href="#"><i class="fa-brands fa-digg"></i></a></li>
                                                     <li><a href="#"><i class="fa-brands fa-stumbleupon"></i></a></li>
@@ -48,132 +59,164 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                    
+
                                     </div>
-                
-                                    
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+            <div class="tab-pane fade" id="pills-Notes" role="tabpanel" aria-labelledby="pills-Notes-tab">
+                <div class="row">
+                    <div class="col-md-4 mb-4" *ngFor="let items of notedverse">
+                        <div class="ct_notes_box">
+                            <h4> Verse: {{items.verse_number}}</h4>
+                            <p>Note: "{{items.notes}}"</p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- <div class="tab-pane fade" id="pills-Saved-Edited-Verses" role="tabpanel"
+                aria-labelledby="pills-Saved-Edited-Verses-tab" *ngIf="editedverse$ | async as editedVerse;">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6" *ngFor="let items of editedVerse.data">
+                        <div class="ct_verse_bg mb-4" style="background-color:#f5f5f5; height: 300px;">
+                            <div class="ct_verse_overlay">
+                                <div class="ct_verse_head">
+                                    <div class="mb-0 ct_innerhtml_p" [innerHTML]="items.verse_number | safeHtml"></div>
+                                    <div class="ct_innerhtml_p" [innerHTML]="items.verse">
+
                                     </div>
-                
-                                
                                 </div>
                             </div>
                         </div>
-                    
+                    </div>
 
-                    </div>
-                
-            
-                
+
                 </div>
-                <div class="tab-pane fade" id="pills-Notes" role="tabpanel" aria-labelledby="pills-Notes-tab">
-                    <div class="row">
-                        <div class="col-md-4 mb-4" *ngFor="let items of notedverse">
-                            <div class="ct_notes_box">
-                            <h4> Verse: {{items.verse_number}}</h4>
-                                <p>Note: "{{items.notes}}"</p>
-                            </div>
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="pills-Saved-Edited-Verses" role="tabpanel" aria-labelledby="pills-Saved-Edited-Verses-tab" *ngIf="editedverse$ | async as editedVerse">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6" *ngFor="let items of editedVerse.data">
-                            <div class="ct_verse_bg mb-4" style="background-color:#f5f5f5; height: 300px;">
-                                <div class="ct_verse_overlay">
-                                    <div class="ct_verse_head">
-                                        <div  class="mb-0 ct_innerhtml_p"  [innerHTML]="items.verse_number | safeHtml"></div>
-                                        <div class="ct_innerhtml_p" [innerHTML]="items.verse">
-                                    
+            </div> -->
+            <div class="tab-pane fade" id="pills-Saved-Edited-Verses" role="tabpanel"
+                aria-labelledby="pills-Saved-Edited-Verses-tab">
+                <div *ngIf="(editedverse$ | async) as editedVerse; else noDataTemplate">
+                    <div *ngIf="editedVerse.data.length > 0; else noDataTemplate">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6" *ngFor="let items of editedVerse.data">
+                                <div class="ct_verse_bg mb-4" style="background-color:#f5f5f5; height: 300px;">
+                                    <div class="ct_verse_overlay">
+                                        <div class="ct_verse_head">
+                                            <div class="mb-0 ct_innerhtml_p"
+                                                [innerHTML]="items.verse_number | safeHtml"></div>
+                                            <div class="ct_innerhtml_p" [innerHTML]="items.verse"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                
-
                     </div>
                 </div>
-                <div class="tab-pane fade" id="pills-Friends-Email-List" role="tabpanel" aria-labelledby="pills-Friends-Email-List-tab">
-                    <div class="ct_past_dailys_section mb-5">
-                       <div class="d-flex align-items-center justify-content-between mb-4">
+            </div>
+
+            <ng-template #noDataTemplate>
+                <div class="no-data-found">
+                    No data found
+                </div>
+            </ng-template>
+
+            <div class="tab-pane fade" id="pills-Friends-Email-List" role="tabpanel"
+                aria-labelledby="pills-Friends-Email-List-tab">
+                <div class="ct_past_dailys_section mb-5">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
                         <h4 class="mb-0 ct_h2 ">Friends Email List</h4>
-                        <button class="ct_custom_btn py-2 px-3 w-auto" data-bs-target="#ct_frreinds" data-bs-toggle="modal">+ Add Friends</button>
-                       </div>
-                        <div class="table-responsive ct_custom_table">
-                            <table class="table  table-striped w-100"  id="example">
-                                <thead>
-                                    <tr>
-                                    
-                                        <th>Name</th>
-                                        <th>Friends Email</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                      
-                                        <td>
-                                            John
-                                        </td>
-                                        <td>johncom</td>
-                                    </tr>
-                                   
-                                </tbody>
-        
-                            </table>
+                        <button class="ct_custom_btn py-2 px-3 w-auto" data-bs-target="#ct_frreinds"
+                            data-bs-toggle="modal">+ Add Friends</button>
+                    </div>
+
+                    <div class="table-responsive ct_custom_table">
+                        <table class="table  table-striped w-100" id="example">
+                            <thead>
+                                <tr>
+
+                                    <th>Name</th>
+                                    <th>Friends Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+
+                                    <td>
+                                        John
+                                    </td>
+                                    <td>johncom</td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-Saved-Searches" role="tabpanel"
+                aria-labelledby="pills-Saved-Searches-tab">
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="ct_search_list">
+                            <h4>Keyword: John 3:16</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="ct_search_list">
+                            <h4>Keyword: John 3:16</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="ct_search_list">
+                            <h4>Keyword: John 3:16</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="ct_search_list">
+                            <h4>Keyword: John 3:16</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="ct_search_list">
+                            <h4>Keyword: John 3:16</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="ct_search_list">
+                            <h4>Keyword: John 3:16</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="ct_search_list">
+                            <h4>Keyword: John 3:16</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="ct_search_list">
+                            <h4>Keyword: John 3:16</h4>
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="pills-Saved-Searches" role="tabpanel" aria-labelledby="pills-Saved-Searches-tab">
-                    <div class="row mb-4">
-                        <div class="col-md-12">
-                            <div class="ct_search_list">
-                            <h4>Keyword: John 3:16</h4>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="ct_search_list">
-                            <h4>Keyword: John 3:16</h4>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="ct_search_list">
-                            <h4>Keyword: John 3:16</h4>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="ct_search_list">
-                            <h4>Keyword: John 3:16</h4>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="ct_search_list">
-                            <h4>Keyword: John 3:16</h4>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="ct_search_list">
-                            <h4>Keyword: John 3:16</h4>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="ct_search_list">
-                            <h4>Keyword: John 3:16</h4>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="ct_search_list">
-                            <h4>Keyword: John 3:16</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> 
+            </div>
         </div>
+    </div>
 
 
-    <section class="mb-3">
+    <!-- <section class="mb-3">
         <div class="container">
             <div class="col-md-12">
                 <div class="ct_banner_small">
@@ -192,46 +235,64 @@
             </div>
 
         </div>
-    </section>
-
-
-    
-
-
-    </div>
+    </section> -->
+    <app-footer></app-footer>
 
 
 
-    <!-- modal -->
+</div>
 
-    
- <div class="modal fade" id="ct_frreinds" tabindex="-1" aria-labelledby="ct_save_verse_modalLabel" aria-hidden="true">
+
+
+<!-- modal -->
+
+
+<div class="modal fade" id="ct_frreinds" tabindex="-1" aria-labelledby="ct_save_verse_modalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header border-0 pb-0">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body border-0 pt-0">
-            <div class="ct_saved_verse_modal">
-                <h4 class="mb-5 text-center"><strong>Add Friend</strong></h4>
-                <form >
-                    <div class="form-floating mb-3 ct_input">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="Enter Name">
-                        <label for="floatingInput">Name</label>
-                        <!-- <p class="ct_error_text">Please enter your name</p> -->
-                      </div>
-                      <div class="form-floating mb-3 ct_input">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="Enter Email">
-                        <label for="floatingInput">Email</label>
-                        <!-- <p class="ct_error_text">Please enter your name</p> -->
-                      </div>
-                </form>
+        <div class="modal-content">
+            <div class="modal-header border-0 pb-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body border-0 pt-0">
+                <div class="ct_saved_verse_modal">
+                    <h4 class="mb-5 text-center"><strong>Add Friend</strong></h4>
+                    <form [formGroup]="form">
+                        <div class="form-floating mb-3 ct_input">
+                            <input type="email" class="form-control" id="floatingInput" formControlName="name"
+                                placeholder="Enter Name">
+                            <label for="floatingInput">Name</label>
+                            <!-- <p class="ct_error_text">Please enter your name</p> -->
+                            <div *ngIf="form.controls['name'].invalid && form.controls['name'].touched"
+                                class="error-message">
+                                <div *ngIf="form.controls['name'].errors?.['required']">Name is
+                                    required.
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-floating mb-3 ct_input">
+                            <input type="email" class="form-control" id="floatingInput" formControlName="email"
+                                placeholder="Enter Email">
+                            <label for="floatingInput">Email</label>
+                            <!-- <p class="ct_error_text">Please enter your name</p> -->
+                            <div *ngIf="form.controls['email'].invalid && form.controls['email'].touched"
+                                class="error-message">
+                                <div *ngIf="form.controls['email'].errors?.['required']">Email is required.</div>
+                                <div
+                                    *ngIf="form.controls['email'].errors?.['email'] && !form.controls['email'].errors?.['required']">
+                                    Invalid email format.</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer border-0 justify-content-center">
+                <button type="button" class="btn-secondary ct_custom_btn text-dark py-2 px-4  w-auto"
+                    style="background-color:  #eee;" data-bs-dismiss="modal" id="modalClose">Close</button>
+                <button (click)="addFriend()" type="button" class="ct_custom_btn py-2 px-4 w-auto">Save</button>
+                <button hidden type="button" class="btn btn-secondary" #closeModal
+                    data-bs-dismiss="modal">Close</button>
             </div>
         </div>
-        <div class="modal-footer border-0 justify-content-center">
-          <button type="button" class="btn-secondary ct_custom_btn text-dark py-2 px-4  w-auto" style="background-color:  #eee;" data-bs-dismiss="modal" id="modalClose">Close</button>
-          <button type="button" class="ct_custom_btn py-2 px-4 w-auto" >Save</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>

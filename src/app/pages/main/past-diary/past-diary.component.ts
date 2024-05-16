@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ApiService } from 'src/app/services/api.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { Observable } from 'rxjs';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-past-diary',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FooterComponent],
   templateUrl: './past-diary.component.html',
   styleUrls: ['./past-diary.component.css']
 })

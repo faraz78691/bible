@@ -15,11 +15,12 @@ interface PageEvent {
   pageCount: number;
 }
 import {TableModule} from 'primeng/table';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CKEditorModule, FormsModule, PaginatorModule,TableModule],
+  imports: [CommonModule, CKEditorModule, FormsModule, PaginatorModule, TableModule,FooterComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
