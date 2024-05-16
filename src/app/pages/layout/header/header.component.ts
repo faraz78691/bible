@@ -40,6 +40,10 @@ export class HeaderComponent {
     })
   };
 
+  logout(){
+    this.apiService.logout();
+  }
+
 
   onChangeVersion(option: any) {
     

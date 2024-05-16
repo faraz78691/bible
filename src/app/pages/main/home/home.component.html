@@ -54,6 +54,18 @@
          <button class="ct_custom_btn w-auto mt-3 py-2">Save</button>
      </div>
     </section>
+
+    <section>
+
+        <p-paginator 
+    (onPageChange)="onPageChange($event)" 
+    [first]="first"
+    [rows]="rows" 
+    [totalRecords]="120" 
+    [rowsPerPageOptions]="[10, 20, 30]" />
+    </section>
+
+
     <section class="mb-5" *ngIf="verseDay$ | async as verses" >
      <div class="d-flex align-items-center flex-wrap mb-4 justify-content-between gap-2">
          <h2 class="mb-0 ct_h2">Bible Verse of the Day</h2>

@@ -10,19 +10,32 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor() { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if(request.body){
-      console.log("working");
-      const modifiedHeaders = request.headers.set(
-          'Content-Type', 'application/x-www-form-urlencoded')
-          .set('Access-Control-Allow-Origin', '*');
+    const authToken = localStorage.getItem('token');
+
+    if (authToken) {
+      let modifiedHeaders = request.headers
+        .set('Authorization', `Bearer ${authToken}`)
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .set('Access-Control-Allow-Origin', '*');
+
       request = request.clone({
-          headers:modifiedHeaders
+        headers: modifiedHeaders
       });
-      return next.handle(request);
-  }
+    } else {
+      let modifiedHeaders = request.headers
+        .set('Authorization', `Bearer ${authToken}`)
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .set('Access-Control-Allow-Origin', '*');
+
+      request = request.clone({
+        headers: modifiedHeaders
+      });
+
+    }
+
     return next.handle(request);
   }
 }

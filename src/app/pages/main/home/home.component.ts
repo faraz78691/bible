@@ -7,10 +7,18 @@ import { ApiService } from 'src/app/services/api.service';
 import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { Observable, tap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { PaginatorModule } from 'primeng/paginator';
+interface PageEvent {
+  first: number;
+  rows: number;
+  page: number;
+  pageCount: number;
+}
+
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CKEditorModule, FormsModule],
+  imports: [CommonModule, CKEditorModule, FormsModule, PaginatorModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -28,6 +36,15 @@ export class HomeComponent {
   notes: string = '';
   constructor(private loaderService: LoaderService, private apiService: ApiService) { }
 
+
+  first: number = 0;
+
+  rows: number = 10;
+
+  onPageChange(event: any) {
+      this.first = event.first;
+      this.rows = event.rows;
+  }
 
   public onReady(editor: any) {
     editor.ui.getEditableElement().parentElement.insertBefore(
