@@ -47,6 +47,10 @@ export class HeaderComponent {
     this.apiService.postAPI('getBibleVersesByKeyword', formData.toString()).subscribe({
       next: res => {
         console.log(res)
+        if(res.success == true){
+          this.apiService.keywordVerseData.set(res.data)
+          console.log(this.apiService.keywordVerseData());
+        }
         // this.apiService.verses.set(res.data);
         // console.log(this.apiService.verses());
         

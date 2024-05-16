@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class ApiService {
 apiUrl = 'http://192.168.1.18:4000/'
 verses = signal<any>([]);
+keywordVerseData = signal<any>([]);
 
   constructor(private http:HttpClient,private toastr: ToastrService, private route: Router) { }
 

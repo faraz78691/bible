@@ -59,29 +59,31 @@
         </div>
     </section>
 
-    <section>
-
-        <!-- <p-table [value]="data">
+    <section class="mb-5" *ngIf="keywordDatas().length >0">
+        <div class="d-flex align-items-center flex-wrap mb-4 justify-content-between gap-2">
+            <h2 class="mb-0 ct_h2">Search Results Verse</h2>
+            <a class="ct_page_link" (click)="clearResults()">Clear Results</a>
+        </div>
+        <p-table class="ct_custom_table" [value]="keywordDatas()"  [paginator]="true" [rows]="10">
             <ng-template pTemplate="header">
                 <tr>
-                    <th>Vin</th>
-                    <th>Year</th>
-                    <th>Brand</th>
-                    <th>Color</th>
+                    <th>#</th>
+                    <th>Verse No.</th>
+                    <th>Verse</th>
+                    <th>Action</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-car>
                 <tr>
-                    <td>{{car.vin}}</td>
-                    <td>{{car.year}}</td>
-                    <td>{{car.brand}}</td>
-                    <td>{{car.color}}</td>
+                    <td></td>
+                    <td>{{car.verse_number}}</td>
+                    <td>{{car.verse}}</td>
+                    <td>Action</td>
                 </tr>
             </ng-template>
-        </p-table> -->
+        </p-table>
 
-        <!-- <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="120"
-            [rowsPerPageOptions]="[10, 20, 30]" /> -->
+
     </section>
 
 
@@ -150,6 +152,7 @@
 
 
     <section class="mb-3">
+
         <div class="container">
             <div class="col-md-12">
                 <div class="ct_banner_small">

@@ -32,10 +32,25 @@ export class HomeComponent {
   verse_number = '';
   verse = '';
   isActiveLabel = computed(() => this.apiService.verses());
+  keywordDatas = computed(() => this.apiService.keywordVerseData());
   verseDay$!: Observable<any>;
   verseOftheDay: any = {};
   notes: string = '';
-  constructor(private loaderService: LoaderService, private apiService: ApiService) { }
+  representatives: any[];
+  constructor(private loaderService: LoaderService, private apiService: ApiService) { 
+    this.representatives = [
+      {name: "Amy Elsner", image: 'amyelsner.png'},
+      {name: "Anna Fali", image: 'annafali.png'},
+      {name: "Asiya Javayant", image: 'asiyajavayant.png'},
+      {name: "Bernardo Dominic", image: 'bernardodominic.png'},
+      {name: "Elwin Sharvill", image: 'elwinsharvill.png'},
+      {name: "Ioni Bowcher", image: 'ionibowcher.png'},
+      {name: "Ivan Magalhaes",image: 'ivanmagalhaes.png'},
+      {name: "Onyama Limba", image: 'onyamalimba.png'},
+      {name: "Stephen Shaw", image: 'stephenshaw.png'},
+      {name: "Xuxue Feng", image: 'xuxuefeng.png'}
+  ];
+  }
 
 
   first: number = 0;
