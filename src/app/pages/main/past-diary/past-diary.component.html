@@ -4,55 +4,20 @@
         <h4 class="mb-0 ct_h2 mb-4">Past Dailys</h4>
 
         <div class="table-responsive ct_custom_table">
-            <table class="table  table-striped"  id="example">
+            <table class="table  table-striped"  id="example" *ngIf="verseDay$ | async as verses">
                 <thead>
                     <tr>
                         <th>Date</th>
+                        <th>Verse No.</th>
                         <th>Daily Bible verse/s for this date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><a href="view-previous_day.html" target="_blank">15/04/2024</a></td>
-                        <td><a href="view-previous_day.html" target="_blank"> Know this, my beloved brothers let every person be quick to hear, slow to speak, slow to anger</a></td>
+                    <tr *ngFor="let items of verses.data">
+                        <td><a  >{{items.created_at | date:'dd-MM-YYYY'}}</a></td>
+                        <td><a href="view-previous_day.html" target="_blank"> {{items.verse_number}}</a></td>
+                        <td><a href="view-previous_day.html" target="_blank"> {{items.verse}}</a></td>
                     </tr>
-                    <tr>
-                        <td><a href="view-previous_day.html" target="_blank">15/04/2024</a></td>
-                        <td><a href="view-previous_day.html" target="_blank"> Know this, my beloved brothers let every person be quick to hear, slow to speak, slow to anger</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="view-previous_day.html" target="_blank">15/04/2024</a></td>
-                        <td><a href="view-previous_day.html" target="_blank"> Know this, my beloved brothers let every person be quick to hear, slow to speak, slow to anger</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="view-previous_day.html" target="_blank">15/04/2024</a></td>
-                        <td><a href="view-previous_day.html" target="_blank"> Know this, my beloved brothers let every person be quick to hear, slow to speak, slow to anger</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="view-previous_day.html" target="_blank">15/04/2024</a></td>
-                        <td><a href="view-previous_day.html" target="_blank"> Know this, my beloved brothers let every person be quick to hear, slow to speak, slow to anger</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="view-previous_day.html" target="_blank">15/04/2024</a></td>
-                        <td><a href="view-previous_day.html" target="_blank"> Know this, my beloved brothers let every person be quick to hear, slow to speak, slow to anger</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="view-previous_day.html" target="_blank">15/04/2024</a></td>
-                        <td><a href="view-previous_day.html" target="_blank"> Know this, my beloved brothers let every person be quick to hear, slow to speak, slow to anger</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="view-previous_day.html" target="_blank">15/04/2024</a></td>
-                        <td><a href="view-previous_day.html" target="_blank"> Know this, my beloved brothers let every person be quick to hear, slow to speak, slow to anger</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="view-previous_day.html" target="_blank">15/04/2024</a></td>
-                        <td><a href="view-previous_day.html" target="_blank"> Know this, my beloved brothers let every person be quick to hear, slow to speak, slow to anger</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="view-previous_day.html" target="_blank">15/04/2024</a></td>
-                        <td><a href="view-previous_day.html" target="_blank"> Know this, my beloved brothers let every person be quick to hear, slow to speak, slow to anger</a></td>
-                    </tr>
-
                 </tbody>
 
             </table>

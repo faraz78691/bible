@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+ /* regular style toast */
+@import 'ngx-toastr/toastr';
+
+.ct_innerhtml_p p {
+    color: black;
+}
+
+h4.ct_innerhtml_p{
+    font-family: 'Roboto', sans-serif;
+}

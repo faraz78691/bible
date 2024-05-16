@@ -6,6 +6,8 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { RouterModule, Routes, provideRouter } from '@angular/router';
 import { AuthInterceptor } from './app/auth.interceptor';
+import { provideToastr } from 'ngx-toastr';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 
 export const routes: Routes = [
@@ -35,6 +37,8 @@ export const routes: Routes = [
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideAnimations(), // required animations providers
+    provideToastr(), // Toastr providers
     provideHttpClient(
       withInterceptorsFromDi(),
       

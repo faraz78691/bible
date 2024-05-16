@@ -10,19 +10,23 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,CKEditorModule, FormsModule],
+  imports: [CommonModule, CKEditorModule, FormsModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
   customize = false;
   public Editor = DecoupledEditor;
-  public editorData = '<p>Hello, world!</p>';
+  public Editor2 = DecoupledEditor;
+  public editorData = '';
+  public editorData2 = '<p>Hello, world!</p>';
+  verse_number = '';
+  verse = '';
   isActiveLabel = computed(() => this.apiService.verses());
-  verseDay$! :Observable<any>;
-  verseOftheDay :any[]= [];
-  notes:string = '';
-  constructor(private loaderService: LoaderService, private apiService :ApiService) { }
+  verseDay$!: Observable<any>;
+  verseOftheDay: any = {};
+  notes: string = '';
+  constructor(private loaderService: LoaderService, private apiService: ApiService) { }
 
 
   public onReady(editor: any) {
@@ -34,42 +38,81 @@ export class HomeComponent {
   ngOnInit(): void {
 
 
-this.verseDay$ = this.apiService.getApi('getBibleVerseOfTheDay').pipe(tap(value=>{
-console.log(value);
-this.verseOftheDay = value.data;
-}))
-   
+    this.verseDay$ = this.apiService.getApi('getBibleVerseOfTheDay').pipe(tap(value => {
+      console.log(value);
+      this.verseOftheDay = value.data;
+    }))
+
     this.loaderService.removeLoaderClass();
   };
 
   onEditorChange(event: any) {
     this.editorData = event.editor.getData();
   };
+  onEditorChange2(event: any) {
+    this.editorData2 = event.editor.getData();
+  };
 
-  getVersions(){
+  getVersions() {
     this.apiService.getApi('getVersion')
   };
 
-  getVerseOfTheDay(){
+  getVerseOfTheDay() {
     this.apiService.getApi('getBibleVerseOfTheDay')
   };
 
 
-clearResults(){
-  this.apiService.verses.set([]);
+  clearResults() {
+    this.apiService.verses.set([]);
+
+  };
+
+  saveVerse() {
+    console.log("yo", this.verseOftheDay);
+    const formData = new URLSearchParams();
+    formData.set('verse_number', this.verseOftheDay.verse_number)
+    formData.set('verse', this.verseOftheDay.verse)
+    formData.set('notes', this.notes)
+
+    this.apiService.postAPI('saveBibleVerses', formData.toString()).subscribe({
+      next: res => {
+        console.log(res)
+        if (res.success == true) {
+          document.getElementById('modalClose')?.click()
+        }
+      }
+    })
+
+  };
+
+
+  customizeVerse() {
+    this.customize = !this.customize;
+    this.editorData = `<p>${this.verseOftheDay.verse_number}</p>`
+    this.editorData2 = `<p>${this.verseOftheDay.verse}</p>`
    
-};
+  };
 
-saveVerse(){
-const formData = new URLSearchParams();
-formData.set('verse_number',this.verseOftheDay[0].verse_number)
-formData.set('verse',this.verseOftheDay[0].verse)
-formData.set('notes',this.verseOftheDay[0].verse)
 
-this.apiService.postAPI('saveBibleVerses', formData.toString()).subscribe({next:res=>{
-  console.log(res)
-}})
+  saveEditedVerse(message: any) {
+   console.log(this.editorData);
+   console.log(this.editorData2);
+   
+    const formData = new URLSearchParams();
+    formData.set('verse_number', this.editorData)
+    formData.set('verse', this.editorData2)
+    formData.set('notes', message.value)
 
-}
+    this.apiService.postAPI('saveEditedBibleVerses', formData.toString()).subscribe({
+      next: res => {
+        console.log(res)
+        if (res.success == true) {
+          // document.getElementById('modalClose')?.click()
+          this.apiService.showSuccess(res.message)
+          this.customize = false;
+        }
+      }
+    })
+  }
 
 }
