@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -14,7 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,AppComponent,
-    AppRoutingModule,CKEditorModule,HttpClientModule
+    AppRoutingModule,HttpClientModule
   ],
   providers: [],
   bootstrap: []
