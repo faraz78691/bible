@@ -1,7 +1,7 @@
 import { Component, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoaderService } from 'src/app/services/loader.service';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ApiService } from 'src/app/services/api.service';
 import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
