@@ -14,11 +14,12 @@ interface PageEvent {
   page: number;
   pageCount: number;
 }
+import {TableModule} from 'primeng/table';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CKEditorModule, FormsModule, PaginatorModule],
+  imports: [CommonModule, CKEditorModule, FormsModule, PaginatorModule,TableModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

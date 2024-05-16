@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 export class HeaderComponent {
   version$!: Observable<any>;
   verse_number: string = '';
+  keyWord: string = ''
   selectedOption: string = '';
   verseSignal = computed(()=>{
     this.apiService.verses()
@@ -22,7 +23,6 @@ export class HeaderComponent {
 
   }
   ngOnInit() {
-
     this.version$ = this.apiService.getApi('getversion')
   }
 
@@ -35,6 +35,20 @@ export class HeaderComponent {
       next: res => {
         this.apiService.verses.set(res.data);
         console.log(this.apiService.verses());
+        
+      }
+    })
+  };
+
+  search_keyword() {
+    const formData = new URLSearchParams();
+    formData.set("table_name", this.selectedOption)
+    formData.set("keyword", this.keyWord)
+    this.apiService.postAPI('getBibleVersesByKeyword', formData.toString()).subscribe({
+      next: res => {
+        console.log(res)
+        // this.apiService.verses.set(res.data);
+        // console.log(this.apiService.verses());
         
       }
     })
