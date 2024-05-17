@@ -351,8 +351,8 @@ color: #000;
     height: 42px;
 }
 .ct_search_bar i{
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 10px;
     color: #fff;
     display: flex;
@@ -361,7 +361,7 @@ color: #000;
     background-color: var(--red);
     position: absolute;
     top: 50%;
-    right: -34px;
+    right: -49px;
     transform: translateY(-50%);
     cursor: pointer;
 
@@ -694,6 +694,8 @@ select.ct_verse_version_drop {
     color: #fff;
     border-bottom: none;
     vertical-align: middle;
+    padding: 10px 15px;
+    white-space: nowrap;
 }
 
 
@@ -719,6 +721,7 @@ select.ct_verse_version_drop {
 .ct_custom_table tbody tr td{
     vertical-align: middle;
     padding-block: 10px;
+    padding-inline: 15px;
 }
 .ct_custom_table tbody tr:last-child td{
     border-bottom: 0px;
