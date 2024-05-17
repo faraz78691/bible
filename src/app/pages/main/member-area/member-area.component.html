@@ -80,7 +80,7 @@
                 <div class="row">
                     <div class="col-md-4 mb-4" *ngFor="let items of notedverse">
                         <div class="ct_notes_box">
-                            <h4> Verse: {{items.verse_number}}</h4>
+                            <h4> Verse: {{items.book_name}} {{items.verse_number}}:{{items.chapter}}</h4>
                             <p>Note: "{{items.notes}}"</p>
                         </div>
                     </div>
