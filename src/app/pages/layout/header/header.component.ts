@@ -39,14 +39,15 @@ export class HeaderComponent {
     this.version$ = this.apiService.getApi('getversion').pipe(tap((items: any) => {
       this.selectedOption = items.data[0].table_name;
       this.getBooksName()
-      
     }))
   }
 
   search_verse() {
     const formData = new URLSearchParams();
     formData.set("table_name", this.selectedOption)
-    formData.set("verse_no", this.verse_number)
+    formData.set("book_name", this.selectedBookName)
+    formData.set("verse_number", this.selectedVerse)
+    formData.set("chatperNo", this.selectedChapter)
 
     this.apiService.postAPI('getVerses', formData.toString()).subscribe({
       next: res => {
@@ -92,7 +93,7 @@ export class HeaderComponent {
       next: resp => {
         this.bookNames = resp.data;
         this.selectedBookName = this.bookNames[0].book_name;
-        this.getChapterNo()
+        this.getChapterNo();
       }
     })
   }
