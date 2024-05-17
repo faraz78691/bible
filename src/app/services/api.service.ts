@@ -25,6 +25,10 @@ keywordVerseData = signal<any>([]);
   getApi(url:any):Observable<any>{
     return this.http.get(this.apiUrl + url )
   };
+
+  isLogedIn() {
+    return this.getToken() !== null;
+  }
   
   postAPI(url:any, data:any):Observable<any>{
     return this.http.post(this.apiUrl + url ,data )

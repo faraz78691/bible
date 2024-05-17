@@ -7,6 +7,7 @@ import { BibleBooksComponent } from "../bible-books/bible-books.component";
 import { MemberAreaComponent } from "../member-area/member-area.component";
 import { SuggestedSitesComponent } from "../suggested-sites/suggested-sites.component";
 import { BibleChapterComponent } from "../bible-chapter/bible-chapter.component";
+import { AuthGuard } from "src/app/guard/auth.guard";
 
 export const  MAIN_ROUTES: Routes = [
  {
@@ -19,27 +20,27 @@ export const  MAIN_ROUTES: Routes = [
             redirectTo: 'home'
         },
         {
-            path: 'home',
+            path: 'home',  canActivate: [AuthGuard],
             component: HomeComponent
         },
         {
-            path: 'past_daily',
+            path: 'past_daily', canActivate: [AuthGuard],
             component: PastDiaryComponent
         },
         {
-            path: 'bible_books',
+            path: 'bible_books', canActivate: [AuthGuard],
             component: BibleBooksComponent
         },
         {
-            path: 'member_area',
+            path: 'member_area', canActivate: [AuthGuard],
             component: MemberAreaComponent
         },
         {
-            path: 'suggested_bible',
+            path: 'suggested_bible', canActivate: [AuthGuard],
             component: SuggestedSitesComponent
         },
         {
-            path: 'bible_chapter',
+            path: 'bible_chapter', canActivate: [AuthGuard],
             component: BibleChapterComponent
         }
     ]
