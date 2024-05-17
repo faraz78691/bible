@@ -34,11 +34,11 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-12" *ngFor="let items of savedVerse.data">
                         <div class="ct_verse_bg mb-4" style="background-color:#3a0d0f;">
-                            <img src="img/verse_day1.jpg">
+                            <img src="assets/img/verse_day1.jpg">
                             <div class="ct_verse_overlay">
-                                <span class="ct_saved_verse_date">{{items.created_at}}</span>
+                                <span class="ct_saved_verse_date">{{items.created_at | date:'yyyy-MM-dd' }}</span>
                                 <div class="ct_verse_head">
-                                    <h4 class="mb-0">{{items.verse_number}}</h4>
+                                    <h4 class="mb-0">{{items.book_name}} {{items.verse_number}}:{{items.chapter}}</h4>
                                     <p>
                                         {{items.verse}}
                                     </p>

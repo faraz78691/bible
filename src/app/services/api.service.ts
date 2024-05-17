@@ -68,10 +68,10 @@ filterSection = signal<any>(true);
     this.toastr.success(message, 'Success');
   }
   showWarning(message:string) {
-    this.toastr.warning(message, 'Success');
+    this.toastr.warning(message);
   }
   showError(message:string) {
-    this.toastr.error(message, 'Success');
+    this.toastr.error(message);
   }
 
   logout() {
