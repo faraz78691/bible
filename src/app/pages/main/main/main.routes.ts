@@ -40,7 +40,7 @@ export const  MAIN_ROUTES: Routes = [
             component: SuggestedSitesComponent
         },
         {
-            path: 'bible_chapter', canActivate: [AuthGuard],
+            path: 'bible_chapter/:chapter', canActivate: [AuthGuard],
             component: BibleChapterComponent
         }
     ]

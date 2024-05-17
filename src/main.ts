@@ -4,7 +4,7 @@ import { AppModule } from './app/app.module';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
-import { RouterModule, Routes, provideRouter } from '@angular/router';
+import { RouterModule, Routes, provideRouter, withComponentInputBinding } from '@angular/router';
 import { AuthInterceptor } from './app/auth.interceptor';
 import { provideToastr } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -44,7 +44,7 @@ bootstrapApplication(AppComponent, {
       
     ),
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    provideRouter(routes)
+    provideRouter(routes,withComponentInputBinding())
   ],
 });
 

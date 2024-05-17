@@ -10,9 +10,10 @@ import { Router } from '@angular/router';
 export class ApiService {
 apiUrl = 'http://192.168.1.18:4000/'
 verses = signal<any>([]);
+versionSelected = signal('');
 keywordVerseData = signal<any>([]);
 
-  constructor(private http:HttpClient,private toastr: ToastrService, private route: Router) { }
+  constructor(private http:HttpClient, private toastr: ToastrService, private route: Router) { }
 
   setToken(token: string) {
     localStorage.setItem('token', token)
@@ -20,6 +21,10 @@ keywordVerseData = signal<any>([]);
 
   getToken() {
     return localStorage.getItem('token')
+  };
+
+  getData(){
+    return this.versionSelected();
   }
 
   getApi(url:any):Observable<any>{

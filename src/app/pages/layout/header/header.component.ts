@@ -15,12 +15,12 @@ export class HeaderComponent {
   version$!: Observable<any>;
   verse_number: string = '';
   keyWord: string = ''
-  selectedOption: string = '';
-  verseSignal = computed(()=>{
+  selectedOption: string = 'kjvbible';
+  verseSignal = computed(() => {
     this.apiService.verses()
   })
   constructor(private apiService: ApiService) {
-
+    this.apiService.versionSelected.set(this.selectedOption)
   }
   ngOnInit() {
     this.version$ = this.apiService.getApi('getversion')
@@ -35,7 +35,7 @@ export class HeaderComponent {
       next: res => {
         this.apiService.verses.set(res.data);
         console.log(this.apiService.verses());
-        
+
       }
     })
   };
@@ -47,26 +47,26 @@ export class HeaderComponent {
     this.apiService.postAPI('getBibleVersesByKeyword', formData.toString()).subscribe({
       next: res => {
         console.log(res)
-        if(res.success == true){
+        if (res.success == true) {
           this.apiService.keywordVerseData.set(res.data)
           console.log(this.apiService.keywordVerseData());
         }
         // this.apiService.verses.set(res.data);
         // console.log(this.apiService.verses());
-        
+
       }
     })
   };
 
-  logout(){
+  logout() {
     this.apiService.logout();
   }
 
 
   onChangeVersion(option: any) {
-    
-    this.selectedOption = option.target.value;
 
+    this.selectedOption = option.target.value;
+    this.apiService.versionSelected.set(this.selectedOption)
   }
 
 
