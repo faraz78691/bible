@@ -361,7 +361,7 @@ color: #000;
     background-color: var(--red);
     position: absolute;
     top: 50%;
-    right: 5px;
+    right: -34px;
     transform: translateY(-50%);
     cursor: pointer;
 
