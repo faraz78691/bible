@@ -64,10 +64,10 @@
             <h2 class="mb-0 ct_h2">Search Results Verse</h2>
             <a class="ct_page_link" (click)="clearResults()">Clear Results</a>
         </div>
-        <p-table class="ct_custom_table" [value]="keywordDatas()"  [paginator]="true" [rows]="10">
+        <p-table class="ct_custom_table table-responsive ct_custom_table" [value]="keywordDatas()"  [paginator]="true" [rows]="10">
             <ng-template pTemplate="header">
                 <tr>
-                    <th>#</th>
+                    
                     <th>Verse No.</th>
                     <th>Verse</th>
                     <th>Action</th>
@@ -75,8 +75,8 @@
             </ng-template>
             <ng-template pTemplate="body" let-car>
                 <tr>
-                    <td></td>
-                    <td>{{car.verse_number}}</td>
+                    
+                    <td>{{car.book_name}}{{car.chapter}}:{{car.verse_number}}</td>
                     <td>{{car.verse}}</td>
                     <td>Action</td>
                 </tr>

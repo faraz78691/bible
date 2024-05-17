@@ -14,13 +14,13 @@ interface PageEvent {
   page: number;
   pageCount: number;
 }
-import {TableModule} from 'primeng/table';
+import { TableModule } from 'primeng/table';
 import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CKEditorModule, FormsModule, PaginatorModule, TableModule,FooterComponent],
+  imports: [CommonModule, CKEditorModule, FormsModule, PaginatorModule, TableModule, FooterComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -38,19 +38,19 @@ export class HomeComponent {
   verseOftheDay: any = {};
   notes: string = '';
   representatives: any[];
-  constructor(private loaderService: LoaderService, private apiService: ApiService) { 
+  constructor(private loaderService: LoaderService, private apiService: ApiService) {
     this.representatives = [
-      {name: "Amy Elsner", image: 'amyelsner.png'},
-      {name: "Anna Fali", image: 'annafali.png'},
-      {name: "Asiya Javayant", image: 'asiyajavayant.png'},
-      {name: "Bernardo Dominic", image: 'bernardodominic.png'},
-      {name: "Elwin Sharvill", image: 'elwinsharvill.png'},
-      {name: "Ioni Bowcher", image: 'ionibowcher.png'},
-      {name: "Ivan Magalhaes",image: 'ivanmagalhaes.png'},
-      {name: "Onyama Limba", image: 'onyamalimba.png'},
-      {name: "Stephen Shaw", image: 'stephenshaw.png'},
-      {name: "Xuxue Feng", image: 'xuxuefeng.png'}
-  ];
+      { name: "Amy Elsner", image: 'amyelsner.png' },
+      { name: "Anna Fali", image: 'annafali.png' },
+      { name: "Asiya Javayant", image: 'asiyajavayant.png' },
+      { name: "Bernardo Dominic", image: 'bernardodominic.png' },
+      { name: "Elwin Sharvill", image: 'elwinsharvill.png' },
+      { name: "Ioni Bowcher", image: 'ionibowcher.png' },
+      { name: "Ivan Magalhaes", image: 'ivanmagalhaes.png' },
+      { name: "Onyama Limba", image: 'onyamalimba.png' },
+      { name: "Stephen Shaw", image: 'stephenshaw.png' },
+      { name: "Xuxue Feng", image: 'xuxuefeng.png' }
+    ];
   }
 
 
@@ -59,8 +59,8 @@ export class HomeComponent {
   rows: number = 10;
 
   onPageChange(event: any) {
-      this.first = event.first;
-      this.rows = event.rows;
+    this.first = event.first;
+    this.rows = event.rows;
   }
 
   public onReady(editor: any) {
@@ -124,14 +124,14 @@ export class HomeComponent {
     this.customize = !this.customize;
     this.editorData = `<p>${this.verseOftheDay.verse_number}</p>`
     this.editorData2 = `<p>${this.verseOftheDay.verse}</p>`
-   
+
   };
 
 
   saveEditedVerse(message: any) {
-   console.log(this.editorData);
-   console.log(this.editorData2);
-   
+    console.log(this.editorData);
+    console.log(this.editorData2);
+
     const formData = new URLSearchParams();
     formData.set('verse_number', this.editorData)
     formData.set('verse', this.editorData2)

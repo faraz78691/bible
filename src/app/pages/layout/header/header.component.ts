@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ApiService } from 'src/app/services/api.service';
 import { Observable, tap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -29,13 +30,17 @@ export class HeaderComponent {
 
   verseSignal = computed(() => {
     this.apiService.verses()
-  })
+  });
 
-  constructor(private apiService: ApiService) {
+  isFilterSectionActive = computed(() => this.apiService.filterSection());
+
+  constructor(private apiService: ApiService, private router :Router,private route: ActivatedRoute) {
     this.apiService.versionSelected.set(this.selectedOption)
   }
 
   ngOnInit() {
+    const currentUrl = this.router.url;
+    console.log(currentUrl);
     this.version$ = this.apiService.getApi('getversion').pipe(tap((items: any) => {
       this.selectedOption = items.data[0].table_name;
       this.getBooksName()
@@ -60,6 +65,7 @@ export class HeaderComponent {
   search_keyword() {
     const formData = new URLSearchParams();
     formData.set("table_name", this.selectedOption)
+    formData.set("book_name", this.selectedBookName)
     formData.set("keyword", this.keyWord)
     this.apiService.postAPI('getBibleVersesByKeyword', formData.toString()).subscribe({
       next: res => {

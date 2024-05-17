@@ -1,8 +1,8 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, filter } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
  
@@ -13,8 +13,28 @@ apiUrl = 'http://192.168.1.18:4000/'
 verses = signal<any>([]);
 versionSelected = signal('');
 keywordVerseData = signal<any>([]);
+filterSection = signal<any>(true);
+  constructor(private http:HttpClient, private toastr: ToastrService, private route: Router) { 
+    this.route.events
+    .pipe(filter(event => event instanceof NavigationEnd))
+    .subscribe((event: any) => {
+      this.checkRoute(event.urlAfterRedirects);
+    });
 
-  constructor(private http:HttpClient, private toastr: ToastrService, private route: Router) { }
+  };
+
+    // Function to check the current route and update the boolean variable
+    private checkRoute(currentRoute: string): void {
+    console.log(currentRoute);
+      if (currentRoute.includes('/main/home') ) {
+        console.log("here it si");
+          this.filterSection.set(true)
+      
+      } else {
+          this.filterSection.set(false)
+   
+      }
+    }
 
   setToken(token: string) {
     localStorage.setItem('token', token)
