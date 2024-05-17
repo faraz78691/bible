@@ -1,4 +1,4 @@
-import { Component, computed } from '@angular/core';
+import { Component, ElementRef, ViewChild, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoaderService } from 'src/app/services/loader.service';
 
@@ -26,10 +26,13 @@ import { FooterComponent } from '../footer/footer.component';
 })
 export class HomeComponent {
   customize = false;
+  customize2 = false;
   public Editor = DecoupledEditor;
   public Editor2 = DecoupledEditor;
   public editorData = '';
-  public editorData2 = '<p>Hello, world!</p>';
+  public editorData2 = '';
+  public editorData3 = '';
+  public editorData4 = '';
   verse_number = '';
   verse = '';
   isActiveLabel = computed(() => this.apiService.verses());
@@ -86,6 +89,12 @@ export class HomeComponent {
   onEditorChange2(event: any) {
     this.editorData2 = event.editor.getData();
   };
+  onEditorChange3(event: any) {
+    this.editorData3 = event.editor.getData();
+  };
+  onEditorChange4(event: any) {
+    this.editorData4 = event.editor.getData();
+  };
 
   getVersions() {
     this.apiService.getApi('getVersion')
@@ -101,9 +110,15 @@ export class HomeComponent {
 
   };
 
+  @ViewChild('closeModal') closeModal!: ElementRef;
+  @ViewChild('closeModal2') closeModal2!: ElementRef;
+
   saveVerse() {
-    console.log("yo", this.verseOftheDay);
+    // console.log("yo", this.verseOftheDay);
+    // return
     const formData = new URLSearchParams();
+    formData.set('book_name', this.verseOftheDay.book_name)
+    formData.set('chapter', this.verseOftheDay.chapter)
     formData.set('verse_number', this.verseOftheDay.verse_number)
     formData.set('verse', this.verseOftheDay.verse)
     formData.set('notes', this.notes)
@@ -113,6 +128,31 @@ export class HomeComponent {
         console.log(res)
         if (res.success == true) {
           document.getElementById('modalClose')?.click()
+          this.closeModal.nativeElement.click();
+        }
+      }
+    })
+
+  };
+
+
+
+  saveVerse2() {
+    console.log("yo", this.isActiveLabel());
+    
+    const formData = new URLSearchParams();
+    formData.set('book_name', this.isActiveLabel()[0]?.book_name)
+    formData.set('chapter', this.isActiveLabel()[0]?.chapter)
+    formData.set('verse_number', this.isActiveLabel()[0]?.verse_number)
+    formData.set('verse', this.verseOftheDay.verse)
+    formData.set('notes', this.notes)
+
+    this.apiService.postAPI('saveBibleVerses', formData.toString()).subscribe({
+      next: res => {
+        console.log(res)
+        if (res.success == true) {
+          document.getElementById('modalClose')?.click()
+          this.closeModal2.nativeElement.click();
         }
       }
     })
@@ -122,9 +162,16 @@ export class HomeComponent {
 
   customizeVerse() {
     this.customize = !this.customize;
-    this.editorData = `<p>${this.verseOftheDay.verse_number}</p>`
+    this.editorData = `<p>${this.verseOftheDay.book_name} ${this.verseOftheDay.verse_number}:${this.verseOftheDay.chapter}</p>`
     this.editorData2 = `<p>${this.verseOftheDay.verse}</p>`
 
+  };
+
+  customizeVerse2() {
+    console.log("called f")
+    console.log("called",this.isActiveLabel())
+    this.editorData3 = `<p>${this.isActiveLabel()[0]?.book_name} ${this.isActiveLabel()[0]?.verse_number}:${this.isActiveLabel()[0]?.chapter}</p>`
+    this.editorData4 = `<p>${this.isActiveLabel()[0]?.verse}</p>`
   };
 
 
@@ -148,5 +195,26 @@ export class HomeComponent {
       }
     })
   }
+
+  saveEditedVerse2(message: any) {
+    console.log(this.editorData3);
+    console.log(this.editorData4);
+    
+     const formData = new URLSearchParams();
+     formData.set('verse_number', this.editorData3)
+     formData.set('verse', this.editorData4)
+     formData.set('notes', message.value)
+ 
+     this.apiService.postAPI('saveEditedBibleVerses', formData.toString()).subscribe({
+       next: res => {
+         console.log(res)
+         if (res.success == true) {
+           // document.getElementById('modalClose')?.click()
+           this.apiService.showSuccess(res.message)
+           this.customize2 = false;
+         }
+       }
+     })
+   }
 
 }
