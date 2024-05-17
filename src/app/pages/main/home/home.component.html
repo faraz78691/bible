@@ -40,8 +40,8 @@
                                         class="fa-solid fa-floppy-disk me-2"></i> Save Verse</button>
                             </div>
                             <div class="ct_customize_btn12">
-                                <button class="ct_custom_btn" (click)="customizeVerse2()" (click)="customize2 = !customize2"><i
-                                        class="fa-regular fa-pen-to-square me-2" ></i>
+                                <button class="ct_custom_btn" (click)="customizeVerse2()"
+                                    (click)="customize2 = !customize2"><i class="fa-regular fa-pen-to-square me-2"></i>
                                     Customize</button>
                             </div>
                         </div>
@@ -78,31 +78,27 @@
             <h2 class="mb-0 ct_h2">Search Results Verse</h2>
             <a class="ct_page_link" (click)="clearResults()">Clear Results</a>
         </div>
-        <div class="ct_past_dailys_section mb-5">
-          
-    
-            <div class="table-responsive ct_custom_table">
-                <p-table  [value]="keywordDatas()" [paginator]="true" [rows]="10">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            
-                            <th>Verse No.</th>
-                            <th>Verse</th>
-                            <th>Action</th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-car>
-                        <tr>
-                            
-                            <td>{{car.book_name}}{{car.chapter}}:{{car.verse_number}}</td>
-                            <td>{{car.verse}}</td>
-                            <td>Action</td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
-        </div>
-     
+        <p-table class="ct_custom_table" [value]="keywordDatas()" [paginator]="true" [rows]="10">
+            <ng-template pTemplate="header">
+                <tr>
+
+                    <th>Verse No.</th>
+                    <th>Verse</th>
+                    <th>Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-car>
+                <tr>
+
+                    <td>{{car.book_name}}{{car.chapter}}:{{car.verse_number}}</td>
+                    <td>{{car.verse}}</td>
+                    <td class="d-flex align-items-center gap-3 justify-content-end ct_action_btns">
+                        <i class="fa-solid fa-pen" data-bs-toggle="modal" data-bs-target="#ct_save_verse_modal"
+                            style="cursor: pointer;" title="Update"></i>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
 
 
     </section>

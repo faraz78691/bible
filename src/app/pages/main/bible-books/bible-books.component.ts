@@ -20,8 +20,8 @@ export class BibleBooksComponent {
 
   // savedverse$!: Observable<any>;
   booktestament$!: Observable<any>;
- 
- 
+
+
   notedverse: any[] = []
 
   verseOftheDay: any = {};
@@ -34,20 +34,20 @@ export class BibleBooksComponent {
 
 
     this.booktestament$ = this.apiService.getApi('testaments');
-   
+
 
     // this.loaderService.removeLoaderClass();
   };
 
-getBooks(){
-  const formData = new URLSearchParams();
+  getBooks() {
+    const formData = new URLSearchParams();
 
-  this.apiService.postAPI('/getChapters', formData.toString()).subscribe({
-    next:res=>{
-      console.log(res);
-    }
-  })
-}
+    this.apiService.postAPI('/getChapters', formData.toString()).subscribe({
+      next: res => {
+        console.log(res);
+      }
+    })
+  }
 
 
 }

@@ -129,6 +129,7 @@ export class HomeComponent {
         if (res.success == true) {
           document.getElementById('modalClose')?.click()
           this.closeModal.nativeElement.click();
+          this.apiService.showSuccess(res.message);
         }
       }
     })
@@ -153,6 +154,7 @@ export class HomeComponent {
         if (res.success == true) {
           document.getElementById('modalClose')?.click()
           this.closeModal2.nativeElement.click();
+          this.apiService.showSuccess(res.message);
         }
       }
     })
