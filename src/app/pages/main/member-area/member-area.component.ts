@@ -23,6 +23,7 @@ export class MemberAreaComponent {
   // savedverse$!: Observable<any>;
   savedverse$!: Observable<any>;
   editedverse$!: Observable<any>;
+  freinds$!: Observable<any>;
   notedverse: any[] = []
 
   verseOftheDay: any = {};
@@ -37,6 +38,7 @@ export class MemberAreaComponent {
       this.notedverse = (items.data).filter((val: any) => val.notes != '')))
 
     this.editedverse$ = this.apiService.getApi('getEditedVerses');
+    this.freinds$ = this.apiService.getApi('getFreidns');
     this.initForm();
 
     // this.loaderService.removeLoaderClass();
@@ -62,6 +64,7 @@ export class MemberAreaComponent {
           if (resp.success == true) {
             this.apiService.showSuccess(resp.message);
             this.closeModal.nativeElement.click();
+            this.freinds$ = this.apiService.getApi('getFreidns');
             //this.loading = false;
             this.form.reset();
           } else {

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoaderService } from 'src/app/services/loader.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgTiltModule } from '@geometricpanda/angular-tilt';
 import { ApiService } from 'src/app/services/api.service';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
@@ -21,7 +21,7 @@ export class SignupComponent {
   isPasswordVisible1: boolean = false;
   passwordMismatch = false;
 
-  constructor(private loaderService: LoaderService, private service : ApiService) { }
+  constructor(private loaderService: LoaderService, private service : ApiService,private route: Router) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -60,6 +60,7 @@ export class SignupComponent {
             //localStorage.setItem('userDetail', JSON.stringify(resp.admin));
             //this.srevice.setToken(resp.token);
             this.service.showSuccess(resp.message);
+             this.route.navigateByUrl("/");
             //this.loading = false;
             //this.signupForm.reset();
           } else {

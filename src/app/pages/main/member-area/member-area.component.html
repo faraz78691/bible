@@ -144,7 +144,7 @@
                     </div>
 
                     <div class="table-responsive ct_custom_table">
-                        <table class="table  table-striped w-100" id="example">
+                        <table class="table  table-striped w-100" id="example" *ngIf="freinds$ | async as friends">
                             <thead>
                                 <tr>
 
@@ -153,12 +153,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr *ngFor="let items of friends.data" >
 
                                     <td>
-                                        John
+                                        {{items.name}}
                                     </td>
-                                    <td>johncom</td>
+                                    <td>{{items.email}}</td>
                                 </tr>
 
                             </tbody>
