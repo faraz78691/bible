@@ -2,82 +2,78 @@
     <div class="ct_toggle_bar">
         <i class="fa-solid fa-bars-staggered"></i>
     </div>
-    <div class="w-100" >
-        <div class="d-flex align-items-center gap-2 ct_flex_res" *ngIf="version$ | async as version">
+    <div class="" *ngIf="isFilterSectionActive() == true">
+        <div class="d-flex align-items-center gap-2 flex-wrap" *ngIf="version$ | async as version">
 
-        <select class="ct_verse_version_drop" [(ngModel)]="selectedOption" (change)="onChangeVersion($event)">
-            <option *ngFor="let items of version.data" [value]="items.table_name">{{items.name}}</option>
-        </select>
-
-        <select class="ct_verse_version_drop" [(ngModel)]="selectedBookName" (change)="onChangeName($event)">
-            <!-- <option>Select Name</option> -->
-            <option *ngFor="let option of bookNames;" >
-                {{option.book_name}}</option>
-        </select>
-
-        <select class="ct_verse_version_drop" [(ngModel)]="selectedChapter" (change)="onChangeChapter($event)">
-             <option>Select Chapter</option>
-            <option *ngFor="let option of chapterNo;">
-                {{option.chapter}}</option>
-        </select>
-
-        <select class="ct_verse_version_drop" [(ngModel)]="selectedVerse">
-             <option value=0>Select Chapter first</option>
-            <option *ngFor="let option of varseNo;">
-                {{option.verse_number}}</option>
-        </select>
-        
-        <div class="ct_search_bar w-auto">
-            
-            <i class="fa-solid fa-magnifying-glass" (click)="search_verse()"></i>
-            <div class="ct_search_list12">
-                <ul>
-                    <li>James 1:19</li>
-                    <li>James 1:19</li>
-                    <li>James 1:19</li>
-                    <li>James 1:19</li>
-                </ul>
+            <div>
+                <select class="ct_verse_version_drop" style="max-width: 200px;" [(ngModel)]="selectedOption" (change)="onChangeVersion($event)">
+                    <option *ngFor="let items of version.data" [value]="items.table_name">{{items.name}}</option>
+                </select>
+    
+                <select class="ct_verse_version_drop" [(ngModel)]="selectedBookName" (change)="onChangeName($event)">
+                    <!-- <option>Select Name</option> -->
+                    <option *ngFor="let option of bookNames;">
+                        {{option.book_name}}</option>
+                </select>
+    
+                <select class="ct_verse_version_drop" [(ngModel)]="selectedChapter" (change)="onChangeChapter($event)">
+                    <option>Select Chapter</option>
+                    <option *ngFor="let option of chapterNo;">
+                        {{option.chapter}}</option>
+                </select>
+    
+                <select class="ct_verse_version_drop" [(ngModel)]="selectedVerse">
+                    <option value=0>Select Chapter first</option>
+                    <option *ngFor="let option of varseNo;">
+                        {{option.verse_number}}</option>
+                </select>
             </div>
-    
-     
-    
-     
-    
-         
-    
+
+            <div class="ct_search_bar w-auto">
+
+                <i class="fa-solid fa-magnifying-glass" (click)="search_verse()"></i>
+                <div class="ct_search_list12">
+                    <ul>
+                        <li>James 1:19</li>
+                        <li>James 1:19</li>
+                        <li>James 1:19</li>
+                        <li>James 1:19</li>
+                    </ul>
+                </div>
+
+
+
+
+
+
+
+            </div>
+          
         </div>
-        <div class="ct_my_account dropdown ms-auto">
-            <button class="btn ct_custom_btn py-2 px-4 w-auto dropdown-toggle" type="button" id="dropdownMenuButton1"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                My Account
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="my-profile.html">My Profile</a></li>
-                <li><a class="dropdown-item" href="my-verses.html">My Verses</a></li>
-                <li><a class="dropdown-item" href="change-password.html">Change Password</a></li>
-                <li> <a class="dropdown-item" (click)="logout()">Log Out</a></li>
-            </ul>
-    
-        </div>
-    </div>
-    <div class="ct_search_bar mt-2">
-        <input type="text" class="form-control" placeholder="Search By Keyword" [(ngModel)]="keyWord"
-            autocomplete="on">
-        <i class="fa-solid fa-magnifying-glass" (click)="search_keyword()"></i>
-        <div class="ct_search_list12">
-            <ul>
-                <li>James 1:19</li>
-                <li>James 1:19</li>
-                <li>James 1:19</li>
-                <li>James 1:19</li>
-            </ul>
+        <div class="ct_search_bar mt-2 ct_search_bar_2">
+            <input type="text" class="form-control" placeholder="Search By Keyword" [(ngModel)]="keyWord" autocomplete="on">
+            <i class="fa-solid fa-magnifying-glass" (click)="search_keyword()" title="search by keyword"></i>
+          
         </div>
     </div>
-   
+    <div class="ct_my_account dropdown ms-auto">
+        <button class="btn ct_custom_btn py-2 px-4 w-auto dropdown-toggle" type="button"
+            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            My Account
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="my-profile.html">My Profile</a></li>
+            <li><a class="dropdown-item" href="my-verses.html">My Verses</a></li>
+            <li><a class="dropdown-item" href="change-password.html">Change Password</a></li>
+            <li> <a class="dropdown-item" (click)="logout()">Log Out</a></li>
+        </ul>
+
+    </div>
+
     <div class="d-flex align-items-center gap-2 d-none">
         <a href="login.html">Login</a>
         /
         <a href="signup.html">Sign Up</a>
     </div>
- 
+
 </div>

@@ -366,6 +366,13 @@ color: #000;
     cursor: pointer;
 
 }
+.ct_search_bar_2 {
+    width: 100%;
+    max-width: 100%;
+}
+.ct_search_bar_2 i{
+    right: 1px;
+}
 .ct_toggle_bar{
     display: none;
     position: absolute;
@@ -385,7 +392,8 @@ color: #000;
 select.ct_verse_version_drop {
     height: 42px;
     border-radius: 10px;
-    /* width: 120px; */
+    width: 100%;
+    max-width: 148px;
     padding-inline: 10px;
     outline: none;
     
@@ -713,15 +721,16 @@ select.ct_verse_version_drop {
 .ct_custom_table thead th:last-child{
     border-radius: 0px 10px 0px 0px;
 }
-.ct_custom_table {
+.ct_custom_table .p-component {
     border: 1px solid #dee2e6;
     border-radius: 10px;
-    padding: 15px;
+    padding: 8px;
 }
 .ct_custom_table tbody tr td{
     vertical-align: middle;
     padding-block: 10px;
     padding-inline: 15px;
+    white-space: nowrap;
 }
 .ct_custom_table tbody tr:last-child td{
     border-bottom: 0px;
@@ -1153,6 +1162,16 @@ span.ct_saved_verse_date {
 }
 .ct_my_profile_main{
     border-top: 4px solid var(--red);
+}
+.ct_fw_600 {
+    font-weight: 600;
+}
+.ck.ck-editor__editable_inline {
+    border: 1px solid #eee !important;
+    box-shadow: none !important;
+}
+.ck.ck-editor__editable_inline:focus{
+    border-color: var(--red) !important;
 }
 @media screen and (max-width:991px){
     .ct_toggle_bar,.ct_close_btn{

@@ -1,4 +1,7 @@
 <div class="ct_middle_cnt">
+
+
+    <!-- Single verse reasult section -->
     <section class="mb-5" *ngIf="isActiveLabel()?.length > 0">
 
         <div class="d-flex align-items-center flex-wrap mb-4 justify-content-between gap-2">
@@ -61,7 +64,7 @@
             <button class="ct_custom_btn w-auto mt-3 py-2">Save</button>
         </div> -->
         <div class="ct_bottom_customize" *ngIf="customize2">
-            <label for="Verse no">Verse number</label>
+            <label for="Verse no" class="ct_fw_600 mb-2">Verse number</label>
             <ckeditor class="ct_ol_padd" [editor]="Editor" [data]="verse_number" (change)="onEditorChange3($event)"
                 [(ngModel)]="editorData3" (ready)="onReady($event)"></ckeditor>
             <label for="Verse">Verse</label>
@@ -72,10 +75,11 @@
         </div>
     </section>
 
+    <!-- keyword results section -->
     <section class="mb-5" *ngIf="keywordDatas().length >0">
         
         <div class="d-flex align-items-center flex-wrap mb-4 justify-content-between gap-2">
-            <h2 class="mb-0 ct_h2">Search Results Verse</h2>
+            <h2 class="mb-0 ct_h2">Keyword Results Verse</h2>
             <a class="ct_page_link" (click)="clearResults()">Clear Results</a>
         </div>
         <p-table class="ct_custom_table" [value]="keywordDatas()" [paginator]="true" [rows]="10">
@@ -103,7 +107,7 @@
 
     </section>
 
-
+<!-- verse of the day section -->
     <section class="mb-5" *ngIf="verseDay$ | async as verses">
         <div class="d-flex align-items-center flex-wrap mb-4 justify-content-between gap-2">
             <h2 class="mb-0 ct_h2">Bible Verse of the Day</h2>
@@ -156,13 +160,13 @@
         </div>
         <div class="ct_bottom_customize" *ngIf="customize">
 
-            <label for="Verse no">Verse number</label>
+            <label for="Verse no" class="ct_fw_600 mb-2">Verse number</label>
             <ckeditor class="ct_ol_padd" [editor]="Editor" [data]="verse_number" (change)="onEditorChange($event)"
                 [(ngModel)]="editorData" (ready)="onReady($event)"></ckeditor>
-            <label for="Verse">Verse</label>
+            <label for="Verse" class="ct_fw_600 mb-2 mt-4">Verse</label>
             <ckeditor class="ct_ol_padd" [editor]="Editor2" [data]="verse" (change)="onEditorChange2($event)"
                 [(ngModel)]="editorData2" (ready)="onReady($event)"></ckeditor>
-            <input type="text" placeholder="Add custom message" #message>
+            <input type="text" placeholder="Add custom message" class="form-control mt-3" #message>
             <button class="ct_custom_btn w-auto mt-3 py-2" (click)="saveEditedVerse(message)">Save</button>
         </div>
     </section>
