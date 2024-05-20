@@ -8,6 +8,7 @@ import { MemberAreaComponent } from "../member-area/member-area.component";
 import { SuggestedSitesComponent } from "../suggested-sites/suggested-sites.component";
 import { BibleChapterComponent } from "../bible-chapter/bible-chapter.component";
 import { AuthGuard } from "src/app/guard/auth.guard";
+import { MyProfileComponent } from "../my-profile/my-profile.component";
 
 export const  MAIN_ROUTES: Routes = [
  {
@@ -42,7 +43,11 @@ export const  MAIN_ROUTES: Routes = [
         {
             path: 'bible_chapter/:chapter', canActivate: [AuthGuard],
             component: BibleChapterComponent
-        }
+        },
+        {
+            path: 'my_profile', canActivate: [AuthGuard],
+            component: MyProfileComponent
+        },
     ]
  }
 ];
