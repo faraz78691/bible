@@ -35,7 +35,7 @@ export class MemberAreaComponent {
 
 
     this.savedverse$ = this.apiService.getApi('getSavedVerses').pipe(tap(items =>
-      this.notedverse = (items.data).filter((val: any) => val.notes != '')))
+      this.notedverse = (items.data).reverse().filter((val: any) => val.notes != '')))
 
     this.editedverse$ = this.apiService.getApi('getEditedVerses');
     this.freinds$ = this.apiService.getApi('getFreidns');

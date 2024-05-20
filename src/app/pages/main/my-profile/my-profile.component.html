@@ -3,18 +3,18 @@
         <div class="col-md-8 mx-auto">
             <div class="ct_my_profile_main">
                 <h2 class="mb-5 ct_h2">My Profile</h2>
-                <form action="#">
+                <form [formGroup]="updateForm">
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-floating mb-3 ct_input">
-                          <input type="email" class="form-control" id="floatingInput"  value="John" disabled>
+                          <input type="email" class="form-control" formControlName="firstName" id="floatingInput">
                           <label for="floatingInput">First Name</label>
                           <!-- <p class="ct_error_text">Please enter your first name</p> -->
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-floating mb-3 ct_input">
-                          <input type="email" class="form-control" id="floatingInput"  value="Doe"  disabled>
+                          <input type="email" class="form-control" formControlName="lastName" id="floatingInput">
                           <label for="floatingInput">Last Name</label>
                           <!-- <p class="ct_error_text">Please enter your last name</p> -->
                         </div>
@@ -22,7 +22,7 @@
                     </div>
                         
                       <div class="form-floating mb-3 ct_input">
-                          <input type="email" class="form-control" id="floatingInput" value="johndoe@gmail.com" disabled>
+                          <input type="email" class="form-control" formControlName="email" id="floatingInput">
                           <label for="floatingInput">Email address</label>
                           <!-- <p class="ct_error_text">Please enter your email</p> -->
                         </div>

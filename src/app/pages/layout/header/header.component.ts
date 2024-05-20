@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ApiService } from 'src/app/services/api.service';
 import { Observable, tap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })

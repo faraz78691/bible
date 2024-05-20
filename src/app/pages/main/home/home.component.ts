@@ -133,6 +133,7 @@ export class HomeComponent {
           document.getElementById('modalClose')?.click()
           this.closeModal.nativeElement.click();
           this.apiService.showSuccess(res.message);
+          this.notes = '';
         }
       }
     })
@@ -158,6 +159,7 @@ export class HomeComponent {
           document.getElementById('modalClose')?.click()
           this.closeModal2.nativeElement.click();
           this.apiService.showSuccess(res.message);
+          this.notes = '';
         }
       }
     })
