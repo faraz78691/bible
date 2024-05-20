@@ -3,6 +3,25 @@
 @import 'ngx-toastr/toastr';
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+/* @use '@angular/material' as mat; */
+
+@import url('https://fonts.googleapis.com/css?family=Play:400,700|Roboto:400,500,500i,700');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+/* @import '~normalize.css'; */
+/* @import 'assets/style/material';
+@import 'assets/style/code'; */
+/* @import '../../ngx-sharebuttons/themes/modern';
+@import '../../ngx-sharebuttons/themes/circles';
+@import '../../ngx-sharebuttons/themes/material';
+@import '../../ngx-sharebuttons/themes/outline';
+@import '../../ngx-sharebuttons/themes/classic';
+@import '../../ngx-sharebuttons/themes/default'; */
+/* @import '../node_modules/ngx-sharebuttons/themes/circles.scss'; 
+@import '../node_modules/ngx-sharebuttons/themes/material.scss';
+@import '../node_modules/ngx-sharebuttons/themes/circles.scss';
+@import '../node_modules/ngx-sharebuttons/themes/default.scss'; */
+
 /* @import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default'; */
 

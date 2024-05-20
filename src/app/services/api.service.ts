@@ -8,7 +8,8 @@ import { NavigationEnd, Router } from '@angular/router';
  
 })
 export class ApiService {
-apiUrl = 'http://192.168.1.18:4000/'
+// apiUrl = 'http://192.168.1.18:4000/'
+apiUrl = 'http://localhost:4000/'
 // apiUrl = 'https://e704-2401-4900-1c08-6421-79ee-8067-d19e-afaa.ngrok-free.app/'
 verses = signal<any>([]);
 versionSelected = signal('');

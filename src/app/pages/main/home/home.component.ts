@@ -8,6 +8,8 @@ import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { Observable, tap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { PaginatorModule } from 'primeng/paginator';
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 interface PageEvent {
   first: number;
   rows: number;
@@ -20,7 +22,8 @@ import { FooterComponent } from '../footer/footer.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CKEditorModule, FormsModule, PaginatorModule, TableModule, FooterComponent],
+  imports: [CommonModule, CKEditorModule, FormsModule, PaginatorModule, TableModule, FooterComponent, ShareButtonsModule,
+    ShareIconsModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
