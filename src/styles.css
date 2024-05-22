@@ -8,6 +8,7 @@
 
 @import url('https://fonts.googleapis.com/css?family=Play:400,700|Roboto:400,500,500i,700');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+/* @import '~ngx-sharebuttons/themes/default'; */
 /* @import '~normalize.css'; */
 /* @import 'assets/style/material';
 @import 'assets/style/code'; */
@@ -42,9 +43,71 @@ h4.ct_innerhtml_p{
 @layer reset, primeng;
 
 /* Reset CSS */
-@layer reset {
-    button,
-    input {
-        /* CSS to Reset */
-    }
+
+
+.sb-group.sb-modern-dark share-button.sb-button.sb-modern-dark:nth-child(1) button.sb-wrapper {
+    background: #607D8B !important;
+}
+
+.sb-group.sb-modern-dark share-button.sb-button.sb-modern-dark:nth-child(2) button.sb-wrapper {
+    background: #4267B2;
+}
+.sb-group.sb-modern-dark share-button.sb-button.sb-modern-dark:nth-child(3) button.sb-wrapper {
+    background: #FF961C;
+}
+.sb-group.sb-modern-dark share-button.sb-button.sb-modern-dark:nth-child(4) button.sb-wrapper {
+    background: #0080FF;
+}
+.sb-group.sb-modern-dark share-button.sb-button.sb-modern-dark:nth-child(5) button.sb-wrapper {
+    background: #eb4924;
+}
+.sb-group.sb-modern-dark share-button.sb-button.sb-modern-dark:nth-child(6) button.sb-wrapper {
+    background: #00b900;
+}
+.sb-group.sb-modern-dark share-button.sb-button.sb-modern-dark:nth-child(7) button.sb-wrapper {
+    background: #006fa6;
+}
+.sb-group.sb-modern-dark share-button.sb-button.sb-modern-dark:nth-child(8) button.sb-wrapper {
+    background: #BD091D;
+}
+.sb-group.sb-modern-dark share-button.sb-button.sb-modern-dark:nth-child(9) button.sb-wrapper {
+    background: #7459a1;
+}
+.sb-group.sb-modern-dark share-button.sb-button.sb-modern-dark:nth-child(10) button.sb-wrapper {
+    background: #ff3d06;
+}
+.sb-group.sb-modern-dark share-button.sb-button.sb-modern-dark:nth-child(11) button.sb-wrapper {
+    background: #1fa962;
+}
+.sb-group.sb-modern-dark share-button.sb-button.sb-modern-dark:nth-child(12) button.sb-wrapper {
+    background: #0a78b3;
+}
+.sb-group.sb-modern-dark share-button.sb-button.sb-modern-dark:nth-child(13) button.sb-wrapper {
+    background: #2d4152;
+}
+.sb-group.sb-modern-dark share-button.sb-button.sb-modern-dark:nth-child(14) button.sb-wrapper {
+    background: #009bd7;
+}
+.sb-group.sb-modern-dark share-button.sb-button.sb-modern-dark:nth-child(15) button.sb-wrapper {
+    background: #5e5495;
+}
+.sb-group.sb-modern-dark share-button.sb-button.sb-modern-dark:nth-child(16) button.sb-wrapper {
+    background: #466895;
+}
+.sb-group.sb-modern-dark share-button.sb-button.sb-modern-dark:nth-child(17) button.sb-wrapper {
+    background: #005c5d;
+}
+.sb-group.sb-modern-dark share-button.sb-button.sb-modern-dark:nth-child(18) button.sb-wrapper {
+    background: #04a503;
+}
+.sb-group.sb-modern-dark {
+    flex-direction: column;
+}
+
+button.sb-wrapper.sb-show-icon {
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    border-radius: 100px;
+    font-size: 10px;
 }

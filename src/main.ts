@@ -32,6 +32,12 @@ export const routes: Routes = [
                               .then(r => r.MAIN_ROUTES)
 
 },
+{
+  path: 'content',
+  loadComponent: () => import('./app/pages/share-link/share-link.component')
+                              .then(r => r.ShareLinkComponent)
+
+},
 ];
 
 

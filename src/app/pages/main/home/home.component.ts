@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { PaginatorModule } from 'primeng/paginator';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+
 interface PageEvent {
   first: number;
   rows: number;
@@ -30,6 +31,7 @@ import { FooterComponent } from '../footer/footer.component';
 export class HomeComponent {
   customize = false;
   customize2 = false;
+  shareButton = false;
   public Editor = DecoupledEditor;
   public Editor2 = DecoupledEditor;
   public editorData = '';
@@ -43,21 +45,38 @@ export class HomeComponent {
   verseDay$!: Observable<any>;
   verseOftheDay: any = {};
   notes: string = '';
-  representatives: any[];
+  @ViewChild('contentDiv') contentDiv: ElementRef | undefined;
+  shareUrl: string = ''
+  shareText?: string;
+  verseNumber = '';
+  getVerse = '';
+  
+
+
+
+  // ngAfterViewInit() {
+  //   console.log("aferr view init");
+  //   this.updateShareContent();
+  // }
   constructor(private loaderService: LoaderService, private apiService: ApiService) {
-    this.representatives = [
-      { name: "Amy Elsner", image: 'amyelsner.png' },
-      { name: "Anna Fali", image: 'annafali.png' },
-      { name: "Asiya Javayant", image: 'asiyajavayant.png' },
-      { name: "Bernardo Dominic", image: 'bernardodominic.png' },
-      { name: "Elwin Sharvill", image: 'elwinsharvill.png' },
-      { name: "Ioni Bowcher", image: 'ionibowcher.png' },
-      { name: "Ivan Magalhaes", image: 'ivanmagalhaes.png' },
-      { name: "Onyama Limba", image: 'onyamalimba.png' },
-      { name: "Stephen Shaw", image: 'stephenshaw.png' },
-      { name: "Xuxue Feng", image: 'xuxuefeng.png' }
-    ];
+
   }
+  
+
+  updateShareContent() {
+
+    const contentElement = this.contentDiv?.nativeElement.cloneNode(true);
+    const linkElement = contentElement.querySelector('.ct_page_link');
+
+    if (linkElement) {
+      linkElement.style.display = 'block';
+    }
+    const content = contentElement.innerHTML;
+    this.shareText = encodeURIComponent(content);
+    console.log(this.shareText);
+    
+    this.shareUrl = `http://localhost:4200/content?content=${this.shareText}`;
+  };
 
 
   first: number = 0;
@@ -76,11 +95,17 @@ export class HomeComponent {
     );
   }
   ngOnInit(): void {
-
+    console.log("ngonint");
 
     this.verseDay$ = this.apiService.getApi('getBibleVerseOfTheDay').pipe(tap(value => {
-      console.log(value);
+
       this.verseOftheDay = value.data;
+      console.log(this.verseOftheDay.book_name);
+      setTimeout(() => {
+        this.updateShareContent()
+      }, 2000)
+      // console.log("ngonint");
+
     }))
 
     this.loaderService.removeLoaderClass();
@@ -144,7 +169,7 @@ export class HomeComponent {
 
   saveVerse2() {
     console.log("yo", this.isActiveLabel());
-    
+
     const formData = new URLSearchParams();
     formData.set('book_name', this.isActiveLabel()[0]?.book_name)
     formData.set('chapter', this.isActiveLabel()[0]?.chapter)
@@ -176,7 +201,7 @@ export class HomeComponent {
 
   customizeVerse2() {
     console.log("called f")
-    console.log("called",this.isActiveLabel())
+    console.log("called", this.isActiveLabel())
     this.editorData3 = `<p>${this.isActiveLabel()[0]?.book_name} ${this.isActiveLabel()[0]?.verse_number}:${this.isActiveLabel()[0]?.chapter}</p>`
     this.editorData4 = `<p>${this.isActiveLabel()[0]?.verse}</p>`
   };
@@ -206,22 +231,22 @@ export class HomeComponent {
   saveEditedVerse2(message: any) {
     console.log(this.editorData3);
     console.log(this.editorData4);
-    
-     const formData = new URLSearchParams();
-     formData.set('verse_number', this.editorData3)
-     formData.set('verse', this.editorData4)
-     formData.set('notes', message.value)
- 
-     this.apiService.postAPI('saveEditedBibleVerses', formData.toString()).subscribe({
-       next: res => {
-         console.log(res)
-         if (res.success == true) {
-           // document.getElementById('modalClose')?.click()
-           this.apiService.showSuccess(res.message)
-           this.customize2 = false;
-         }
-       }
-     })
-   }
+
+    const formData = new URLSearchParams();
+    formData.set('verse_number', this.editorData3)
+    formData.set('verse', this.editorData4)
+    formData.set('notes', message.value)
+
+    this.apiService.postAPI('saveEditedBibleVerses', formData.toString()).subscribe({
+      next: res => {
+        console.log(res)
+        if (res.success == true) {
+          // document.getElementById('modalClose')?.click()
+          this.apiService.showSuccess(res.message)
+          this.customize2 = false;
+        }
+      }
+    })
+  }
 
 }

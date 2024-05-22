@@ -484,7 +484,7 @@ select.ct_verse_version_drop {
 }
 .ct_share_main i{
     color: #000;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     transition: 0.4s ease all;
  
 }

@@ -1,15 +1,6 @@
-<!-- <share-buttons [theme]="'circles-dark'"
-[include]="['copy', 'facebook', 'email', 'messenger', 'mix', 'line', 'linkedin', 'pinterest', 'print', 'reddit', 'sms', 'telegram', 'tumblr', 'twitter', 'viber', 'vk', 'xing', 'whatsapp']"
-[showIcon]="true"
-[showText]="true"
-url="https://rodrigo.kamada.com.br/"
-description="Angular Share Buttons"
-twitterAccount="rodrigokamada"
-class="pt-5">
-</share-buttons> -->
 <div class="ct_middle_cnt">
-   
-      
+
+
 
     <!-- Single verse reasult section -->
     <section class="mb-5" *ngIf="isActiveLabel()?.length > 0">
@@ -87,7 +78,7 @@ class="pt-5">
 
     <!-- keyword results section -->
     <section class="mb-5" *ngIf="keywordDatas().length >0">
-        
+
         <div class="d-flex align-items-center flex-wrap mb-4 justify-content-between gap-2">
             <h2 class="mb-0 ct_h2">Keyword Results Verse</h2>
             <a class="ct_page_link" (click)="clearResults()">Clear Results</a>
@@ -117,7 +108,7 @@ class="pt-5">
 
     </section>
 
-<!-- verse of the day section -->
+    <!-- verse of the day section -->
     <section class="mb-5" *ngIf="verseDay$ | async as verses">
         <div class="d-flex align-items-center flex-wrap mb-4 justify-content-between gap-2">
             <h2 class="mb-0 ct_h2">Bible Verse of the Day</h2>
@@ -135,8 +126,14 @@ class="pt-5">
                     <div class="ct_socials_bottom_position">
                         <div class="d-flex align-items-end gap-3">
                             <div class="ct_share_main">
-                                <i class="fa-solid fa-share-nodes"></i>
-                                <ul class="ct_animated_socials">
+                                <i class="fa-solid fa-share-nodes" (click)="shareButton = !shareButton"></i>
+                                <share-buttons *ngIf="shareButton" class="ct_social_icon_clr" theme='modern-dark'
+                                    [include]="['copy', 'facebook', 'email', 'linkedin', 'pinterest', 'reddit', 'sms', 'telegram', 'tumblr', 'twitter', 'whatsapp']"  [show]="5"
+                                    [showIcon]="true" [showText]="false" [url]="shareUrl"
+                                    description="Bible Verse" class="pt-5">
+                                </share-buttons>
+                                <!-- url="https://rodrigo.kamada.com.br/" -->
+                                <!-- <ul class="ct_animated_socials">
                                     <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
                                     <li> <a href="#"><i class="fa-solid fa-envelope"></i></a> </li>
                                     <li> <a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
@@ -144,8 +141,8 @@ class="pt-5">
                                     <li><a href="#"><i class="fa-brands fa-pinterest-p"></i></a></li>
                                     <li><a href="#"><i class="fa-brands fa-digg"></i></a></li>
                                     <li><a href="#"><i class="fa-brands fa-stumbleupon"></i></a></li>
-                                    <li> <a href="#"><i class="fa-brands fa-reddit"></i></a></li>
-                                </ul>
+                                    <li> <a href="#"><i class="fa-brands fa-reddit"></i></a></li> -->
+                                <!-- </ul> -->
                             </div>
 
                         </div>
@@ -180,6 +177,8 @@ class="pt-5">
             <button class="ct_custom_btn w-auto mt-3 py-2" (click)="saveEditedVerse(message)">Save</button>
         </div>
     </section>
+
+
 
 
 
@@ -245,3 +244,25 @@ class="pt-5">
         </div>
     </div>
 </div>
+
+
+<section #contentDiv  class="ct_page_link" style="display: none;">
+    <div class="d-flex align-items-center flex-wrap mb-4 justify-content-between gap-2">
+        <h2 class="mb-0 ct_h2">Bible Verse of the Day</h2>
+       
+    </div>
+    <div class="ct_verse_bg" style="background-color:#3a0d0f;">
+        <img src="assets/img/verse_day1.jpg">
+        <div class="ct_verse_overlay">
+            <div class="ct_verse_head">
+                <h4 class="mb-0">{{ this.verseOftheDay.book_name}} {{ this.verseOftheDay.chapter}}:{{ this.verseOftheDay.verse_number}}</h4>
+                <p>
+                    {{ this.verseOftheDay.verse}}
+                </p>
+            </div>
+
+
+        </div>
+    </div>
+  
+</section>
