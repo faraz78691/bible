@@ -112,7 +112,7 @@
     <section class="mb-5" *ngIf="verseDay$ | async as verses">
         <div class="d-flex align-items-center flex-wrap mb-4 justify-content-between gap-2">
             <h2 class="mb-0 ct_h2">Bible Verse of the Day</h2>
-            <a href="bible-chapter.html" class="ct_page_link">Read whole chapter</a>
+            <a (click)="getChapter()" class="ct_page_link">Read whole chapter</a>
         </div>
         <div class="ct_verse_bg" style="background-color:#3a0d0f;">
             <img src="assets/img/verse_day1.jpg">

@@ -19,7 +19,8 @@ interface PageEvent {
 }
 import { TableModule } from 'primeng/table';
 import { FooterComponent } from '../footer/footer.component';
-import { SafeHtmlPipe } from "../../../helper/safe-html.pipe";
+import { Router } from '@angular/router';
+import { SafeHtmlPipe } from 'src/app/helper/safe-html.pipe';
 
 @Component({
     selector: 'app-home',
@@ -65,7 +66,7 @@ export class HomeComponent {
   //   console.log("aferr view init");
   //   this.updateShareContent();
   // }
-  constructor(private loaderService: LoaderService, public apiService: ApiService) {
+  constructor(private loaderService: LoaderService, private apiService: ApiService, private route: Router) {
 
   }
 
@@ -118,11 +119,10 @@ export class HomeComponent {
   };
 
   ngOnInit(): void {
- 
-      this.verseDay$ = this.apiService.getApi('getBibleVerseOfTheDay').pipe(tap(value => {
+    this.verseDay$ = this.apiService.getApi('getBibleVerseOfTheDay').pipe(tap(value => {
       this.randomTableID = value.data.id;
       this.verseOftheDay = value.data;
-    
+      console.log('verseOftheDay', this.verseOftheDay);
       setTimeout(() => {
         this.updateShareContent()
       }, 2000)
@@ -166,7 +166,7 @@ export class HomeComponent {
   @ViewChild('closeModal2') closeModal2!: ElementRef;
 
   saveVerse() {
- 
+
     const formData = new URLSearchParams();
     formData.set('book_name', this.verseOftheDay.book_name)
     formData.set('chapter', this.verseOftheDay.chapter)
@@ -191,8 +191,6 @@ export class HomeComponent {
 
 
   saveVerse2() {
-
-
     const formData = new URLSearchParams();
     formData.set('book_name', this.isActiveLabel()[0]?.book_name)
     formData.set('chapter', this.isActiveLabel()[0]?.chapter)
@@ -202,7 +200,7 @@ export class HomeComponent {
 
     this.apiService.postAPI('saveBibleVerses', formData.toString()).subscribe({
       next: res => {
-       
+
         if (res.success == true) {
           document.getElementById('modalClose')?.click()
           this.closeModal2.nativeElement.click();
@@ -211,13 +209,12 @@ export class HomeComponent {
         }
       }
     })
-
   };
 
   getShortURl(fullUrl: string, id: any) {
-    
+
     const formData = new URLSearchParams();
-    formData.set('full_url',fullUrl)
+    formData.set('full_url', fullUrl)
     formData.set('id', id)
 
 
@@ -225,8 +222,8 @@ export class HomeComponent {
       next: res => {
       
         if (res.success == true) {
-      this.shareUrl = `http://localhost:4200/content?content=${res.data}`;
-    
+          this.shareUrl = `http://localhost:4200/content?content=${res.data}`;
+
         }
       }
     })
@@ -288,5 +285,15 @@ export class HomeComponent {
       }
     })
   }
+
+  getChapter() {
+    // const formData = new URLSearchParams();
+    // formData.set('book_name', this.verseOftheDay.book_name)
+    // formData.set('chatperNo', this.verseOftheDay.chapter)
+    // formData.set('table_name', 'kjvbible')
+    this.route.navigateByUrl(`main/bible_chapter/${this.verseOftheDay.book_name}`);
+    this.apiService.setBookDetails(this.verseOftheDay.book_name, this.verseOftheDay.chapter)
+  };
+
 
 }
