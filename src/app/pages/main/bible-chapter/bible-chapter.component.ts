@@ -16,30 +16,37 @@ import { LoaderService } from 'src/app/services/loader.service';
 export class BibleChapterComponent {
   @Input() chapter = '';
   chapterNo = 1;
-  chapterVerses:any[] = [];
+  bookName: any;
+  chapterNo1: any;
+  chapterVerses: any[] = [];
   selectedVersion = computed(() => {
-   return this.apiService.versionSelected()
+    return this.apiService.versionSelected()
   });
   constructor(private loaderService: LoaderService, private apiService: ApiService) { }
 
   ngOnInit() {
     const table_name = this.apiService.getData();
     console.log(table_name);
-    this.getChapters()
+    this.getChapters();
   };
-
-
 
 
   getChapters() {
     const formData = new URLSearchParams();
-    formData.set('table_name',this.selectedVersion())
-    formData.set('book_name',this.chapter)
-    formData.set('chatperNo',this.chapterNo.toString())
+    if (!this.apiService.getBookDetails()[0]?.chapterNo) {
+      formData.set('table_name', this.selectedVersion())
+      formData.set('book_name', this.chapter)
+      formData.set('chatperNo', this.chapterNo.toString())
+    } else {
+      formData.set('book_name', this.apiService.getBookDetails()[0]?.bookName);
+      formData.set('chatperNo', this.apiService.getBookDetails()[0]?.chapterNo);
+      formData.set('table_name', 'kjvbible');
+    }
+
 
     this.apiService.postAPI('getChapters', formData.toString()).subscribe({
       next: res => {
-        if(res.success == true){
+        if (res.success == true) {
           this.chapterVerses = res.data
         }
         console.log(res);
@@ -48,19 +55,25 @@ export class BibleChapterComponent {
   }
 
 
+
+  ngOnDestroy(): void {
+    this.apiService.setBookDetails(this.bookName =  undefined, this.chapterNo1 = undefined)
+  }
+
+
   previous() {
-if(this.chapterNo == 1){
-  return
-}this.chapterNo--;
-this.getChapters()
+    if (this.chapterNo == 1) {
+      return
+    } this.chapterNo--;
+    this.getChapters()
   };
 
 
 
   next() {
- this.chapterNo++;
- this.getChapters()
- console.log(this.chapterNo);
+    this.chapterNo++;
+    this.getChapters()
+    console.log(this.chapterNo);
   }
 
 }

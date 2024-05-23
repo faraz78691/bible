@@ -12,88 +12,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr *ngFor="let row of data; let i = index">
+                        <td>{{i+1}}</td>
                         <td>
-                            <div class="ct_ad_image">
-                                <img src="assets/img/ads.jpg" alt="assets/img/ads.jpg">
+                            <div class="ct_event_img">
+                                <img [src]="'http://192.168.1.34:4000/profile/' + row.image" alt="img">
                             </div>
                         </td>
-                        <td><a href="#">www.dummy.com</a></td>
+                        <td>{{row.links}}</td>
+                        
                     </tr>
-                    <tr>
-                        <td>
-                            <div class="ct_ad_image">
-                                <img src="assets/img/ads.jpg" alt="assets/img/ads.jpg">
-                            </div>
-                        </td>
-                        <td><a href="#">www.dummy.com</a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="ct_ad_image">
-                                <img src="assets/img/ads.jpg" alt="assets/img/ads.jpg">
-                            </div>
-                        </td>
-                        <td><a href="#">www.dummy.com</a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="ct_ad_image">
-                                <img src="assets/img/ads.jpg" alt="assets/img/ads.jpg">
-                            </div>
-                        </td>
-                        <td><a href="#">www.dummy.com</a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="ct_ad_image">
-                                <img src="assets/img/ads.jpg" alt="assets/img/ads.jpg">
-                            </div>
-                        </td>
-                        <td><a href="#">www.dummy.com</a></td>
-                    <tr>
-                        <td>
-                            <div class="ct_ad_image">
-                                <img src="assets/img/ads.jpg" alt="assets/img/ads.jpg">
-                            </div>
-                        </td>
-                        <td><a href="#">www.dummy.com</a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="ct_ad_image">
-                                <img src="assets/img/ads.jpg" alt="assets/img/ads.jpg">
-                            </div>
-                        </td>
-                        <td><a href="#">www.dummy.com</a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="ct_ad_image">
-                                <img src="assets/img/ads.jpg" alt="assets/img/ads.jpg">
-                            </div>
-                        </td>
-                        <td><a href="#">www.dummy.com</a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="ct_ad_image">
-                                <img src="assets/img/ads.jpg" alt="assets/img/ads.jpg">
-                            </div>
-                        </td>
-                        <td><a href="#">www.dummy.com</a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="ct_ad_image">
-                                <img src="assets/img/ads.jpg" alt="assets/img/ads.jpg">
-                            </div>
-                        </td>
-                        <td><a href="#">www.dummy.com</a></td>
-                    </tr>
-
                 </tbody>
-
             </table>
         </div>
     </div>
