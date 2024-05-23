@@ -128,21 +128,11 @@
                             <div class="ct_share_main">
                                 <i class="fa-solid fa-share-nodes" (click)="shareButton = !shareButton"></i>
                                 <share-buttons *ngIf="shareButton" class="ct_social_icon_clr" theme='modern-dark'
-                                    [include]="['copy', 'facebook', 'email', 'telegram', 'twitter', 'whatsapp']"  [show]="5"
-                                    [showIcon]="true" [showText]="false" [url]="shareUrl"
+                                    [include]="['copy', 'facebook', 'email', 'telegram', 'twitter', 'whatsapp']"
+                                    [show]="5" [showIcon]="true" [showText]="false" [url]="shareUrl"
                                     description="Bible Verse" class="pt-5">
                                 </share-buttons>
-                                <!-- url="https://rodrigo.kamada.com.br/" -->
-                                <!-- <ul class="ct_animated_socials">
-                                    <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li> <a href="#"><i class="fa-solid fa-envelope"></i></a> </li>
-                                    <li> <a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
-                                    <li> <a href="#"><i class="fa-brands fa-square-instagram"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-pinterest-p"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-digg"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-stumbleupon"></i></a></li>
-                                    <li> <a href="#"><i class="fa-brands fa-reddit"></i></a></li> -->
-                                <!-- </ul> -->
+
                             </div>
 
                         </div>
@@ -165,38 +155,49 @@
 
             </div>
         </div>
-        <div class="ct_bottom_customize" *ngIf="customize">
 
+        <div class="ct_bottom_customize" *ngIf="customize">
+            <h2 class="mb-4 ct_h2">Bible Verse of the Day</h2>
             <label for="Verse no" class="ct_fw_600 mb-2">Verse number</label>
             <ckeditor class="ct_ol_padd" [editor]="Editor" [data]="verse_number" (change)="onEditorChange($event)"
                 [(ngModel)]="editorData" (ready)="onReady($event)"></ckeditor>
             <label for="Verse" class="ct_fw_600 mb-2 mt-4">Verse</label>
             <ckeditor class="ct_ol_padd" [editor]="Editor2" [data]="verse" (change)="onEditorChange2($event)"
                 [(ngModel)]="editorData2" (ready)="onReady($event)"></ckeditor>
-            <input type="text" placeholder="Add custom message" class="form-control mt-3" #message>
-            <label for="">Select card template</label>
-            <select class="ct_verse_version_drop" [(ngModel)]="selectedTempalte" *ngIf="template$ | async as template">
-                <option value=0>Select verse</option>
-                <option *ngFor="let option of template.data" >
+            <input type="text" placeholder="Add custom message" class="form-control mt-3" [(ngModel)]="customMessage"
+                #message>
+            <label for="" class="d-block mb-2 mt-3">Select card template</label>
+            <select style="max-width: 50%;" class="ct_verse_version_drop form-control" [(ngModel)]="selectedTempalte"
+                *ngIf="template$ | async as template">
+                <option value="">Select verse</option>
+                <option *ngFor="let option of template.data">
                     {{option.image}}</option>
-                </select>
-                <button class="ct_custom_btn w-auto mt-3 py-2" (click)="saveEditedVerse(message)">Save</button>
-                <button class="ct_custom_btn w-auto mt-3 py-2" data-bs-toggle="modal"
-                data-bs-target="#preview_modal">Preview</button>
-                <button class="ct_custom_btn w-auto mt-3 py-2" (click)="saveEditedVerse(message)">Share</button>
+            </select>
+            <div class="d-flex align-items-center gap-3">
+
+
+                <div class="ct_edited_share_postion_fix12">
+                    <div class="ct_share_main">
+                        <button class="ct_custom_btn py-2 w-auto" (click)="makeEditedURl()">Share</button>
+                        <share-buttons *ngIf="shareButton2" class="ct_social_icon_clr" theme='modern-dark'
+                            [include]="['copy', 'facebook', 'email', 'telegram', 'twitter', 'whatsapp']" [show]="5"
+                            [showIcon]="true" [showText]="false" [url]="shareEditUrl" description="Bible Verse"
+                            class="pt-5">
+                        </share-buttons>
+
+                    </div>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <button class="ct_custom_btn w-auto mt-3 py-2" (click)="saveEditedVerse(message)">Save</button>
+                    <button class="ct_custom_btn w-auto mt-3 py-2" data-bs-toggle="modal"
+                        data-bs-target="#preview_modal">Preview</button>
+                </div>
+            </div>
         </div>
     </section>
 
 
-
-
-
-
     <app-footer></app-footer>
-
-
-
-
 
 </div>
 
@@ -255,49 +256,46 @@
 </div>
 
 
-<section #contentDiv  class="ct_page_link" style="display: none;">
+<section #contentDiv class="ct_page_link" style="display: none;">
     <div class="d-flex align-items-center flex-wrap mb-4 justify-content-between gap-2">
         <h2 class="mb-0 ct_h2">Bible Verse of the Day</h2>
-       
+
     </div>
     <div class="ct_verse_bg" style="background-color:#3a0d0f;">
         <img src="assets/img/verse_day1.jpg">
         <div class="ct_verse_overlay">
             <div class="ct_verse_head">
-                <h4 class="mb-0">{{ this.verseOftheDay.book_name}} {{ this.verseOftheDay.chapter}}:{{ this.verseOftheDay.verse_number}}</h4>
+                <h4 class="mb-0">{{ this.verseOftheDay.book_name}} {{ this.verseOftheDay.chapter}}:{{
+                    this.verseOftheDay.verse_number}}</h4>
                 <p>
                     {{ this.verseOftheDay.verse}}
                 </p>
             </div>
-
-
         </div>
     </div>
-  
 </section>
 
-<div class="modal fade" id="preview_modal" tabindex="-1" aria-labelledby="preview_modal"
-    aria-hidden="true">
+<div class="modal fade" id="preview_modal" tabindex="-1" aria-labelledby="preview_modal" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered">
         <div class="modal-content">
-            <section class="ct_page_link">
-                
+            <section #customizeDiv class="ct_page_link">
+
                 <div class="ct_verse_bg" style="background-color:#3a0d0f;">
-                    <img src="assets/img/verse_day1.jpg">
+                    
+                    <img src="assets/img/verse_day1.jpg" *ngIf="this.selectedTempalte == ''">
+                    <img src="{{this.apiService.imageUrl + this.selectedTempalte}}" *ngIf="this.selectedTempalte != ''">
                     <div class="ct_verse_overlay">
                         <div class="ct_verse_head">
                             <h4 class="mb-0" [innerHTML]="editorData | safeHtml"></h4>
                             <p [innerHTML]="editorData2 | safeHtml">
-                                
                             </p>
                         </div>
-            
-            
+                        <p>{{customMessage}}</p>
                     </div>
                 </div>
-              
+
             </section>
+
         </div>
     </div>
 </div>
-

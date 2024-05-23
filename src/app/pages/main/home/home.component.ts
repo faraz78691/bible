@@ -33,6 +33,7 @@ export class HomeComponent {
   customize = false;
   customize2 = false;
   shareButton = false;
+  shareButton2 = false;
   public Editor = DecoupledEditor;
   public Editor2 = DecoupledEditor;
   public editorData = '';
@@ -48,12 +49,15 @@ export class HomeComponent {
   verseOftheDay: any = {};
   notes: string = '';
   @ViewChild('contentDiv') contentDiv: ElementRef | undefined;
-  shareUrl: string = ''
+  @ViewChild('customizeDiv') customizeDiv: ElementRef | undefined;
+  shareUrl: string = '';
+  shareEditUrl: string = '';
   shareText?: string;
   verseNumber = '';
   getVerse = '';
   randomTableID: any;
   selectedTempalte:string ='';
+  customMessage:string ='';
 
 
 
@@ -61,7 +65,7 @@ export class HomeComponent {
   //   console.log("aferr view init");
   //   this.updateShareContent();
   // }
-  constructor(private loaderService: LoaderService, private apiService: ApiService) {
+  constructor(private loaderService: LoaderService, public apiService: ApiService) {
 
   }
 
@@ -75,6 +79,21 @@ export class HomeComponent {
       linkElement.style.display = 'block';
     }
     const content = contentElement.innerHTML;
+    this.shareText = encodeURIComponent(content);
+    
+    this.shareUrl = `http://localhost:4200/content?content=${this.shareText}`;
+    this.getShortURl(this.shareUrl, this.randomTableID)
+  };
+
+  makeEditedURl() {
+    this.shareButton2 = !this.shareButton2
+    // const contentElement = this.contentDiv?.nativeElement.cloneNode(true);
+    // const linkElement = contentElement.querySelector('.ct_page_link');
+
+    // if (linkElement) {
+    //   linkElement.style.display = 'block';
+    // }
+    const content = this.customizeDiv?.nativeElement.innerHTML;
     this.shareText = encodeURIComponent(content);
     
     this.shareUrl = `http://localhost:4200/content?content=${this.shareText}`;
