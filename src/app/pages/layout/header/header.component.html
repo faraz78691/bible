@@ -17,13 +17,13 @@
                 </select>
     
                 <select class="ct_verse_version_drop" [(ngModel)]="selectedChapter" (change)="onChangeChapter($event)">
-                    <option>Select Chapter</option>
+                    <option>Select chapter</option>
                     <option *ngFor="let option of chapterNo;">
                         {{option.chapter}}</option>
                 </select>
     
                 <select class="ct_verse_version_drop" [(ngModel)]="selectedVerse">
-                    <option value=0>Select Chapter first</option>
+                    <option value=0>Select verse</option>
                     <option *ngFor="let option of varseNo;">
                         {{option.verse_number}}</option>
                 </select>

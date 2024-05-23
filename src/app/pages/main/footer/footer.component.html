@@ -1,20 +1,23 @@
- <section class="mb-3">
-        <div class="container">
-            <div class="col-md-12">
-                <div class="ct_banner_small">
-                    <img src="assets/img/verse_day2.jpg" alt="">
-                </div>
-            </div>
+ <div *ngIf="image$ | async as images">
+    <section class="mb-3" >
+           <div class="container">
+               <div class="col-md-12">
+                   <div class="ct_banner_small">
+                       <img src="assets/img/verse_day2.jpg" src="{{this.apiService.imageUrl + images.data[0].small_image}}" alt="">
+                   </div>
+               </div>
+   
+           </div>
+       </section>
+       <section>
+           <div class="container">
+               <div class="col-md-12">
+                   <div class="ct_banner_big">
+                       <img src="assets/img/verse_day2.jpg" src="{{this.apiService.imageUrl + images.data[0].big_image}}" alt="">
+                   </div>
+               </div>
+   
+           </div>
+       </section>
 
-        </div>
-    </section>
-    <section>
-        <div class="container">
-            <div class="col-md-12">
-                <div class="ct_banner_big">
-                    <img src="assets/img/verse_day2.jpg" alt="">
-                </div>
-            </div>
-
-        </div>
-    </section>
+ </div>

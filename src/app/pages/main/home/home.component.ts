@@ -50,7 +50,7 @@ export class HomeComponent {
   shareText?: string;
   verseNumber = '';
   getVerse = '';
-  
+  randomTableID: any;
 
 
 
@@ -61,7 +61,7 @@ export class HomeComponent {
   constructor(private loaderService: LoaderService, private apiService: ApiService) {
 
   }
-  
+
 
   updateShareContent() {
 
@@ -74,8 +74,9 @@ export class HomeComponent {
     const content = contentElement.innerHTML;
     this.shareText = encodeURIComponent(content);
     console.log(this.shareText);
-    
+
     this.shareUrl = `http://localhost:4200/content?content=${this.shareText}`;
+    this.getShortURl(this.shareUrl, this.randomTableID)
   };
 
 
@@ -86,19 +87,19 @@ export class HomeComponent {
   onPageChange(event: any) {
     this.first = event.first;
     this.rows = event.rows;
-  }
+  };
 
   public onReady(editor: any) {
     editor.ui.getEditableElement().parentElement.insertBefore(
       editor.ui.view.toolbar.element,
       editor.ui.getEditableElement()
     );
-  }
+  };
+
   ngOnInit(): void {
-    console.log("ngonint");
-
-    this.verseDay$ = this.apiService.getApi('getBibleVerseOfTheDay').pipe(tap(value => {
-
+ 
+      this.verseDay$ = this.apiService.getApi('getBibleVerseOfTheDay').pipe(tap(value => {
+      this.randomTableID = value.data.id;
       this.verseOftheDay = value.data;
       console.log(this.verseOftheDay.book_name);
       setTimeout(() => {
@@ -142,8 +143,7 @@ export class HomeComponent {
   @ViewChild('closeModal2') closeModal2!: ElementRef;
 
   saveVerse() {
-    // console.log("yo", this.verseOftheDay);
-    // return
+ 
     const formData = new URLSearchParams();
     formData.set('book_name', this.verseOftheDay.book_name)
     formData.set('chapter', this.verseOftheDay.chapter)
@@ -168,7 +168,7 @@ export class HomeComponent {
 
 
   saveVerse2() {
-    console.log("yo", this.isActiveLabel());
+
 
     const formData = new URLSearchParams();
     formData.set('book_name', this.isActiveLabel()[0]?.book_name)
@@ -179,12 +179,31 @@ export class HomeComponent {
 
     this.apiService.postAPI('saveBibleVerses', formData.toString()).subscribe({
       next: res => {
-        console.log(res)
+       
         if (res.success == true) {
           document.getElementById('modalClose')?.click()
           this.closeModal2.nativeElement.click();
           this.apiService.showSuccess(res.message);
           this.notes = '';
+        }
+      }
+    })
+
+  };
+
+  getShortURl(fullUrl: string, id: any) {
+    
+    const formData = new URLSearchParams();
+    formData.set('full_url',fullUrl)
+    formData.set('id', id)
+
+
+    this.apiService.postAPI('getshortURl', formData.toString()).subscribe({
+      next: res => {
+        console.log(res)
+        if (res.success == true) {
+      this.shareUrl = `http://localhost:4200/content?content=${res.data}`;
+    
         }
       }
     })

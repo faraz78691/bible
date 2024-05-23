@@ -30,7 +30,6 @@ export const routes: Routes = [
   path: 'main',
   loadChildren: () => import('./app/pages/main/main/main.routes')
                               .then(r => r.MAIN_ROUTES)
-
 },
 {
   path: 'content',
