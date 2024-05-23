@@ -19,14 +19,15 @@ interface PageEvent {
 }
 import { TableModule } from 'primeng/table';
 import { FooterComponent } from '../footer/footer.component';
+import { SafeHtmlPipe } from "../../../helper/safe-html.pipe";
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [CommonModule, CKEditorModule, FormsModule, PaginatorModule, TableModule, FooterComponent, ShareButtonsModule,
-    ShareIconsModule],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+    selector: 'app-home',
+    standalone: true,
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css'],
+    imports: [CommonModule, CKEditorModule, FormsModule, PaginatorModule, TableModule, FooterComponent, ShareButtonsModule,
+        ShareIconsModule, SafeHtmlPipe]
 })
 export class HomeComponent {
   customize = false;
@@ -43,6 +44,7 @@ export class HomeComponent {
   isActiveLabel = computed(() => this.apiService.verses());
   keywordDatas = computed(() => this.apiService.keywordVerseData());
   verseDay$!: Observable<any>;
+  template$!: Observable<any>;
   verseOftheDay: any = {};
   notes: string = '';
   @ViewChild('contentDiv') contentDiv: ElementRef | undefined;
@@ -51,6 +53,7 @@ export class HomeComponent {
   verseNumber = '';
   getVerse = '';
   randomTableID: any;
+  selectedTempalte:string ='';
 
 
 
@@ -73,8 +76,7 @@ export class HomeComponent {
     }
     const content = contentElement.innerHTML;
     this.shareText = encodeURIComponent(content);
-    console.log(this.shareText);
-
+    
     this.shareUrl = `http://localhost:4200/content?content=${this.shareText}`;
     this.getShortURl(this.shareUrl, this.randomTableID)
   };
@@ -101,13 +103,15 @@ export class HomeComponent {
       this.verseDay$ = this.apiService.getApi('getBibleVerseOfTheDay').pipe(tap(value => {
       this.randomTableID = value.data.id;
       this.verseOftheDay = value.data;
-      console.log(this.verseOftheDay.book_name);
+    
       setTimeout(() => {
         this.updateShareContent()
       }, 2000)
       // console.log("ngonint");
 
     }))
+
+    this.template$ = this.apiService.getApi('getCardTemplate')
 
     this.loaderService.removeLoaderClass();
   };
@@ -200,7 +204,7 @@ export class HomeComponent {
 
     this.apiService.postAPI('getshortURl', formData.toString()).subscribe({
       next: res => {
-        console.log(res)
+      
         if (res.success == true) {
       this.shareUrl = `http://localhost:4200/content?content=${res.data}`;
     
@@ -227,9 +231,7 @@ export class HomeComponent {
 
 
   saveEditedVerse(message: any) {
-    console.log(this.editorData);
-    console.log(this.editorData2);
-
+   
     const formData = new URLSearchParams();
     formData.set('verse_number', this.editorData)
     formData.set('verse', this.editorData2)

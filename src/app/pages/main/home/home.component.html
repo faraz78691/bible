@@ -174,7 +174,16 @@
             <ckeditor class="ct_ol_padd" [editor]="Editor2" [data]="verse" (change)="onEditorChange2($event)"
                 [(ngModel)]="editorData2" (ready)="onReady($event)"></ckeditor>
             <input type="text" placeholder="Add custom message" class="form-control mt-3" #message>
-            <button class="ct_custom_btn w-auto mt-3 py-2" (click)="saveEditedVerse(message)">Save</button>
+            <label for="">Select card template</label>
+            <select class="ct_verse_version_drop" [(ngModel)]="selectedTempalte" *ngIf="template$ | async as template">
+                <option value=0>Select verse</option>
+                <option *ngFor="let option of template.data" >
+                    {{option.image}}</option>
+                </select>
+                <button class="ct_custom_btn w-auto mt-3 py-2" (click)="saveEditedVerse(message)">Save</button>
+                <button class="ct_custom_btn w-auto mt-3 py-2" data-bs-toggle="modal"
+                data-bs-target="#preview_modal">Preview</button>
+                <button class="ct_custom_btn w-auto mt-3 py-2" (click)="saveEditedVerse(message)">Share</button>
         </div>
     </section>
 
@@ -266,3 +275,29 @@
     </div>
   
 </section>
+
+<div class="modal fade" id="preview_modal" tabindex="-1" aria-labelledby="preview_modal"
+    aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <section class="ct_page_link">
+                
+                <div class="ct_verse_bg" style="background-color:#3a0d0f;">
+                    <img src="assets/img/verse_day1.jpg">
+                    <div class="ct_verse_overlay">
+                        <div class="ct_verse_head">
+                            <h4 class="mb-0" [innerHTML]="editorData | safeHtml"></h4>
+                            <p [innerHTML]="editorData2 | safeHtml">
+                                
+                            </p>
+                        </div>
+            
+            
+                    </div>
+                </div>
+              
+            </section>
+        </div>
+    </div>
+</div>
+
