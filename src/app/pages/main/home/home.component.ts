@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, computed } from '@angular/core';
+import { Component, ElementRef, ViewChild, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoaderService } from 'src/app/services/loader.service';
 
@@ -44,6 +44,7 @@ export class HomeComponent {
   verse_number = '';
   verse = '';
   isActiveLabel = computed(() => this.apiService.verses());
+
   keywordDatas = computed(() => this.apiService.keywordVerseData());
   verseDay$!: Observable<any>;
   template$!: Observable<any>;
@@ -51,6 +52,8 @@ export class HomeComponent {
   notes: string = '';
   @ViewChild('contentDiv') contentDiv: ElementRef | undefined;
   @ViewChild('customizeDiv') customizeDiv: ElementRef | undefined;
+  @ViewChild('searchedDiv') searchedDiv: ElementRef | undefined;
+  @ViewChild('searchcustomizeDiv') searchcustomizeDiv: ElementRef | undefined;
   shareUrl: string = '';
   shareEditUrl: string = '';
   shareText?: string;
@@ -67,7 +70,15 @@ export class HomeComponent {
   //   this.updateShareContent();
   // }
   constructor(private loaderService: LoaderService, public apiService: ApiService, private route: Router) {
+    effect(() => {
+      if (this.apiService.verses().length > 0) {
+        setTimeout(()=>{
+          console.log("effect is  working")
+          this.searchShareContent()
 
+        },2000)
+      }
+    })
   }
 
 
@@ -86,6 +97,23 @@ export class HomeComponent {
     this.getShortURl(this.shareUrl, this.randomTableID)
   };
 
+  searchShareContent() {
+    console.log("function");
+    const contentElement = this.searchedDiv?.nativeElement.cloneNode(true);
+    console.log("contentElement", contentElement);
+    const linkElement = contentElement.querySelector('.ct_searchedDiv');
+
+    if (linkElement) {
+      linkElement.style.display = 'block';
+    }
+    const content = contentElement.innerHTML;
+    console.log("content", content);
+    this.shareText = encodeURIComponent(content);
+
+    this.shareUrl = `http://localhost:4200/content?content=${this.shareText}`;
+    this.getEditShortURl(this.shareUrl)
+  };
+
   makeEditedURl() {
     this.shareButton2 = !this.shareButton2
     // const contentElement = this.contentDiv?.nativeElement.cloneNode(true);
@@ -95,6 +123,21 @@ export class HomeComponent {
     //   linkElement.style.display = 'block';
     // }
     const content = this.customizeDiv?.nativeElement.innerHTML;
+    this.shareText = encodeURIComponent(content);
+
+    this.shareEditUrl = `http://localhost:4200/content?content=${this.shareText}`;
+    this.getEditShortURl(this.shareEditUrl)
+  };
+
+  searchedEditedURl() {
+    this.shareButton2 = !this.shareButton2
+    // const contentElement = this.contentDiv?.nativeElement.cloneNode(true);
+    // const linkElement = contentElement.querySelector('.ct_page_link');
+
+    // if (linkElement) {
+    //   linkElement.style.display = 'block';
+    // }
+    const content = this.searchcustomizeDiv?.nativeElement.innerHTML;
     this.shareText = encodeURIComponent(content);
 
     this.shareEditUrl = `http://localhost:4200/content?content=${this.shareText}`;
@@ -230,10 +273,10 @@ export class HomeComponent {
 
   };
   getEditShortURl(fullUrl: string) {
-console.log(fullUrl)
+    console.log(fullUrl)
     const formData = new URLSearchParams();
     formData.set('full_url', fullUrl)
-    
+
 
 
 
@@ -252,7 +295,7 @@ console.log(fullUrl)
 
   customizeVerse() {
     this.customize = !this.customize;
-    this.editorData = `<p>${this.verseOftheDay.book_name} ${this.verseOftheDay.verse_number}:${this.verseOftheDay.chapter}</p>`
+    this.editorData = `<p>${this.verseOftheDay.book_name} ${this.verseOftheDay.chapter}:${this.verseOftheDay.verse_number}</p>`
     this.editorData2 = `<p>${this.verseOftheDay.verse}</p>`
 
   };
@@ -260,7 +303,7 @@ console.log(fullUrl)
   customizeVerse2() {
     console.log("called f")
     console.log("called", this.isActiveLabel())
-    this.editorData3 = `<p>${this.isActiveLabel()[0]?.book_name} ${this.isActiveLabel()[0]?.verse_number}:${this.isActiveLabel()[0]?.chapter}</p>`
+    this.editorData3 = `<p>${this.isActiveLabel()[0]?.book_name} ${this.isActiveLabel()[0]?.chapter}:${this.isActiveLabel()[0]?.verse_number}</p>`
     this.editorData4 = `<p>${this.isActiveLabel()[0]?.verse}</p>`
   };
 
@@ -275,7 +318,7 @@ console.log(fullUrl)
 
     this.apiService.postAPI('saveEditedBibleVerses', formData.toString()).subscribe({
       next: res => {
-       
+
         if (res.success == true) {
           // document.getElementById('modalClose')?.click()
           this.apiService.showSuccess(res.message)

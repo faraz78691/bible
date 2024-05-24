@@ -6,21 +6,24 @@ import { LoaderService } from 'src/app/services/loader.service';
 import { SafeHtmlPipe } from 'src/app/helper/safe-html.pipe';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FooterComponent } from '../footer/footer.component';
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 
 @Component({
   selector: 'app-member-area',
   standalone: true,
-  imports: [CommonModule, SafeHtmlPipe, FormsModule, ReactiveFormsModule, FooterComponent],
+  imports: [CommonModule, SafeHtmlPipe, FormsModule, ReactiveFormsModule, FooterComponent,ShareButtonsModule,
+    ShareIconsModule, SafeHtmlPipe],
   templateUrl: './member-area.component.html',
   styleUrls: ['./member-area.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
 export class MemberAreaComponent {
-
   form!: FormGroup;
   @ViewChild('closeModal') closeModal!: ElementRef;
-
+  
   // savedverse$!: Observable<any>;
+  shareButton = false;
   savedverse$!: Observable<any>;
   editedverse$!: Observable<any>;
   freinds$!: Observable<any>;
@@ -28,7 +31,10 @@ export class MemberAreaComponent {
 
   verseOftheDay: any = {};
   notes: string = '';
-  constructor(private loaderService: LoaderService, private apiService: ApiService) { }
+  shareUrl: string = '';
+  shareEditUrl: string = '';
+  shareText?: string;
+  constructor(private loaderService: LoaderService, public apiService: ApiService) { }
 
 
   ngOnInit(): void {
@@ -49,6 +55,10 @@ export class MemberAreaComponent {
       name: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
     })
+  };
+
+  SavedCard(id:any){
+
   }
 
   addFriend() {

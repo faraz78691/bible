@@ -32,7 +32,7 @@
             <div class="tab-pane fade show active" id="pills-Saved-Verses" role="tabpanel"
                 aria-labelledby="pills-Saved-Verses-tab" *ngIf="savedverse$ | async as savedVerse">
                 <div class="row">
-                    <div class="col-lg-6 col-md-12" *ngFor="let items of savedVerse.data">
+                    <div class="col-lg-6 col-md-12" *ngFor="let items of savedVerse.data; index as i">
                         <div class="ct_verse_bg mb-4" style="background-color:#3a0d0f;">
                             <img src="assets/img/verse_day1.jpg">
                             <div class="ct_verse_overlay">
@@ -43,21 +43,17 @@
                                         {{items.verse}}
                                     </p>
                                     <div class="ct_socials_bottom_position">
-                                        <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-end gap-3">
                                             <div class="ct_share_main">
-                                                <i class="fa-solid fa-share-nodes"></i>
-                                                <ul class="ct_animated_socials">
-                                                    <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                                    <li> <a href="#"><i class="fa-solid fa-envelope"></i></a> </li>
-                                                    <li> <a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
-                                                    <li> <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
-                                                    </li>
-                                                    <li><a href="#"><i class="fa-brands fa-pinterest-p"></i></a></li>
-                                                    <li><a href="#"><i class="fa-brands fa-digg"></i></a></li>
-                                                    <li><a href="#"><i class="fa-brands fa-stumbleupon"></i></a></li>
-                                                    <li> <a href="#"><i class="fa-brands fa-reddit"></i></a></li>
-                                                </ul>
+                                                <i class="fa-solid fa-share-nodes" (click)="SavedCard(items.id)"></i>
+                                                <share-buttons *ngIf="shareButton" class="ct_social_icon_clr" theme='modern-dark'
+                                                    [include]="['copy', 'facebook', 'email', 'telegram', 'twitter', 'whatsapp']"
+                                                    [show]="5" [showIcon]="true" [showText]="false" [url]="shareUrl"
+                                                    description="Bible Verse" class="pt-5">
+                                                </share-buttons>
+                
                                             </div>
+                
                                         </div>
 
                                     </div>
@@ -113,12 +109,13 @@
                     <div *ngIf="editedVerse.data.length > 0; else noDataTemplate">
                         <div class="row">
                             <div class="col-lg-4 col-md-6" *ngFor="let items of editedVerse.data">
-                                <div class="ct_verse_bg mb-4" style="background-color:#f5f5f5; height: 300px;">
+                                <div class="ct_verse_bg mb-4" style="background-color:#3a0d0f; height: 300px;">
+                                    <img src="{{this.apiService.imageUrl + items.bg_image}}">
                                     <div class="ct_verse_overlay">
                                         <div class="ct_verse_head">
-                                            <div class="mb-0 ct_innerhtml_p"
+                                            <div class="ct_verse_head"
                                                 [innerHTML]="items.verse_number | safeHtml"></div>
-                                            <div class="ct_innerhtml_p" [innerHTML]="items.verse"></div>
+                                            <div [innerHTML]="items.verse | safeHtml"></div>
                                         </div>
                                     </div>
                                 </div>
