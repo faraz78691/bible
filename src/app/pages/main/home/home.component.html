@@ -53,7 +53,7 @@
 
             </div>
         </div>
-      
+
         <div class="ct_bottom_customize" *ngIf="customize2">
             <h2 class="mb-4 ct_h2">Customize Verse</h2>
             <label for="Verse no" class="ct_fw_600 mb-2">Verse number</label>
@@ -62,35 +62,35 @@
             <label for="Verse">Verse</label>
             <ckeditor class="ct_ol_padd" [editor]="Editor2" [data]="verse" (change)="onEditorChange4($event)"
                 [(ngModel)]="editorData4" (ready)="onReady($event)"></ckeditor>
-                <input type="text" placeholder="Add custom message" class="form-control mt-3" [(ngModel)]="customMessage"
+            <input type="text" placeholder="Add custom message" class="form-control mt-3" [(ngModel)]="customMessage"
                 #message>
-                <label for="" class="d-block mb-2 mt-3">Select card template</label>
-                <select style="max-width: 50%;" class="ct_verse_version_drop form-control" [(ngModel)]="selectedTempalte"
-                    *ngIf="template$ | async as template">
-                    <option value="">Select verse</option>
-                    <option *ngFor="let option of template.data">
-                        {{option.image}}</option>
-                </select>
-                <div class="d-flex align-items-center gap-3">
+            <label for="" class="d-block mb-2 mt-3">Select card template</label>
+            <select style="max-width: 50%;" class="ct_verse_version_drop form-control" [(ngModel)]="selectedTempalte"
+                *ngIf="template$ | async as template">
+                <option value="">Select verse</option>
+                <option *ngFor="let option of template.data">
+                    {{option.image}}</option>
+            </select>
+            <div class="d-flex align-items-center gap-3">
 
 
-                    <div class="ct_edited_share_postion_fix12">
-                        <div class="ct_share_main">
-                            <button class="ct_custom_btn py-2 w-auto" (click)="searchedEditedURl()">Share</button>
-                            <share-buttons *ngIf="shareButton2" class="ct_social_icon_clr" theme='modern-dark'
-                                [include]="['copy', 'facebook', 'email', 'telegram', 'twitter', 'whatsapp']" [show]="5"
-                                [showIcon]="true" [showText]="false" [url]="shareEditUrl" description="Bible Verse"
-                                class="pt-5">
-                            </share-buttons>
-    
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center gap-3">
-                        <button class="ct_custom_btn w-auto mt-3 py-2" (click)="saveEditedVerse(message)">Save</button>
-                        <button class="ct_custom_btn w-auto mt-3 py-2" data-bs-toggle="modal"
-                            data-bs-target="#preview_modal2">Preview</button>
+                <div class="ct_edited_share_postion_fix12">
+                    <div class="ct_share_main">
+                        <button class="ct_custom_btn py-2 w-auto" (click)="searchedEditedURl()">Share</button>
+                        <share-buttons *ngIf="shareButton2" class="ct_social_icon_clr" theme='modern-dark'
+                            [include]="['copy', 'facebook', 'email', 'telegram', 'twitter', 'whatsapp']" [show]="5"
+                            [showIcon]="true" [showText]="false" [url]="shareEditUrl" description="Bible Verse"
+                            class="pt-5">
+                        </share-buttons>
+
                     </div>
                 </div>
+                <div class="d-flex align-items-center gap-3">
+                    <button class="ct_custom_btn w-auto mt-3 py-2" (click)="saveEditedVerse(message)">Save</button>
+                    <button class="ct_custom_btn w-auto mt-3 py-2" data-bs-toggle="modal"
+                        data-bs-target="#preview_modal2">Preview</button>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -293,8 +293,8 @@
     </div>
 </section>
 
-   <!-- Single verse reasult section -->
-   <section #searchedDiv class="mb-5" class="ct_searchedDiv"  style="display: none;">
+<!-- Single verse reasult section -->
+<section #searchedDiv class="mb-5" class="ct_searchedDiv" style="display: none;">
     <div class="ct_verse_bg" style="background-color:#3a0d0f;">
         <img src="assets/img/verse_day1.jpg">
         <div class="ct_verse_overlay">
@@ -316,16 +316,17 @@
             <section #customizeDiv class="ct_page_link">
 
                 <div class="ct_verse_bg" style="background-color:#3a0d0f;">
-                    
+
                     <img src="assets/img/verse_day1.jpg" *ngIf="this.selectedTempalte == 'assets/img/verse_day1.jpg'">
-                    <img src="{{this.apiService.imageUrl + this.selectedTempalte}}" *ngIf="this.selectedTempalte != 'assets/img/verse_day1.jpg'">
+                    <img src="{{this.apiService.imageUrl + this.selectedTempalte}}"
+                        *ngIf="this.selectedTempalte != 'assets/img/verse_day1.jpg'">
                     <div class="ct_verse_overlay">
                         <div class="ct_verse_head">
                             <h4 class="mb-0" [innerHTML]="editorData | safeHtml"></h4>
                             <p [innerHTML]="editorData2 | safeHtml">
                             </p>
                         </div>
-                        <p>{{customMessage}}</p>
+                        <p class="text-white">{{customMessage}}</p>
                     </div>
                 </div>
 
@@ -340,9 +341,10 @@
             <section #searchcustomizeDiv class="ct_page_link">
 
                 <div class="ct_verse_bg" style="background-color:#3a0d0f;">
-                    
+
                     <img src="assets/img/verse_day1.jpg" *ngIf="this.selectedTempalte == 'assets/img/verse_day1.jpg'">
-                    <img src="{{this.apiService.imageUrl + this.selectedTempalte}}" *ngIf="this.selectedTempalte != 'assets/img/verse_day1.jpg'">
+                    <img src="{{this.apiService.imageUrl + this.selectedTempalte}}"
+                        *ngIf="this.selectedTempalte != 'assets/img/verse_day1.jpg'">
                     <div class="ct_verse_overlay">
                         <div class="ct_verse_head">
                             <h4 class="mb-0" [innerHTML]="editorData3 | safeHtml"></h4>

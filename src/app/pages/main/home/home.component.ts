@@ -79,7 +79,7 @@ export class HomeComponent {
         },2000)
       }
     })
-  }
+  };
 
 
   updateShareContent() {

@@ -12,7 +12,7 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 @Component({
   selector: 'app-member-area',
   standalone: true,
-  imports: [CommonModule, SafeHtmlPipe, FormsModule, ReactiveFormsModule, FooterComponent,ShareButtonsModule,
+  imports: [CommonModule, SafeHtmlPipe, FormsModule, ReactiveFormsModule, FooterComponent, ShareButtonsModule,
     ShareIconsModule, SafeHtmlPipe],
   templateUrl: './member-area.component.html',
   styleUrls: ['./member-area.component.css'],
@@ -21,7 +21,9 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 export class MemberAreaComponent {
   form!: FormGroup;
   @ViewChild('closeModal') closeModal!: ElementRef;
-  
+  @ViewChild('savedDiv') savedDiv: ElementRef | undefined;
+  @ViewChild('editedDiv') editedDiv: ElementRef | undefined;
+
   // savedverse$!: Observable<any>;
   shareButton = false;
   savedverse$!: Observable<any>;
@@ -34,6 +36,9 @@ export class MemberAreaComponent {
   shareUrl: string = '';
   shareEditUrl: string = '';
   shareText?: string;
+  activeItemId: number | null = null;
+  selectedItems: any;
+
   constructor(private loaderService: LoaderService, public apiService: ApiService) { }
 
 
@@ -57,8 +62,92 @@ export class MemberAreaComponent {
     })
   };
 
-  SavedCard(id:any){
+  setActiveItem(items: any, index: any): void {
+    console.log(items);
+    this.selectedItems = items;
 
+
+
+    if (this.activeItemId == index) {
+      this.activeItemId = 0;
+      this.selectedItems = '';
+    } else {
+      this.activeItemId = index;
+      setTimeout(() => {
+        console.log("effect is  working")
+        this.updateShareContent()
+
+      }, 1000)
+    }
+  };
+  setActiveItem2(items: any, index: any): void {
+    console.log(items);
+    this.selectedItems = items;
+    if (this.activeItemId == index) {
+      this.activeItemId = 0;
+      this.selectedItems = '';
+    } else {
+      this.activeItemId = index;
+      setTimeout(() => {
+        console.log("effect is  working")
+        this.updateShareContent2()
+
+      }, 1000)
+    }
+  };
+
+
+  updateShareContent() {
+
+    const contentElement = this.savedDiv?.nativeElement.cloneNode(true);
+    const linkElement = contentElement.querySelector('.ct_searchedDiv');
+    
+    if (linkElement) {
+      linkElement.style.display = 'block';
+    }
+    const content = contentElement.innerHTML;
+    this.shareText = encodeURIComponent(content);
+
+    this.shareUrl = `http://localhost:4200/content?content=${this.shareText}`;
+    this.getEditShortURl(this.shareUrl)
+  };
+  updateShareContent2() {
+    const contentElement = this.editedDiv?.nativeElement.cloneNode(true);
+    const linkElement = contentElement.querySelector('.ct_searchedDiv2');
+    console.log(contentElement);
+    if (linkElement) {
+      linkElement.style.display = 'block';
+    }
+    const content = contentElement.innerHTML;
+    this.shareText = encodeURIComponent(content);
+
+    this.shareUrl = `http://localhost:4200/content?content=${this.shareText}`;
+    this.getEditShortURl(this.shareUrl)
+  };
+
+  getEditShortURl(fullUrl: string) {
+    console.log(fullUrl)
+    const formData = new URLSearchParams();
+    formData.set('full_url', fullUrl);
+
+    this.apiService.postAPI('getEditshortURl', formData.toString()).subscribe({
+      next: res => {
+
+        if (res.success == true) {
+          this.shareEditUrl = `http://localhost:4200/content?content=${res.data}`;
+
+        }
+      }
+    })
+
+  };
+
+
+  isActive(itemId: number) {
+    return this.activeItemId === itemId;
+  }
+  isActive2(itemId: number) {
+    return this.activeItemId === itemId;
   }
 
   addFriend() {
