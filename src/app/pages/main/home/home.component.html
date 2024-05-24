@@ -67,9 +67,9 @@
             <label for="" class="d-block mb-2 mt-3">Select card template</label>
             <select style="max-width: 50%;" class="ct_verse_version_drop form-control" [(ngModel)]="selectedTempalte"
                 *ngIf="template$ | async as template">
-                <option value="">Select verse</option>
-                <option *ngFor="let option of template.data">
-                    {{option.image}}</option>
+                <option value='assets/img/verse_day1.jpg'>Select verse</option>
+                <option *ngFor="let option of template.data; index as i" [ngValue]="option.image">
+                   Template {{i + 1}}</option>
             </select>
             <div class="d-flex align-items-center gap-3">
 
@@ -115,11 +115,11 @@
             <ng-template pTemplate="body" let-car>
                 <tr>
 
-                    <td>{{car.book_name}}{{car.chapter}}:{{car.verse_number}}</td>
+                    <td>{{car.book_name}} {{car.chapter}}:{{car.verse_number}}</td>
                     <td>{{car.verse}}</td>
                     <td class="d-flex align-items-center gap-3 justify-content-end ct_action_btns">
-                        <i class="fa-solid fa-pen" data-bs-toggle="modal" data-bs-target="#ct_save_verse_modal"
-                            style="cursor: pointer;" title="Update"></i>
+                        <i class="fa-solid fa-pen" data-bs-toggle="modal" data-bs-target="#ct_keyword_save_verse_modal2"
+                            style="cursor: pointer;" title="Update" (click)="setKeywordData(car)"></i>
                     </td>
                 </tr>
             </ng-template>
@@ -189,9 +189,9 @@
             <label for="" class="d-block mb-2 mt-3">Select card template</label>
             <select style="max-width: 50%;" class="ct_verse_version_drop form-control" [(ngModel)]="selectedTempalte"
                 *ngIf="template$ | async as template">
-                <option value="">Select verse</option>
-                <option *ngFor="let option of template.data">
-                    {{option.image}}</option>
+                <option value="assets/img/verse_day1.jpg">Select template</option>
+                <option *ngFor="let option of template.data; index as i" [ngValue]="option.image">
+                    Template {{i +1}}</option>
             </select>
             <div class="d-flex align-items-center gap-3">
 
@@ -232,7 +232,7 @@
                 <div class="ct_saved_verse_modal">
                     <h4 class="mb-4 text-center"><strong>Save Verse</strong></h4>
                     <form>
-                        <textarea rows="4" class="form-control" placeholder="Please add a note" [(ngModel)]="notes"
+                        <textarea rows="4" class="form-control" placeholder="Want to add a note" [(ngModel)]="notes"
                             [ngModelOptions]="{standalone: true}"></textarea>
                     </form>
                 </div>
@@ -270,6 +270,32 @@
                 <button type="button" class="ct_custom_btn py-2 px-4 w-auto" (click)="saveVerse2()">Save</button>
                 <button hidden type="button" class="btn btn-secondary" #closeModal2
                     data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ct_keyword_save_verse_modal2" tabindex="-1" aria-labelledby="ct_keyword_save_verse_modal2"
+    aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0 pb-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body border-0 pt-0">
+                <div class="ct_saved_verse_modal">
+                    <h4 class="mb-4 text-center"><strong>Save Verse</strong></h4>
+                    <form>
+                        <textarea rows="4" class="form-control" placeholder="Want to add a note" [(ngModel)]="notes"
+                            [ngModelOptions]="{standalone: true}"></textarea>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn-secondary ct_custom_btn text-dark py-2 px-4  w-auto"
+                    style="background-color:  #eee;" data-bs-dismiss="modal" id="modalClose">Close</button>
+                <button type="button" class="ct_custom_btn py-2 px-4 w-auto" (click)="saveKeywordVerse()">Save</button>
+                
             </div>
         </div>
     </div>
@@ -353,7 +379,7 @@
                             <p [innerHTML]="editorData4 | safeHtml">
                             </p>
                         </div>
-                        <p>{{customMessage}}</p>
+                        <p class="text-white">{{customMessage}}</p>
                     </div>
                 </div>
 

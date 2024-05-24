@@ -14,9 +14,9 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let items of verses.data">
-                        <td><a  >{{items.created_at | date:'dd-MM-YYYY'}}</a></td>
-                        <td><a href="view-previous_day.html" target="_blank"> {{items.verse_number}}</a></td>
-                        <td><a href="view-previous_day.html" target="_blank"> {{items.verse}}</a></td>
+                        <td>  {{items.created_at | date:'dd-MM-YYYY'}}</td>
+                        <td>{{items.book_name}} {{items.chapter}}:{{items.verse_number}}</td>
+                        <td class="ct_verse_para_40"><p>{{items.verse}}</p></td>
                     </tr>
                 </tbody>
 

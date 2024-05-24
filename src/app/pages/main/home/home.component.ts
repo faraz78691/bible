@@ -62,6 +62,7 @@ export class HomeComponent {
   randomTableID: any;
   selectedTempalte: string = 'assets/img/verse_day1.jpg';
   customMessage: string = '';
+  keywordItems:any;
 
 
 
@@ -231,6 +232,11 @@ export class HomeComponent {
 
   };
 
+  setKeywordData(items:any){
+this.keywordItems = items
+console.log(this.keywordItems);
+  }
+
 
 
   saveVerse2() {
@@ -249,6 +255,26 @@ export class HomeComponent {
           this.closeModal2.nativeElement.click();
           this.apiService.showSuccess(res.message);
           this.notes = '';
+        }
+      }
+    })
+  };
+  saveKeywordVerse() {
+    const formData = new URLSearchParams();
+    formData.set('book_name', this.keywordItems?.book_name)
+    formData.set('chapter', this.keywordItems?.chapter)
+    formData.set('verse_number', this.keywordItems?.verse_number)
+    formData.set('verse', this.keywordItems.verse)
+    formData.set('notes', this.notes)
+
+    this.apiService.postAPI('saveBibleVerses', formData.toString()).subscribe({
+      next: res => {
+
+        if (res.success == true) {
+          document.getElementById('modalClose')?.click()
+          this.apiService.showSuccess(res.message);
+          this.notes = '';
+          this.keywordItems = ''
         }
       }
     })
@@ -324,6 +350,7 @@ export class HomeComponent {
           // document.getElementById('modalClose')?.click()
           this.apiService.showSuccess(res.message)
           this.customize = false;
+          this.selectedTempalte = 'assets/img/verse_day1.jpg';
         }
       }
     })
@@ -345,6 +372,7 @@ export class HomeComponent {
           // document.getElementById('modalClose')?.click()
           this.apiService.showSuccess(res.message)
           this.customize2 = false;
+          this.selectedTempalte = 'assets/img/verse_day1.jpg';
         }
       }
     })
