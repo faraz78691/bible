@@ -109,7 +109,7 @@
                     <div *ngIf="editedVerse.data.length > 0; else noDataTemplate">
                         <div class="row">
                             <div class="col-lg-4 col-md-6" *ngFor="let items of editedVerse.data">
-                                <div class="ct_verse_bg mb-4" style="background-color:#3a0d0f; height: 300px;">
+                                <div class="ct_verse_bg mb-4" style="background-color:#3a0d0f;">
                                     <img src="{{this.apiService.imageUrl + items.bg_image}}">
                                     <div class="ct_verse_overlay">
                                         <div class="ct_verse_head">

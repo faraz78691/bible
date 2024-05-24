@@ -2,11 +2,11 @@
     <div class="ct_toggle_bar">
         <i class="fa-solid fa-bars-staggered"></i>
     </div>
-    <div class="" *ngIf="isFilterSectionActive() == true">
-        <div class="d-flex align-items-center gap-2 flex-wrap" *ngIf="version$ | async as version">
+    <div class="ct_res_w_100" *ngIf="isFilterSectionActive() == true">
+        <div class="d-flex align-items-center gap-2 ct_res_flex_wrap_30" *ngIf="version$ | async as version">
 
-            <div>
-                <select class="ct_verse_version_drop" style="max-width: 200px;" [(ngModel)]="selectedOption" (change)="onChangeVersion($event)">
+            <div class="ct_grid_2_select">
+                <select class="ct_verse_version_drop ct_max_width_200"  [(ngModel)]="selectedOption" (change)="onChangeVersion($event)">
                     <option *ngFor="let items of version.data" [value]="items.table_name">{{items.name}}</option>
                 </select>
     
@@ -29,9 +29,9 @@
                 </select>
             </div>
 
-            <div class="ct_search_bar w-auto">
+            <div class="ct_search_bar ct_search_without_position w-auto ct_multi_search_res12">
 
-                <i class="fa-solid fa-magnifying-glass" (click)="search_verse()"></i>
+                <button><i class="fa-solid fa-magnifying-glass" (click)="search_verse()"></i> <span>Search Verses</span></button>
                 <div class="ct_search_list12">
                     <ul>
                         <li>James 1:19</li>
@@ -44,7 +44,7 @@
             </div>
           
         </div>
-        <div class="ct_search_bar mt-2 ct_search_bar_2">
+        <div class="ct_search_bar mt-2 ct_search_bar_2 ">
             <input type="text" class="form-control" placeholder="Search By Keyword" [(ngModel)]="keyWord" autocomplete="on">
             <i class="fa-solid fa-magnifying-glass" (click)="search_keyword()" title="search by keyword"></i>
           
