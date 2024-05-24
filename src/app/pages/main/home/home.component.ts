@@ -309,7 +309,8 @@ export class HomeComponent {
 
 
   saveEditedVerse(message: any) {
-
+    console.log('editorData', this.editorData3);
+    console.log('editorData2',this.editorData4);
     const formData = new URLSearchParams();
     formData.set('verse_number', this.editorData)
     formData.set('verse', this.editorData2)
@@ -329,14 +330,14 @@ export class HomeComponent {
   }
 
   saveEditedVerse2(message: any) {
-    console.log(this.editorData3);
-    console.log(this.editorData4);
+    console.log('editorData3', this.editorData3);
+    console.log('editorData4',this.editorData4);
 
     const formData = new URLSearchParams();
     formData.set('verse_number', this.editorData3)
     formData.set('verse', this.editorData4)
     formData.set('notes', message.value)
-
+    formData.set('bg_image', this.selectedTempalte)
     this.apiService.postAPI('saveEditedBibleVerses', formData.toString()).subscribe({
       next: res => {
         console.log(res)
