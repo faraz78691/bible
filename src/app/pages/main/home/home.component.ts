@@ -387,5 +387,14 @@ console.log(this.keywordItems);
     this.apiService.setBookDetails(this.verseOftheDay.book_name, this.verseOftheDay.chapter)
   };
 
+  getSearchChapter() {
+    // const formData = new URLSearchParams();
+    // formData.set('book_name', this.verseOftheDay.book_name)
+    // formData.set('chatperNo', this.verseOftheDay.chapter)
+    // formData.set('table_name', 'kjvbible')
+    this.route.navigateByUrl(`main/bible_chapter/${this.isActiveLabel()[0]?.book_name}`);
+    this.apiService.setBookDetails(this.isActiveLabel()[0]?.book_name, this.isActiveLabel()[0]?.chapter)
+  };
+
 
 }
