@@ -23,12 +23,12 @@ import { Router } from '@angular/router';
 import { SafeHtmlPipe } from 'src/app/helper/safe-html.pipe';
 
 @Component({
-    selector: 'app-home',
-    standalone: true,
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.css'],
-    imports: [CommonModule, CKEditorModule, FormsModule, PaginatorModule, TableModule, FooterComponent, ShareButtonsModule,
-        ShareIconsModule, SafeHtmlPipe]
+  selector: 'app-home',
+  standalone: true,
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css'],
+  imports: [CommonModule, CKEditorModule, FormsModule, PaginatorModule, TableModule, FooterComponent, ShareButtonsModule,
+    ShareIconsModule, SafeHtmlPipe]
 })
 export class HomeComponent {
   customize = false;
@@ -57,8 +57,8 @@ export class HomeComponent {
   verseNumber = '';
   getVerse = '';
   randomTableID: any;
-  selectedTempalte:string ='';
-  customMessage:string ='';
+  selectedTempalte: string = 'assets/img/verse_day1.jpg';
+  customMessage: string = '';
 
 
 
@@ -66,7 +66,7 @@ export class HomeComponent {
   //   console.log("aferr view init");
   //   this.updateShareContent();
   // }
-  constructor(private loaderService: LoaderService, private apiService: ApiService, private route: Router) {
+  constructor(private loaderService: LoaderService, public apiService: ApiService, private route: Router) {
 
   }
 
@@ -81,7 +81,7 @@ export class HomeComponent {
     }
     const content = contentElement.innerHTML;
     this.shareText = encodeURIComponent(content);
-    
+
     this.shareUrl = `http://localhost:4200/content?content=${this.shareText}`;
     this.getShortURl(this.shareUrl, this.randomTableID)
   };
@@ -96,9 +96,9 @@ export class HomeComponent {
     // }
     const content = this.customizeDiv?.nativeElement.innerHTML;
     this.shareText = encodeURIComponent(content);
-    
-    this.shareUrl = `http://localhost:4200/content?content=${this.shareText}`;
-    this.getShortURl(this.shareUrl, this.randomTableID)
+
+    this.shareEditUrl = `http://localhost:4200/content?content=${this.shareText}`;
+    this.getEditShortURl(this.shareEditUrl)
   };
 
 
@@ -220,9 +220,28 @@ export class HomeComponent {
 
     this.apiService.postAPI('getshortURl', formData.toString()).subscribe({
       next: res => {
-      
+
         if (res.success == true) {
           this.shareUrl = `http://localhost:4200/content?content=${res.data}`;
+
+        }
+      }
+    })
+
+  };
+  getEditShortURl(fullUrl: string) {
+console.log(fullUrl)
+    const formData = new URLSearchParams();
+    formData.set('full_url', fullUrl)
+    
+
+
+
+    this.apiService.postAPI('getEditshortURl', formData.toString()).subscribe({
+      next: res => {
+
+        if (res.success == true) {
+          this.shareEditUrl = `http://localhost:4200/content?content=${res.data}`;
 
         }
       }
@@ -247,15 +266,16 @@ export class HomeComponent {
 
 
   saveEditedVerse(message: any) {
-   
+
     const formData = new URLSearchParams();
     formData.set('verse_number', this.editorData)
     formData.set('verse', this.editorData2)
     formData.set('notes', message.value)
+    formData.set('bg_image', this.selectedTempalte)
 
     this.apiService.postAPI('saveEditedBibleVerses', formData.toString()).subscribe({
       next: res => {
-        console.log(res)
+       
         if (res.success == true) {
           // document.getElementById('modalClose')?.click()
           this.apiService.showSuccess(res.message)

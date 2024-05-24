@@ -282,8 +282,8 @@
 
                 <div class="ct_verse_bg" style="background-color:#3a0d0f;">
                     
-                    <img src="assets/img/verse_day1.jpg" *ngIf="this.selectedTempalte == ''">
-                    <img src="{{this.apiService.imageUrl + this.selectedTempalte}}" *ngIf="this.selectedTempalte != ''">
+                    <img src="assets/img/verse_day1.jpg" *ngIf="this.selectedTempalte == 'assets/img/verse_day1.jpg'">
+                    <img src="{{this.apiService.imageUrl + this.selectedTempalte}}" *ngIf="this.selectedTempalte != 'assets/img/verse_day1.jpg'">
                     <div class="ct_verse_overlay">
                         <div class="ct_verse_head">
                             <h4 class="mb-0" [innerHTML]="editorData | safeHtml"></h4>
