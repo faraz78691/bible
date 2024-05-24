@@ -74,23 +74,25 @@
             <div class="d-flex align-items-center gap-3">
 
 
-                <div class="ct_edited_share_postion_fix12">
-                    <div class="ct_share_main">
-                        <button class="ct_custom_btn py-2 w-auto" (click)="searchedEditedURl()">Share</button>
-                        <share-buttons *ngIf="shareButton2" class="ct_social_icon_clr" theme='modern-dark'
-                            [include]="['copy', 'facebook', 'email', 'telegram', 'twitter', 'whatsapp']" [show]="5"
-                            [showIcon]="true" [showText]="false" [url]="shareEditUrl" description="Bible Verse"
-                            class="pt-5">
-                        </share-buttons>
-
+                    <div class="ct_edited_share_postion_fix12">
+                        <div class="ct_share_main">
+                            <button class="ct_custom_btn py-2 w-auto" (click)="searchedEditedURl()">Share</button>
+                            <share-buttons *ngIf="shareButton2" class="ct_social_icon_clr" theme='modern-dark'
+                                [include]="['copy', 'facebook', 'email', 'telegram', 'twitter', 'whatsapp']" [show]="5"
+                                [showIcon]="true" [showText]="false" [url]="shareEditUrl" description="Bible Verse"
+                                class="pt-5">
+                            </share-buttons>
+    
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <button class="ct_custom_btn w-auto mt-3 py-2" (click)="saveEditedVerse2(message)">Save</button>
+                        <button class="ct_custom_btn w-auto mt-3 py-2" data-bs-toggle="modal"
+                            data-bs-target="#preview_modal2">Preview</button>
                     </div>
                 </div>
-                <div class="d-flex align-items-center gap-3">
-                    <button class="ct_custom_btn w-auto mt-3 py-2" (click)="saveEditedVerse(message)">Save</button>
-                    <button class="ct_custom_btn w-auto mt-3 py-2" data-bs-toggle="modal"
-                        data-bs-target="#preview_modal2">Preview</button>
-                </div>
-            </div>
+               
+            
         </div>
     </section>
 

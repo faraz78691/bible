@@ -17,7 +17,7 @@ export class LoginComponent {
 
   isPasswordVisible: boolean = false;
   loginForm!: FormGroup
-
+ 
   constructor(private loaderService: LoaderService, private service : ApiService, private route: Router) { }
 
   ngOnInit(): void {
