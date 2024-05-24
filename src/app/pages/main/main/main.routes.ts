@@ -9,6 +9,7 @@ import { SuggestedSitesComponent } from "../suggested-sites/suggested-sites.comp
 import { BibleChapterComponent } from "../bible-chapter/bible-chapter.component";
 import { AuthGuard } from "src/app/guard/auth.guard";
 import { MyProfileComponent } from "../my-profile/my-profile.component";
+import { TermsConditionComponent } from "../terms-condition/terms-condition.component";
 
 export const  MAIN_ROUTES: Routes = [
  {
@@ -47,6 +48,10 @@ export const  MAIN_ROUTES: Routes = [
         {
             path: 'my_profile', canActivate: [AuthGuard],
             component: MyProfileComponent
+        },
+        {
+            path: 'terms-condition', canActivate: [AuthGuard],
+            component: TermsConditionComponent
         },
     ]
  }
