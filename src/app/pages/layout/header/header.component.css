@@ -1,0 +1,95 @@
+.ct_search_without_position i{
+    position: unset;
+    top: 0px;
+    transform: unset;
+}
+
+.ct_grid_2_select{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ct_max_width_200{
+    max-width: 210px;
+}
+.ct_multi_search_res12 button{
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+.ct_multi_search_res12 button span{
+    display: none;
+}
+
+@media screen and (max-width:1199px){
+    .ct_grid_2_select{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+    .ct_grid_2_select select {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+}
+@media screen and (max-width:991px){
+    .ct_grid_2_select{
+        display: grid;
+        /* grid-template-columns: repeat(1,1fr); */
+        width: 100%;
+    }
+    .ct_right_header {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 15px;
+    }
+    .ct_res_w_100{
+        width: 100%;
+    }
+    select.ct_verse_version_drop{
+        margin-left: 0px;
+    }
+    .ct_max_width_200{
+        max-width: 100%;
+    }
+    .ct_my_account {
+        margin-inline: auto;
+    }
+    .ct_toggle_bar {
+        display: none;
+        position: absolute;
+        top: 42px;
+        left: 15px;
+        transform: translateY(-50%);
+    }
+    .ct_res_flex_wrap_30{
+        flex-wrap: wrap;
+    }
+    .ct_multi_search_res12 {
+        margin-inline: auto;
+    }
+    .ct_multi_search_res12 i {
+        background-color: transparent;
+        width: auto;
+        position: unset;
+        transform: unset;
+        margin-right: 10px;
+    }
+    .ct_multi_search_res12 button{
+        width: 100%;
+        /* height: 40px; */
+        border-radius: 10px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--red);
+        border: 1px solid var(--red);
+        padding-inline: 15px;
+        cursor: pointer;
+    }
+    .ct_multi_search_res12 button span{
+        display: block;
+    }
+}

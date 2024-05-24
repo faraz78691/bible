@@ -452,6 +452,7 @@ select.ct_verse_version_drop {
     display: flex;
     align-items: end;
     justify-content: space-between;
+    z-index: -1;
 }
 .ct_share_main {
 
@@ -486,6 +487,7 @@ select.ct_verse_version_drop {
     color: #000;
     /* margin-top: 10px; */
     transition: 0.4s ease all;
+    cursor: pointer;
  
 }
 .ct_share_main i:hover{
@@ -1172,6 +1174,11 @@ span.ct_saved_verse_date {
 }
 .ck.ck-editor__editable_inline:focus{
     border-color: var(--red) !important;
+}
+.ct_event_img img {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
 }
 @media screen and (max-width:991px){
     .ct_toggle_bar,.ct_close_btn{
