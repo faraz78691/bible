@@ -94,7 +94,7 @@ export class HomeComponent {
     const content = contentElement.innerHTML;
     this.shareText = encodeURIComponent(content);
 
-    this.shareUrl = `http://localhost:4200/content?content=${this.shareText}`;
+    this.shareUrl = `http://52.204.188.107:4000/content?content=${this.shareText}`;
     this.getShortURl(this.shareUrl, this.randomTableID)
   };
 
@@ -111,7 +111,7 @@ export class HomeComponent {
     console.log("content", content);
     this.shareText = encodeURIComponent(content);
 
-    this.shareUrl = `http://localhost:4200/content?content=${this.shareText}`;
+    this.shareUrl = `http://52.204.188.107:4000/content?content=${this.shareText}`;
     this.getEditShortURl(this.shareUrl)
   };
 
@@ -126,7 +126,7 @@ export class HomeComponent {
     const content = this.customizeDiv?.nativeElement.innerHTML;
     this.shareText = encodeURIComponent(content);
 
-    this.shareEditUrl = `http://localhost:4200/content?content=${this.shareText}`;
+    this.shareEditUrl = `http://52.204.188.107:4000/content?content=${this.shareText}`;
     this.getEditShortURl(this.shareEditUrl)
   };
 
@@ -141,7 +141,7 @@ export class HomeComponent {
     const content = this.searchcustomizeDiv?.nativeElement.innerHTML;
     this.shareText = encodeURIComponent(content);
 
-    this.shareEditUrl = `http://localhost:4200/content?content=${this.shareText}`;
+    this.shareEditUrl = `http://52.204.188.107:4000/content?content=${this.shareText}`;
     this.getEditShortURl(this.shareEditUrl)
   };
 
@@ -291,7 +291,7 @@ console.log(this.keywordItems);
       next: res => {
 
         if (res.success == true) {
-          this.shareUrl = `http://localhost:4200/content?content=${res.data}`;
+          this.shareUrl = `http://52.204.188.107:4000/content?content=${res.data}`;
 
         }
       }
@@ -310,7 +310,7 @@ console.log(this.keywordItems);
       next: res => {
 
         if (res.success == true) {
-          this.shareEditUrl = `http://localhost:4200/content?content=${res.data}`;
+          this.shareEditUrl = `http://52.204.188.107:4000/content?content=${res.data}`;
 
         }
       }

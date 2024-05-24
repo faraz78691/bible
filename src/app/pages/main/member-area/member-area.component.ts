@@ -108,7 +108,7 @@ export class MemberAreaComponent {
     const content = contentElement.innerHTML;
     this.shareText = encodeURIComponent(content);
 
-    this.shareUrl = `http://localhost:4200/content?content=${this.shareText}`;
+    this.shareUrl = `http://52.204.188.107:4000/content?content=${this.shareText}`;
     this.getEditShortURl(this.shareUrl)
   };
   updateShareContent2() {
@@ -121,7 +121,7 @@ export class MemberAreaComponent {
     const content = contentElement.innerHTML;
     this.shareText = encodeURIComponent(content);
 
-    this.shareUrl = `http://localhost:4200/content?content=${this.shareText}`;
+    this.shareUrl = `http://52.204.188.107:4000/content?content=${this.shareText}`;
     this.getEditShortURl(this.shareUrl)
   };
 
@@ -134,7 +134,7 @@ export class MemberAreaComponent {
       next: res => {
 
         if (res.success == true) {
-          this.shareEditUrl = `http://localhost:4200/content?content=${res.data}`;
+          this.shareEditUrl = `http://52.204.188.107:4000/content?content=${res.data}`;
 
         }
       }
