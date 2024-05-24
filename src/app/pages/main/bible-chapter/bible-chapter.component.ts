@@ -22,11 +22,12 @@ export class BibleChapterComponent {
   selectedVersion = computed(() => {
     return this.apiService.versionSelected()
   });
+  
   constructor(private loaderService: LoaderService, private apiService: ApiService) { }
 
   ngOnInit() {
     const table_name = this.apiService.getData();
-    console.log(table_name);
+    //console.log(table_name);
     this.getChapters();
   };
 
@@ -41,13 +42,19 @@ export class BibleChapterComponent {
       formData.set('book_name', this.apiService.getBookDetails()[0]?.bookName);
       formData.set('chatperNo', this.apiService.getBookDetails()[0]?.chapterNo);
       formData.set('table_name', 'kjvbible');
+      this.chapterNo = parseInt(this.apiService.getBookDetails()[0]?.chapterNo);
+      this.apiService.setBookDetails(this.bookName = undefined, this.chapterNo1 = undefined)
+      // const num = parseInt(this.apiService.getBookDetails()[0]?.chapterNo)
+      // if(num !== this.chapterNo){
+      //   this.chapterNo = parseInt(this.apiService.getBookDetails()[0]?.chapterNo);
+      //   console.log('chanptr num', this.chapterNo)
+      // }     
     }
-
 
     this.apiService.postAPI('getChapters', formData.toString()).subscribe({
       next: res => {
         if (res.success == true) {
-          this.chapterVerses = res.data
+          this.chapterVerses = res.data;
         }
         console.log(res);
       }
@@ -55,25 +62,24 @@ export class BibleChapterComponent {
   }
 
 
-
   ngOnDestroy(): void {
-    this.apiService.setBookDetails(this.bookName =  undefined, this.chapterNo1 = undefined)
+    this.apiService.setBookDetails(this.bookName = undefined, this.chapterNo1 = undefined)
   }
 
 
   previous() {
     if (this.chapterNo == 1) {
       return
-    } this.chapterNo--;
+    }
+    this.chapterNo--;
     this.getChapters()
   };
 
-
-
   next() {
     this.chapterNo++;
-    this.getChapters()
+    this.getChapters();
     console.log(this.chapterNo);
   }
+
 
 }
