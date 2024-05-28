@@ -69,14 +69,20 @@ export class HeaderComponent {
     }
     const formData = new URLSearchParams();
     formData.set("table_name", this.selectedOption)
-    formData.set("book_name", this.selectedBookName)
-    formData.set("keyword", this.keyWord)
    
-    this.apiService.postAPI('getBibleVersesByKeyword', formData.toString()).subscribe({
+    formData.set("verse", this.keyWord)
+   
+    this.apiService.postAPI('getBibleVersesByVerse', formData.toString()).subscribe({
       next: res => {
         console.log(res)
         if (res.success == true) {
-          this.apiService.keywordVerseData.set(res.data)
+          console.log(res.data.length);
+          if(res.data.length > 1){
+            console.log("here");
+            this.apiService.keywordVerseData.set(res.data)
+          }else{
+            this.apiService.verses.set(res.data);
+          }
           console.log(this.apiService.keywordVerseData());
         } else{
           this.apiService.showWarning(res.message)

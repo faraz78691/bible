@@ -10,7 +10,7 @@ import { NavigationEnd, Router } from '@angular/router';
 export class ApiService {
   bookName: any;
   chapterNo: any;
-  // apiUrl = 'http://192.168.1.34:4000/'
+  // apiUrl = 'http://192.168.1.34:4000/';
   apiUrl = 'http://52.204.188.107:4000/';
   // apiUrl = 'http://localhost:4000/';
   // imageUrl = 'http://localhost:4000/profile/';

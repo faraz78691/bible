@@ -40,15 +40,19 @@
                         <li>James 1:19</li>
                     </ul>
                 </div>
-
             </div>
           
         </div>
-        <div class="ct_search_bar mt-2 ct_search_bar_2 ">
+        <div class="d-flex align-items-center ct_wrap_575 gap-2">
+        <!-- <div class="ct_search_bar mt-2 ct_search_bar_2 ">
             <input type="text" class="form-control" placeholder="Search By Keyword" [(ngModel)]="keyWord" autocomplete="on">
             <i class="fa-solid fa-magnifying-glass" (click)="search_keyword()" title="search by keyword"></i>
-          
+        </div> -->
+        <div class="ct_search_bar mt-2 ct_search_bar_2 ">
+            <input type="text" class="form-control" placeholder="Search By keyword, verses, phrase" [(ngModel)]="keyWord" autocomplete="on">
+            <i class="fa-solid fa-magnifying-glass" (click)="search_keyword()" title="search by keyword"></i>
         </div>
+    </div>
     </div>
     <div class="ct_my_account dropdown ms-auto">
         <button class="btn ct_custom_btn py-2 px-4 w-auto dropdown-toggle" type="button"

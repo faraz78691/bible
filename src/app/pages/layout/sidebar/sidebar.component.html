@@ -4,16 +4,16 @@
     </div>
     <div class="ct_logo">
         <img src="assets/img/login_main.png" alt="">
-        
+
     </div>
     <ul class="mb-0 ps-0 ct_menu_links mt-5">
-        <li ><a routerLink="/main/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+        <li><a routerLink="/main/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
             true}">Home</a></li>
         <li><a routerLink="/main/past_daily" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
-            true}" >Past Dailys</a></li>
-        <li><a routerLink="/main/bible_books" routerLinkActive="active" >Books of the Bible</a></li>
-        <li><a routerLink="/main/member_area" routerLinkActive="active" >Member Area</a></li>
-        <li><a routerLink="/main/suggested_bible" routerLinkActive="active" >Suggested Sites</a></li>
+            true}">Past Dailys</a></li>
+        <li><a routerLink="/main/bible_books" routerLinkActive="active">Books of the Bible</a></li>
+        <li><a routerLink="/main/member_area" routerLinkActive="active">Member Area</a></li>
+        <li><a routerLink="/main/suggested_bible" routerLinkActive="active">Suggested Sites</a></li>
         <!-- <li>
             <a routerLink="/main/bible_books">Send Bible Verses</a>
         </li> -->
@@ -23,8 +23,8 @@
     </ul>
     <div class="ct_ads_slider mt-4" *ngIf="image$ | async as images">
         <div class="">
-            <img src="{{this.apiService.imageUrl + images.data[0].sidebar_image}}" alt="">
+            <a href="{{images.data[0].sidebar_link}}" target="_blank"><img
+                    src="{{this.apiService.imageUrl + images.data[0].sidebar_image}}" alt=""></a>
         </div>
-      
-        </div>
+    </div>
 </div>
