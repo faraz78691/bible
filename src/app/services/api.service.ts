@@ -11,12 +11,13 @@ export class ApiService {
   bookName: any;
   chapterNo: any;
   // apiUrl = 'http://192.168.1.34:4000/';
-  apiUrl = 'http://52.204.188.107:4000/';
-  // apiUrl = 'http://localhost:4000/';
+  // apiUrl = 'http://52.204.188.107:4000/';
+  apiUrl = 'http://localhost:4000/';
   // imageUrl = 'http://localhost:4000/profile/';
   imageUrl = 'http://52.204.188.107:4000/profile/';
   // apiUrl = 'https://e704-2401-4900-1c08-6421-79ee-8067-d19e-afaa.ngrok-free.app/'
   verses = signal<any>([]);
+  headerSidebar = signal<any>([]);
   versionSelected = signal('');
   keywordVerseData = signal<any>([]);
   filterSection = signal<any>(true);
@@ -26,25 +27,24 @@ export class ApiService {
       .subscribe((event: any) => {
         this.checkRoute(event.urlAfterRedirects);
       });
-
   };
 
   // Function to check the current route and update the boolean variable
   private checkRoute(currentRoute: string): void {
-    console.log(currentRoute);
+   
     if (currentRoute.includes('/main/home')) {
-      console.log("here it si");
+      
       this.filterSection.set(true)
 
     } else {
       this.filterSection.set(false)
 
     }
-  }
+  };
 
   setToken(token: string) {
     localStorage.setItem('token', token)
-  }
+  };
 
   getToken() {
     return localStorage.getItem('token')
@@ -52,7 +52,7 @@ export class ApiService {
 
   getData() {
     return this.versionSelected();
-  }
+  };
 
   getApi(url: any): Observable<any> {
     return this.http.get(this.apiUrl + url)

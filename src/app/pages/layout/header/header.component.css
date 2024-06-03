@@ -57,7 +57,7 @@
         margin-inline: auto;
     }
     .ct_toggle_bar {
-        display: none;
+        /* display: none; */
         position: absolute;
         top: 42px;
         left: 15px;

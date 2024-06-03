@@ -96,12 +96,12 @@ a:hover {
 .card {
     margin-top: 100px;
     margin-bottom: 100px;
-    height : 1950px;
-    width: 1200px;
+  
     border-radius: 30px;
     background-color: #f6f8ff;
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 50px;
 }
 
 .card .primary-heading {
@@ -137,107 +137,25 @@ a:hover {
     line-height: 35px;
 }
 
-@media only screen and (max-width: 1218px) {
-    .card {
-        margin-top: 100px;
-        margin-bottom: 100px;
-        height : 2050px;
-        width: 1000px;
-        border-radius: 30px;
-        background-color: #333541;
-        margin-left: auto;
-        margin-right: auto;
-    }
+
+#terms-of-service p{
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    margin-inline: 30px;
+}
+#terms-of-service h1 {
+    font-weight: 600;
+    font-size: 28px;
+    font-family: "Platypi", serif;
+}
+section#terms-of-service {
+    margin-inline: 15px;
 }
 
-@media only screen and (max-width: 1012px) {
-    .card {
-        margin-top: 100px;
-        margin-bottom: 100px;
-        height : 2350px;
-        width: 800px;
-        border-radius: 30px;
-        background-color: #333541;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
 
-@media only screen and (max-width: 832px) {
-    .card {
-        margin-top: 100px;
-        margin-bottom: 100px;
-        height : 2950px;
-        width: 600px;
-        border-radius: 30px;
-        background-color: #000000;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .card .primary-heading {
-        font-size: 3.5em;
-    }
 
-    .footer-heading {
-        font-size: 1.5em;
-    }
-}
 
-@media only screen and (max-width: 626px) {
-    .card {
-        margin-top: 100px;
-        margin-bottom: 100px;
-        height : 3850px;
-        width: 450px;
-        border-radius: 30px;
-        background-color: #000000;
-        margin-left: auto;
-        margin-right: auto;
-    }
 
-    .header-mobile {
-        display: block;
-    }
 
-    .main-header {
-        display: none;
-    }
 
-    .card .primary-heading {
-        font-size: 3em;
-    }
-}
 
-@media only screen and (max-width: 480px) {
-    .card {
-        margin-top: 100px;
-        margin-bottom: 100px;
-        height : 5050px;
-        width: 350px;
-        border-radius: 30px;
-        background-color: #333541;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .card .primary-heading {
-        font-size: 2em;
-    }
-}
-
-@media only screen and (max-width: 365px) {
-    .card {
-        margin-top: 100px;
-        margin-bottom: 100px;
-        height : 6300px;
-        width: 290px;
-        border-radius: 30px;
-        background-color: #333541;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .card .primary-heading {
-        font-size: 2em;
-    }
-}

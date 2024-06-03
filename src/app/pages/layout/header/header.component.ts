@@ -1,4 +1,4 @@
-import { Component, computed, effect } from '@angular/core';
+import { Component, Input, Signal, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from 'src/app/services/api.service';
 import { Observable, tap } from 'rxjs';
@@ -13,6 +13,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+ 
   version$!: Observable<any>;
   name$!: Observable<any>;
   verse_number: string = '';
