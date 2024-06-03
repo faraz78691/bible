@@ -15,7 +15,7 @@ export class SuggestedSitesComponent {
 
   data: any[] = [];
 
-  constructor(private route: Router, private service: ApiService) { }
+  constructor(private route: Router, public service: ApiService) { }
 
 
   ngOnInit(): void {
