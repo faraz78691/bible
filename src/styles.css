@@ -112,3 +112,15 @@ button.sb-wrapper.sb-show-icon {
     font-size: 12px;
 
 }
+
+span.text-big {
+    font-size: 30.2px !important;
+}
+
+span.text-huge {
+    font-size: 36.2px !important;
+}
+
+.ct_verse_title_clr_12 {
+    color: #fff !important;
+}
