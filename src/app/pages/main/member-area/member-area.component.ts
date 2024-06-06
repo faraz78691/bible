@@ -29,6 +29,7 @@ export class MemberAreaComponent {
   savedverse$!: Observable<any>;
   editedverse$!: Observable<any>;
   freinds$!: Observable<any>;
+  savedSearches$!: Observable<any>;
   notedverse: any[] = []
 
   verseOftheDay: any = {};
@@ -38,6 +39,7 @@ export class MemberAreaComponent {
   shareText?: string;
   activeItemId: number | null = null;
   selectedItems: any;
+  selectedTempalte: string = 'verse_day1.jpg';
 
   constructor(private loaderService: LoaderService, public apiService: ApiService) { }
 
@@ -50,6 +52,7 @@ export class MemberAreaComponent {
 
     this.editedverse$ = this.apiService.getApi('getEditedVerses');
     this.freinds$ = this.apiService.getApi('getFreidns');
+    this.savedSearches$ = this.apiService.getApi('getSavedSearchesKeys');
     this.initForm();
 
     // this.loaderService.removeLoaderClass();
@@ -77,7 +80,7 @@ export class MemberAreaComponent {
         console.log("effect is  working")
         this.updateShareContent()
 
-      }, 1000)
+      }, 500)
     }
   };
   setActiveItem2(items: any, index: any): void {
@@ -92,7 +95,7 @@ export class MemberAreaComponent {
         console.log("effect is  working")
         this.updateShareContent2()
 
-      }, 1000)
+      }, 500)
     }
   };
 
@@ -141,6 +144,7 @@ export class MemberAreaComponent {
     })
 
   };
+
 
 
   isActive(itemId: number) {

@@ -77,6 +77,7 @@ export class HeaderComponent {
       next: res => {
         console.log(res)
         if (res.success == true) {
+          this.saveSearchedVerse(this.keyWord)
           console.log(res.data.length);
           if(res.data.length > 1){
             console.log("here");
@@ -155,7 +156,24 @@ export class HeaderComponent {
         this.selectedVerse = this.varseNo[0].verse_number
       }
     })
-  }
+  };
+
+  saveSearchedVerse(keyword:any) {
+
+    const formData = new URLSearchParams();
+
+    formData.set('verse', keyword)
+  
+    this.apiService.postAPI('savedSearchesKeyword', formData.toString()).subscribe({
+      next: res => {
+        console.log(res)
+        if (res.success == true) {
+        
+        }
+      }
+    })
+
+  };
 
 
 }

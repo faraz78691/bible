@@ -60,7 +60,7 @@ export class HomeComponent {
   verseNumber = '';
   getVerse = '';
   randomTableID: any;
-  selectedTempalte: string = 'assets/img/verse_day1.jpg';
+  selectedTempalte: string = 'verse_day1.jpg';
   customMessage: string = '';
   keywordItems:any;
 
@@ -77,7 +77,7 @@ export class HomeComponent {
           console.log("effect is  working")
           this.searchShareContent()
 
-        },2000)
+        },1000)
       }
     })
   };
@@ -169,7 +169,7 @@ export class HomeComponent {
       console.log('verseOftheDay', this.verseOftheDay);
       setTimeout(() => {
         this.updateShareContent()
-      }, 2000)
+      }, 1000)
       // console.log("ngonint");
 
     }))
@@ -327,7 +327,7 @@ console.log(this.keywordItems);
 
   customizeVerse() {
     this.customize = !this.customize;
-    this.editorData = `<p>${this.verseOftheDay.book_name} ${this.verseOftheDay.chapter}:${this.verseOftheDay.verse_number}</p>`
+    this.editorData = `<h4>${this.verseOftheDay.book_name} ${this.verseOftheDay.chapter}:${this.verseOftheDay.verse_number}</h4>`
     this.editorData2 = `<p>${this.verseOftheDay.verse}</p>`
 
   };
@@ -335,7 +335,7 @@ console.log(this.keywordItems);
   customizeVerse2() {
     console.log("called f")
     console.log("called", this.isActiveLabel())
-    this.editorData3 = `<p>${this.isActiveLabel()[0]?.book_name} ${this.isActiveLabel()[0]?.chapter}:${this.isActiveLabel()[0]?.verse_number}</p>`
+    this.editorData3 = `<h4>${this.isActiveLabel()[0]?.book_name} ${this.isActiveLabel()[0]?.chapter}:${this.isActiveLabel()[0]?.verse_number}</h4>`
     this.editorData4 = `<p>${this.isActiveLabel()[0]?.verse}</p>`
   };
 
@@ -356,7 +356,7 @@ console.log(this.keywordItems);
           // document.getElementById('modalClose')?.click()
           this.apiService.showSuccess(res.message)
           this.customize = false;
-          this.selectedTempalte = 'assets/img/verse_day1.jpg';
+          this.selectedTempalte = 'verse_day1.jpg';
         }
       }
     })
@@ -378,7 +378,7 @@ console.log(this.keywordItems);
           // document.getElementById('modalClose')?.click()
           this.apiService.showSuccess(res.message)
           this.customize2 = false;
-          this.selectedTempalte = 'assets/img/verse_day1.jpg';
+          this.selectedTempalte = 'verse_day1.jpg';
         }
       }
     })
@@ -401,6 +401,8 @@ console.log(this.keywordItems);
     this.route.navigateByUrl(`main/bible_chapter/${this.isActiveLabel()[0]?.book_name}`);
     this.apiService.setBookDetails(this.isActiveLabel()[0]?.book_name, this.isActiveLabel()[0]?.chapter)
   };
+
+  
 
 
 }

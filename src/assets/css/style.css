@@ -437,7 +437,7 @@ select.ct_verse_version_drop {
 .ct_verse_head h4,.ct_verse_head p{
     color: #fff;
 }
-.ct_verse_head h4 {
+.ct_verse_head h4,.ct_verse_head h1,.ct_verse_head h2,.ct_verse_head h3,.ct_verse_head h5,.ct_verse_head h6 {
     font-size: 32px;
     padding-bottom: 30px;
     font-weight: 700;

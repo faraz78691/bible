@@ -9,3 +9,18 @@
 .form-control{
     appearance: auto !important;
 }
+
+span.Ct_verse_count_no_12 {
+    position: absolute;
+    left: -10px;
+    top: -3px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+span.text-big {
+    font-size: 24.2px;
+}
+span.text-huge {
+    font-size: 32.2px;
+}

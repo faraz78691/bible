@@ -17,8 +17,11 @@
                     <!-- book_name chapter -->
                     <h4 class="mb-0">{{isActiveLabel()[0]?.book_name}}
                         {{isActiveLabel()[0]?.chapter}}:{{isActiveLabel()[0]?.verse_number}}</h4>
-                    <p>
-                        {{isActiveLabel()[0]?.verse}}
+                    <p class="position-relative" style="font-size: 18px;">
+                        <span class="Ct_verse_count_no_12">
+                            {{isActiveLabel()[0]?.verse_number}}
+                        </span>
+                        <span class="ms-2"></span>{{isActiveLabel()[0]?.verse}}
                     </p>
 
                     <div class="ct_socials_bottom_position">
@@ -68,7 +71,7 @@
             <label for="" class="d-block mb-2 mt-3">Select card template</label>
             <select style="max-width: 50%;" class="ct_verse_version_drop form-control" [(ngModel)]="selectedTempalte"
                 *ngIf="template$ | async as template">
-                <option value='assets/img/verse_day1.jpg'>Select verse</option>
+                <option value='verse_day1.jpg'>Select verse</option>
                 <option *ngFor="let option of template.data; index as i" [ngValue]="option.image">
                    Template {{i + 1}}</option>
             </select>
@@ -140,8 +143,11 @@
             <div class="ct_verse_overlay">
                 <div class="ct_verse_head">
                     <h4 class="mb-0">{{verses.data.book_name}} {{verses.data.chapter}}:{{verses.data.verse_number}}</h4>
-                    <p>
-                        {{verses.data.verse}}
+                    <p class="position-relative" style="font-size: 18px;">
+                        <span class="Ct_verse_count_no_12">
+                            {{verses.data.verse_number}}
+                        </span>
+                       <span class="ms-2"> {{verses.data.verse}}</span>
                     </p>
 
                     <div class="ct_socials_bottom_position">
@@ -190,7 +196,7 @@
             <label for="" class="d-block mb-2 mt-3">Select card template</label>
             <select style="max-width: 50%;" class="ct_verse_version_drop form-control" [(ngModel)]="selectedTempalte"
                 *ngIf="template$ | async as template">
-                <option value="assets/img/verse_day1.jpg">Select template</option>
+                <option value="verse_day1.jpg">Select template</option>
                 <option *ngFor="let option of template.data; index as i" [ngValue]="option.image">
                     Template {{i +1}}</option>
             </select>
@@ -217,10 +223,105 @@
         </div>
     </section>
 
-
     <app-footer></app-footer>
 
 </div>
+
+<!-- verse of the day div for share -->
+
+<section #contentDiv class="ct_page_link" style="display: none;">
+    <div class="d-flex align-items-center flex-wrap mb-4 justify-content-between gap-2">
+        <h2 class="mb-0 ct_h2">Bible Verse of the Day</h2>
+
+    </div>
+    <div class="ct_verse_bg" style="background-color:#3a0d0f;">
+        <img src="{{this.apiService.imageUrl + this.selectedTempalte}}">
+        <div class="ct_verse_overlay">
+            <div class="ct_verse_head">
+                <h4 class="mb-0">{{ this.verseOftheDay.book_name}} {{ this.verseOftheDay.chapter}}:{{
+                    this.verseOftheDay.verse_number}}</h4>
+                <p>
+                    {{ this.verseOftheDay.verse}}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Single verse share reasult section -->
+<section #searchedDiv class="mb-5" class="ct_searchedDiv" style="display: none;">
+    <div class="ct_verse_bg" style="background-color:#3a0d0f;">
+        <img src="{{this.apiService.imageUrl + this.selectedTempalte}}">
+        <div class="ct_verse_overlay">
+            <div class="ct_verse_head">
+                <!-- book_name chapter -->
+                <h4 class="mb-0">{{isActiveLabel()[0]?.book_name}}
+                    {{isActiveLabel()[0]?.chapter}}:{{isActiveLabel()[0]?.verse_number}}</h4>
+                <p>
+                    {{isActiveLabel()[0]?.verse}}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- verse of the customized modal -->
+<div class="modal fade" id="preview_modal" tabindex="-1" aria-labelledby="preview_modal" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content bg-unset border-0">
+            <section #customizeDiv class="">
+
+                <div class="ct_verse_bg" style="background-color:#3a0d0f;">
+
+             
+                    <img src="{{this.apiService.imageUrl + this.selectedTempalte}}"
+                 >
+                    <div class="ct_verse_overlay">
+                        <div class="ct_verse_head color-white">
+                            <div class="mb-0 "  [innerHTML]="editorData | safeHtml"></div>
+                            <!-- <h4  ></h4> -->
+                            <p [innerHTML]="editorData2 | safeHtml">
+                            </p>
+                        </div>
+                        <p class="text-white">{{customMessage}}</p>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<!-- searched customized modal -->
+<div class="modal fade" id="preview_modal2" tabindex="-1" aria-labelledby="preview_modal" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <section #searchcustomizeDiv class="ct_page_link">
+
+                <div class="ct_verse_bg" style="background-color:#3a0d0f;">
+
+                
+                    <img src="{{this.apiService.imageUrl + this.selectedTempalte}}"
+                        >
+                    <div class="ct_verse_overlay">
+                        <div class="ct_verse_head">
+                            <div class="mb-0 ct_verse_title_clr_12" [innerHTML]="editorData3 | safeHtml"></div>
+                            <p [innerHTML]="editorData4 | safeHtml">
+                            </p>
+                        </div>
+                        <p class="text-white">{{customMessage}}</p>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+    </div>
+</div>
+
+
 
 <div class="modal fade" id="ct_save_verse_modal" tabindex="-1" aria-labelledby="ct_save_verse_modalLabel"
     aria-hidden="true">
@@ -298,94 +399,6 @@
                 <button type="button" class="ct_custom_btn py-2 px-4 w-auto" (click)="saveKeywordVerse()">Save</button>
                 
             </div>
-        </div>
-    </div>
-</div>
-
-
-<section #contentDiv class="ct_page_link" style="display: none;">
-    <div class="d-flex align-items-center flex-wrap mb-4 justify-content-between gap-2">
-        <h2 class="mb-0 ct_h2">Bible Verse of the Day</h2>
-
-    </div>
-    <div class="ct_verse_bg" style="background-color:#3a0d0f;">
-        <img src="assets/img/verse_day1.jpg">
-        <div class="ct_verse_overlay">
-            <div class="ct_verse_head">
-                <h4 class="mb-0">{{ this.verseOftheDay.book_name}} {{ this.verseOftheDay.chapter}}:{{
-                    this.verseOftheDay.verse_number}}</h4>
-                <p>
-                    {{ this.verseOftheDay.verse}}
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Single verse reasult section -->
-<section #searchedDiv class="mb-5" class="ct_searchedDiv" style="display: none;">
-    <div class="ct_verse_bg" style="background-color:#3a0d0f;">
-        <img src="assets/img/verse_day1.jpg">
-        <div class="ct_verse_overlay">
-            <div class="ct_verse_head">
-                <!-- book_name chapter -->
-                <h4 class="mb-0">{{isActiveLabel()[0]?.book_name}}
-                    {{isActiveLabel()[0]?.chapter}}:{{isActiveLabel()[0]?.verse_number}}</h4>
-                <p>
-                    {{isActiveLabel()[0]?.verse}}
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<div class="modal fade" id="preview_modal" tabindex="-1" aria-labelledby="preview_modal" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered">
-        <div class="modal-content bg-unset border-0">
-            <section #customizeDiv class="">
-
-                <div class="ct_verse_bg" style="background-color:#3a0d0f;">
-
-                    <img src="assets/img/verse_day1.jpg" *ngIf="this.selectedTempalte == 'assets/img/verse_day1.jpg'">
-                    <img src="{{this.apiService.imageUrl + this.selectedTempalte}}"
-                        *ngIf="this.selectedTempalte != 'assets/img/verse_day1.jpg'">
-                    <div class="ct_verse_overlay">
-                        <div class="ct_verse_head">
-                            <h4 class="mb-0" [innerHTML]="editorData | safeHtml"></h4>
-                            <p [innerHTML]="editorData2 | safeHtml">
-                            </p>
-                        </div>
-                        <p class="text-white">{{customMessage}}</p>
-                    </div>
-                </div>
-
-            </section>
-
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="preview_modal2" tabindex="-1" aria-labelledby="preview_modal" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered">
-        <div class="modal-content">
-            <section #searchcustomizeDiv class="ct_page_link">
-
-                <div class="ct_verse_bg" style="background-color:#3a0d0f;">
-
-                    <img src="assets/img/verse_day1.jpg" *ngIf="this.selectedTempalte == 'assets/img/verse_day1.jpg'">
-                    <img src="{{this.apiService.imageUrl + this.selectedTempalte}}"
-                        *ngIf="this.selectedTempalte != 'assets/img/verse_day1.jpg'">
-                    <div class="ct_verse_overlay">
-                        <div class="ct_verse_head">
-                            <h4 class="mb-0" [innerHTML]="editorData3 | safeHtml"></h4>
-                            <p [innerHTML]="editorData4 | safeHtml">
-                            </p>
-                        </div>
-                        <p class="text-white">{{customMessage}}</p>
-                    </div>
-                </div>
-
-            </section>
-
         </div>
     </div>
 </div>
