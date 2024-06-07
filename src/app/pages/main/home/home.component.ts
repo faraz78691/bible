@@ -62,8 +62,78 @@ export class HomeComponent {
   randomTableID: any;
   selectedTempalte: string = 'verse_day1.jpg';
   customMessage: string = '';
-  keywordItems:any;
+  keywordItems: any;
 
+  public config = {
+    toolbar: [
+      'heading', '|',
+      'bold', 'italic', '|',
+      'link', 'bulletedList', 'numberedList', 'blockQuote', 'fontColor', 'fontBackgroundColor'
+    ],
+    fontColor: {
+      colorPicker: {
+        format: 'hex'
+      },
+      colors: [
+        {
+          color: '#CF5D4E',
+          label: 'Red'
+        },
+        {
+          color: '#454545',
+          label: 'Dark Gray'
+        },
+        {
+          color: '#FFFFFF',
+          label: 'White'
+        },
+        {
+          color: '#CCCCCC',
+          label: 'Light Gray'
+        },
+        {
+          color: '#0000FF',
+          label: 'Blue'
+        },
+        {
+          color: '#3892DD',
+          label: 'Light Blue'
+        }
+      ],
+      columns: 6,
+      documentColors: 0
+    },
+    fontBackgroundColor: {
+      colors: [
+        {
+          color: '#CF5D4E',
+          label: 'Red'
+        },
+        {
+          color: '#454545',
+          label: 'Dark Gray'
+        },
+        {
+          color: '#FFFFFF',
+          label: 'White'
+        },
+        {
+          color: '#CCCCCC',
+          label: 'Light Gray'
+        },
+        {
+          color: '#0000FF',
+          label: 'Blue'
+        },
+        {
+          color: '#3892DD',
+          label: 'Light Blue'
+        }
+      ],
+      columns: 6,
+      documentColors: 0
+    }
+  };
 
 
   // ngAfterViewInit() {
@@ -73,11 +143,11 @@ export class HomeComponent {
   constructor(private loaderService: LoaderService, public apiService: ApiService, private route: Router) {
     effect(() => {
       if (this.apiService.verses().length > 0) {
-        setTimeout(()=>{
+        setTimeout(() => {
           console.log("effect is  working")
           this.searchShareContent()
 
-        },1000)
+        }, 1000)
       }
     })
   };
@@ -155,12 +225,15 @@ export class HomeComponent {
     this.rows = event.rows;
   };
 
-  public onReady(editor: any) {
-    editor.ui.getEditableElement().parentElement.insertBefore(
-      editor.ui.view.toolbar.element,
-      editor.ui.getEditableElement()
+  public onReady(editor: DecoupledEditor): void {
+    const element = editor.ui.getEditableElement()!;
+    const parent = element.parentElement!;
+
+    parent.insertBefore(
+      editor.ui.view.toolbar.element!,
+      element
     );
-  };
+  }
 
   ngOnInit(): void {
     this.verseDay$ = this.apiService.getApi('getBibleVerseOfTheDay').pipe(tap(value => {
@@ -201,11 +274,11 @@ export class HomeComponent {
   };
 
 
-  clearResults(key:string) {
-    if(key){
+  clearResults(key: string) {
+    if (key) {
       key == 'keyword';
       this.apiService.keywordVerseData.set([]);
-    }else{
+    } else {
       this.apiService.verses.set([]);
 
     }
@@ -238,9 +311,9 @@ export class HomeComponent {
 
   };
 
-  setKeywordData(items:any){
-this.keywordItems = items
-console.log(this.keywordItems);
+  setKeywordData(items: any) {
+    this.keywordItems = items
+    console.log(this.keywordItems);
   }
 
 
@@ -342,7 +415,7 @@ console.log(this.keywordItems);
 
   saveEditedVerse(message: any) {
     console.log('editorData', this.editorData3);
-    console.log('editorData2',this.editorData4);
+    console.log('editorData2', this.editorData4);
     const formData = new URLSearchParams();
     formData.set('verse_number', this.editorData)
     formData.set('verse', this.editorData2)
@@ -364,7 +437,7 @@ console.log(this.keywordItems);
 
   saveEditedVerse2(message: any) {
     console.log('editorData3', this.editorData3);
-    console.log('editorData4',this.editorData4);
+    console.log('editorData4', this.editorData4);
 
     const formData = new URLSearchParams();
     formData.set('verse_number', this.editorData3)
@@ -402,7 +475,7 @@ console.log(this.keywordItems);
     this.apiService.setBookDetails(this.isActiveLabel()[0]?.book_name, this.isActiveLabel()[0]?.chapter)
   };
 
-  
+
 
 
 }

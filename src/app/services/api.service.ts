@@ -11,10 +11,10 @@ export class ApiService {
   bookName: any;
   chapterNo: any;
   // apiUrl = 'http://192.168.1.34:4000/';
-  apiUrl = 'http://52.204.188.107:4000/';
-  // apiUrl = 'http://localhost:4000/';
-  // imageUrl = 'http://localhost:4000/profile/';
-  imageUrl = 'http://52.204.188.107:4000/profile/';
+  // apiUrl = 'http://52.204.188.107:4000/';
+  apiUrl = 'http://localhost:4000/';
+  imageUrl = 'http://localhost:4000/profile/';
+  // imageUrl = 'http://52.204.188.107:4000/profile/';
   // apiUrl = 'https://e704-2401-4900-1c08-6421-79ee-8067-d19e-afaa.ngrok-free.app/'
   verses = signal<any>([]);
   headerSidebar = signal<any>([]);

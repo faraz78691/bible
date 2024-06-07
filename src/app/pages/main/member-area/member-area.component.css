@@ -1,0 +1,29 @@
+.ct_verse_scroll_12 {
+    height: auto;
+    max-height: 320px;
+    overflow-y: auto;
+    min-height: 320px;
+}
+
+     
+
+.ct_verse_scroll_12::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  .ct_verse_scroll_12::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  .ct_verse_scroll_12::-webkit-scrollbar-thumb {
+    background: var(--red); 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  .ct_verse_scroll_12::-webkit-scrollbar-thumb:hover {
+    background: var(--red); 
+  }
