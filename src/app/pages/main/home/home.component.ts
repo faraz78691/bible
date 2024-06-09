@@ -64,16 +64,26 @@ export class HomeComponent {
   customMessage: string = '';
   keywordItems: any;
 
-  public config = {
+  public config  = {
     toolbar: [
       'heading', '|',
       'bold', 'italic', '|',
       'link', 'bulletedList', 'numberedList', 'blockQuote', 'fontColor', 'fontBackgroundColor'
     ],
+    fontFamily: {
+      options: [
+        'default',
+        'Arial, Helvetica, sans-serif',
+        'Courier New, Courier, monospace',
+        'Georgia, serif',
+        'Lucida Sans Unicode, Lucida Grande, sans-serif',
+        'Tahoma, Geneva, sans-serif',
+        'Times New Roman, Times, serif',
+        'Trebuchet MS, Helvetica, sans-serif',
+        'Verdana, Geneva, sans-serif'
+      ]
+    },
     fontColor: {
-      colorPicker: {
-        format: 'hex'
-      },
       colors: [
         {
           color: '#CF5D4E',

@@ -124,3 +124,9 @@ span.text-huge {
 .ct_verse_title_clr_12 {
     color: #fff !important;
 }
+.ct_verse_title_clr_12 h3 {
+   font-size: 34px !important;
+}
+.ct_verse_title_clr_12 h2 {
+   font-size: 36px !important;
+}
