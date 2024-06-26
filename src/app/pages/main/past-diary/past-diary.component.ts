@@ -4,11 +4,12 @@ import { ApiService } from 'src/app/services/api.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { Observable } from 'rxjs';
 import { FooterComponent } from '../footer/footer.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-past-diary',
   standalone: true,
-  imports: [CommonModule, FooterComponent],
+  imports: [CommonModule, FooterComponent,RouterLink],
   templateUrl: './past-diary.component.html',
   styleUrls: ['./past-diary.component.css']
 })
@@ -19,12 +20,9 @@ export class PastDiaryComponent {
   notes: string = '';
   constructor(private loaderService: LoaderService, private apiService: ApiService) { }
 
-
   ngOnInit(): void {
 
-
     this.verseDay$ = this.apiService.getApi('getPastRandomVerses');
-
     this.loaderService.removeLoaderClass();
   };
 }

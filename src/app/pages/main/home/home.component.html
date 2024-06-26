@@ -29,7 +29,7 @@
                             <div class="ct_share_main">
                                 <i class="fa-solid fa-share-nodes" (click)="shareButton = !shareButton"></i>
                                 <share-buttons *ngIf="shareButton" class="ct_social_icon_clr" theme='modern-dark'
-                                    [include]="['copy', 'facebook', 'email', 'telegram', 'twitter', 'whatsapp']"
+                                    [include]="['copy', 'facebook', 'email', 'telegram', 'twitter', 'whatsapp', 'reddit','pinterest']"
                                     [show]="5" [showIcon]="true" [showText]="false" [url]="shareEditUrl"
                                     description="Bible Verse" class="pt-5">
                                 </share-buttons>
@@ -154,9 +154,9 @@
                         <div class="d-flex align-items-end gap-3">
                             <div class="ct_share_main">
                                 <i class="fa-solid fa-share-nodes" (click)="shareButton = !shareButton"></i>
-                                <share-buttons *ngIf="shareButton" class="ct_social_icon_clr" theme='modern-dark'
-                                    [include]="['copy', 'facebook', 'email', 'telegram', 'twitter', 'whatsapp']"
-                                    [show]="5" [showIcon]="true" [showText]="false" [url]="shareUrl"
+                                <share-buttons *ngIf="shareButton" class="ct_social_icon_clr" theme='modern-dark' 
+                                [include]="['copy', 'facebook', 'email','messenger', 'telegram', 'twitter', 'whatsapp', 'reddit','pinterest']"
+                                    [show]="5" [showIcon]="true" [showText]="false" [url]="shareUrl" [image]='shareUrl'
                                     description="Bible Verse" class="pt-5">
                                 </share-buttons>
 

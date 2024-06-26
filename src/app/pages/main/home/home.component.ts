@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { PaginatorModule } from 'primeng/paginator';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+import html2canvas from 'html2canvas';
 
 interface PageEvent {
   first: number;
@@ -21,6 +22,7 @@ import { TableModule } from 'primeng/table';
 import { FooterComponent } from '../footer/footer.component';
 import { Router } from '@angular/router';
 import { SafeHtmlPipe } from 'src/app/helper/safe-html.pipe';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -55,6 +57,7 @@ export class HomeComponent {
   @ViewChild('searchedDiv') searchedDiv: ElementRef | undefined;
   @ViewChild('searchcustomizeDiv') searchcustomizeDiv: ElementRef | undefined;
   shareUrl: string = '';
+  shareImageUrl: string = '';
   shareEditUrl: string = '';
   shareText?: string;
   verseNumber = '';
@@ -150,7 +153,7 @@ export class HomeComponent {
   //   console.log("aferr view init");
   //   this.updateShareContent();
   // }
-  constructor(private loaderService: LoaderService, public apiService: ApiService, private route: Router) {
+  constructor(private loaderService: LoaderService, public apiService: ApiService, private route: Router, private metaService: Meta) {
     effect(() => {
       if (this.apiService.verses().length > 0) {
         setTimeout(() => {
@@ -162,9 +165,42 @@ export class HomeComponent {
     })
   };
 
+  
+  ngOnInit(): void {
+    this.verseDay$ = this.apiService.getApi('getBibleVerseOfTheDay').pipe(tap(value => {
+      this.randomTableID = value.data.id;
+      this.verseOftheDay = value.data;
+      console.log('verseOftheDay', this.verseOftheDay);
+      setTimeout(() => {
+        this.updateShareContent()
+      }, 1000)
+      // console.log("ngonint");
+
+    }))
+
+    this.template$ = this.apiService.getApi('getCardTemplate')
+
+    this.loaderService.removeLoaderClass();
+    this.addOpenGraphTags();
+  };
+
+  
+
+  addOpenGraphTags() {
+    this.metaService.addTags([
+      { property: 'og:title', content: 'Bible Verse' },
+      { property: 'og:description', content: 'For perhaps he therefore departed for a season, that thou shouldest receive him for ever;' },
+      { property: 'og:image', content: 'http://52.204.188.107/path-to-your-image.jpg' },
+      { property: 'og:url', content: this.shareUrl },
+      { property: 'og:type', content: 'website' }
+    ]);
+  }
+
 
   updateShareContent() {
-
+    html2canvas(this.contentDiv?.nativeElement).then(canvas => {
+      this.shareImageUrl = canvas.toDataURL('image/png');
+    });
     const contentElement = this.contentDiv?.nativeElement.cloneNode(true);
     const linkElement = contentElement.querySelector('.ct_page_link');
 
@@ -245,22 +281,6 @@ export class HomeComponent {
     );
   }
 
-  ngOnInit(): void {
-    this.verseDay$ = this.apiService.getApi('getBibleVerseOfTheDay').pipe(tap(value => {
-      this.randomTableID = value.data.id;
-      this.verseOftheDay = value.data;
-      console.log('verseOftheDay', this.verseOftheDay);
-      setTimeout(() => {
-        this.updateShareContent()
-      }, 1000)
-      // console.log("ngonint");
-
-    }))
-
-    this.template$ = this.apiService.getApi('getCardTemplate')
-
-    this.loaderService.removeLoaderClass();
-  };
 
   onEditorChange(event: any) {
     this.editorData = event.editor.getData();

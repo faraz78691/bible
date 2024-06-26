@@ -1,0 +1,30 @@
+.ct_grid_2_column{
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(3,1fr);
+    gap: 15px ;
+    text-align: center;
+}
+.ct_suggested_link_img_23{
+    overflow: hidden;
+    position: relative;
+}
+
+.ct_suggested_link_img_23 img{
+    width: 100%;
+    max-width: 460px;
+    height: 60px;
+}
+
+
+@media screen and (max-width:1199px){
+    .ct_grid_2_column{
+        grid-template-columns: repeat(2,1fr); 
+    }
+}
+@media screen and (max-width:767px){
+    .ct_grid_2_column{
+        grid-template-columns: repeat(1,1fr); 
+        justify-content: center;
+    }
+}

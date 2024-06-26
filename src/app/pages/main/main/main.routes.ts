@@ -10,6 +10,7 @@ import { BibleChapterComponent } from "../bible-chapter/bible-chapter.component"
 import { AuthGuard } from "src/app/guard/auth.guard";
 import { MyProfileComponent } from "../my-profile/my-profile.component";
 import { TermsConditionComponent } from "../terms-condition/terms-condition.component";
+import { CustomizeComponent } from "../customize/customize.component";
 
 export const  MAIN_ROUTES: Routes = [
  {
@@ -48,6 +49,10 @@ export const  MAIN_ROUTES: Routes = [
         {
             path: 'my_profile', canActivate: [AuthGuard],
             component: MyProfileComponent
+        },
+        {
+            path: 'customize', canActivate: [AuthGuard],
+            component: CustomizeComponent
         },
         {
             path: 'terms-condition', canActivate: [AuthGuard],

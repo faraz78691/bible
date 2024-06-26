@@ -1,31 +1,38 @@
+
+
 <div class="ct_middle_cnt">
 
     <div class="ct_past_dailys_section mb-5">
         <h4 class="mb-0 ct_h2 mb-4">Suggested Links</h4>
+        <!-- <div class="ad-container" id="ad-container" [innerHTML]="adScript">
+          </div> -->
 
-        <div class="table-responsive ct_custom_table">
-            <table class="table  table-striped w-100"  id="example">
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Image</th>
-                        <th>Website Links</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let row of data; let i = index">
-                        <td>{{i+1}}</td>
-                        <td>
-                            <div class="ct_event_img">
-                                <img [src]="this.service.imageUrl + row.image" alt="img">
-                            </div>
-                        </td>
-                        <td><a href="{{row.links}}" target="_blank">{{row.links}}</a></td>
-                        
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+          <div class="ct_grid_2_column">
+            <ng-container *ngFor="let items of adScripts">
+                <div class="ct_suggested_link_img_23" [innerHTML]="items.links" >
+                    <!-- <a href="http://www.adobe.com" target="_blank">
+                        <img src="assets/img/chaper_blank_page.jpg"  alt="">
+                      </a> -->
+                </div>
+            </ng-container>
+            <!-- <div class="ct_suggested_link_img_23">
+                <a href="http://www.adobe.com" target="_blank">
+                    <img src="assets/img/chaper_blank_page.jpg"  alt="">
+                  </a>
+            </div> -->
+            <!-- <div class="ct_suggested_link_img_23">
+                <a href="http://www.adobe.com" target="_blank">
+                    <img src="assets/img/chaper_blank_page.jpg" alt="">
+                  </a>
+            </div>
+            <div class="ct_suggested_link_img_23">
+                <a href="http://www.adobe.com" target="_blank">
+                    <img src="assets/img/chaper_blank_page.jpg"  alt="">
+                  </a>
+            </div> -->
+
+          </div>
+       
     </div>
    <!-- <section class="mb-5">
     <div class="d-flex align-items-center flex-wrap mb-4 justify-content-between">

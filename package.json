@@ -34,6 +34,7 @@
     "@geometricpanda/angular-tilt": "^0.4.0",
     "@ngx-share/button": "^7.1.4",
     "@ngx-share/core": "^7.1.4",
+    "html2canvas": "^1.4.1",
     "ngx-sharebuttons": "^13.0.0",
     "ngx-toastr": "^17.0.2",
     "node-url-shortener": "^2.0.3",
