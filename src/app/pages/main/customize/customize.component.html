@@ -3,22 +3,22 @@
 
 
     <!-- Single verse reasult section -->
-    <section class="mb-5" >
+    <section class="mb-5">
 
         <!-- <div class="d-flex align-items-center flex-wrap mb-4 justify-content-between gap-2">
             <h2 class="mb-0 ct_h2">Search Results Verse</h2>
             <a  class="ct_page_link">Read whole chapter</a>
             <a class="ct_page_link" >Clear Results</a>
         </div> -->
-       
+
         <div class="ct_bottom_customize">
             <h2 class="mb-4 ct_h2">Customize Verse</h2>
             <label for="Verse no" class="ct_fw_600 mb-2">Verse number</label>
-            <ckeditor class="ct_ol_padd" [editor]="Editor"  [config]="config"  [data]="verse_number" (change)="onEditorChange3($event)"
-                [(ngModel)]="editorData3" (ready)="onReady($event)"></ckeditor>
+            <ckeditor class="ct_ol_padd" [editor]="Editor" [config]="config" [data]="verse_number"
+                (change)="onEditorChange($event)" [(ngModel)]="editorData" (ready)="onReady($event)"></ckeditor>
             <label for="Verse">Verse</label>
-            <ckeditor class="ct_ol_padd" [editor]="Editor2" [config]="config" [data]="verse" (change)="onEditorChange4($event)"
-                [(ngModel)]="editorData4" (ready)="onReady($event)"></ckeditor>
+            <ckeditor class="ct_ol_padd" [editor]="Editor2" [config]="config" [data]="verse"
+                (change)="onEditorChange2($event)" [(ngModel)]="editorData2" (ready)="onReady($event)"></ckeditor>
             <input type="text" placeholder="Add custom message" class="form-control mt-3" [(ngModel)]="customMessage"
                 #message>
             <label for="" class="d-block mb-2 mt-3">Select card template</label>
@@ -26,115 +26,73 @@
                 *ngIf="template$ | async as template">
                 <option value='verse_day1.jpg'>Select verse</option>
                 <option *ngFor="let option of template.data; index as i" [ngValue]="option.image">
-                   Template {{i + 1}}</option>
+                    Template {{i + 1}}</option>
             </select>
+            <ng-container style="max-width: 50%;" class="ct_verse_version_drop form-control" *ngIf="freinds$  | async as users ">
+                <ngx-select-dropdown [instanceId]="'instance1'" [multiple]="true" [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="selectedOption" [config]="config2" [options]="userList"></ngx-select-dropdown>
+            
+            </ng-container>
             <div class="d-flex align-items-center gap-3">
 
+                <div class="d-flex align-items-center gap-3">
+                    <button class="ct_custom_btn w-auto mt-3 py-2" (click)="saveEditedVerse2(message)">Save</button>
+                    <button class="ct_custom_btn w-auto mt-3 py-2" data-bs-toggle="modal"
+                        data-bs-target="#preview_modal">Preview</button>
+                </div>
+                <div class="ct_edited_share_postion_fix12">
+                    <div class="ct_share_main">
+                        <button class="ct_custom_btn py-2 w-auto" (click)="sendEmail()">Send mail</button>
+                        <share-buttons *ngIf="shareButton2" class="ct_social_icon_clr" theme='modern-dark'
+                            [include]="['copy', 'facebook', 'email', 'telegram', 'twitter', 'whatsapp']" [show]="5"
+                            [showIcon]="true" [showText]="false" [url]="shareEditUrl" description="Bible Verse"
+                            class="pt-5">
+                        </share-buttons>
 
-                    <div class="ct_edited_share_postion_fix12">
-                        <div class="ct_share_main">
-                            <button class="ct_custom_btn py-2 w-auto" (click)="searchedEditedURl()">Share</button>
-                            <share-buttons *ngIf="shareButton2" class="ct_social_icon_clr" theme='modern-dark'
-                                [include]="['copy', 'facebook', 'email', 'telegram', 'twitter', 'whatsapp']" [show]="5"
-                                [showIcon]="true" [showText]="false" [url]="shareEditUrl" description="Bible Verse"
-                                class="pt-5">
-                            </share-buttons>
-    
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center gap-3">
-                        <button class="ct_custom_btn w-auto mt-3 py-2" (click)="saveEditedVerse2(message)">Save</button>
-                        <button class="ct_custom_btn w-auto mt-3 py-2" data-bs-toggle="modal"
-                            data-bs-target="#preview_modal2">Preview</button>
                     </div>
                 </div>
-               
-            
+              
+            </div>
+
+
         </div>
     </section>
-    
-    
-    
-    
-    <!-- <section #customizeDiv class="">
 
-        <div class="ct_verse_bg" style="background-color:#3a0d0f;">
 
-     
-            <img src="{{this.apiService.imageUrl + this.selectedTempalte}}"
-         >
-            <div class="ct_verse_overlay">
-                <div class="ct_verse_head color-white">
-                    <div class="mb-0 ct_verse_title_clr_12"  [innerHTML]="editorData | safeHtml"></div>
-          
-                    <p [innerHTML]="editorData2 | safeHtml">
-                    </p>
-                </div>
-                <p class="text-white">{{customMessage}}</p>
-            </div>
-        </div>
 
-    </section> -->
+
+    
     <app-footer></app-footer>
 
 </div>
 
 <!-- verse of the day div for share -->
 
-<section #contentDiv class="ct_page_link" style="display: none;">
-    <div class="d-flex align-items-center flex-wrap mb-4 justify-content-between gap-2">
-        <h2 class="mb-0 ct_h2">Bible Verse of the Day</h2>
-
-    </div>
-    <div class="ct_verse_bg" style="background-color:#3a0d0f;">
-        <img src="{{this.apiService.imageUrl + this.selectedTempalte}}">
-        <div class="ct_verse_overlay">
-            <div class="ct_verse_head">
-                <h4 class="mb-0">{{ this.verseOftheDay.book_name}} {{ this.verseOftheDay.chapter}}:{{
-                    this.verseOftheDay.verse_number}}</h4>
-                <p>
-                    {{ this.verseOftheDay.verse}}
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Single verse share reasult section -->
-<section #searchedDiv class="mb-5" class="ct_searchedDiv" style="display: none;">
-    <div class="ct_verse_bg" style="background-color:#3a0d0f;">
-        <img src="{{this.apiService.imageUrl + this.selectedTempalte}}">
-        <div class="ct_verse_overlay">
-            <div class="ct_verse_head">
-                <!-- book_name chapter -->
-                <h4 class="mb-0">{{isActiveLabel()[0]?.book_name}}
-                    {{isActiveLabel()[0]?.chapter}}:{{isActiveLabel()[0]?.verse_number}}</h4>
-                <p>
-                    {{isActiveLabel()[0]?.verse}}
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
 
 
 
 
-<!-- searched customized modal -->
-<div class="modal fade modal-lg" id="preview_modal2" tabindex="-1" aria-labelledby="preview_modal" aria-hidden="true">
+
+
+
+
+
+
+<!-- verse of the customized modal -->
+<div class="modal fade modal-lg" id="preview_modal" tabindex="-1" aria-labelledby="preview_modal" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered">
-        <div class="modal-content">
-            <section #searchcustomizeDiv class="ct_page_link">
+        <div class="modal-content bg-unset border-0">
+            <section #customizeDiv class="">
 
                 <div class="ct_verse_bg" style="background-color:#3a0d0f;">
 
-                
-                    <img src="{{this.apiService.imageUrl + this.selectedTempalte}}"
-                        >
+
+                    <img src="{{this.apiService.imageUrl + this.selectedTempalte}}">
                     <div class="ct_verse_overlay">
-                        <div class="ct_verse_head">
-                            <div class="mb-0 ct_verse_title_clr_12" [innerHTML]="editorData3 | safeHtml"></div>
-                            <p [innerHTML]="editorData4 | safeHtml">
+                        <div class="ct_verse_head color-white">
+                            <div class="mb-0 ct_verse_title_clr_12" [innerHTML]="editorData | safeHtml"></div>
+                            <!-- <h4  ></h4> -->
+                            <p [innerHTML]="editorData2 | safeHtml">
                             </p>
                         </div>
                         <p class="text-white">{{customMessage}}</p>
@@ -146,9 +104,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-

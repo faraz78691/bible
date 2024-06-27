@@ -70,7 +70,6 @@ export class MemberAreaComponent {
     this.selectedItems = items;
 
 
-
     if (this.activeItemId == index) {
       this.activeItemId = 0;
       this.selectedItems = '';

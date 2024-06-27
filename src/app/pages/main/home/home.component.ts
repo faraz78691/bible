@@ -417,14 +417,11 @@ export class HomeComponent {
 
     this.apiService.postAPI('getEditshortURl', formData.toString()).subscribe({
       next: res => {
-
         if (res.success == true) {
           this.shareEditUrl = `http://52.204.188.107/content?content=${res.data}`;
-
         }
       }
     })
-
   };
 
 

@@ -1,11 +1,11 @@
 import { Component, ElementRef, ViewChild, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Meta } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
-import { Observable, tap } from 'rxjs';
+import { Observable, Subscription, tap } from 'rxjs';
 import { SafeHtmlPipe } from "../../../helper/safe-html.pipe";
 import { FooterComponent } from "../footer/footer.component";
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -14,14 +14,15 @@ import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { PaginatorModule } from 'primeng/paginator';
 import { TableModule } from 'primeng/table';
-
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { SelectDropDownModule } from 'ngx-select-dropdown'
 @Component({
-    selector: 'app-customize',
-    standalone: true,
-    templateUrl: './customize.component.html',
-    styleUrls: ['./customize.component.css'],
-    imports: [CommonModule, CKEditorModule, FormsModule, PaginatorModule, TableModule, FooterComponent, ShareButtonsModule,
-      ShareIconsModule, SafeHtmlPipe]
+  selector: 'app-customize',
+  standalone: true,
+  templateUrl: './customize.component.html',
+  styleUrls: ['./customize.component.css'],
+  imports: [CommonModule, CKEditorModule, FormsModule, PaginatorModule, TableModule, FooterComponent, ShareButtonsModule,
+    ShareIconsModule, SafeHtmlPipe, SelectDropDownModule]
 })
 export class CustomizeComponent {
   customize = false;
@@ -36,6 +37,8 @@ export class CustomizeComponent {
   public editorData4 = '';
   verse_number = '';
   verse = '';
+  selectedOption: any[] = [];
+  userList: any[] = [];
   isActiveLabel = computed(() => this.apiService.verses());
 
   keywordDatas = computed(() => this.apiService.keywordVerseData());
@@ -57,9 +60,28 @@ export class CustomizeComponent {
   selectedTempalte: string = 'verse_day1.jpg';
   customMessage: string = '';
   keywordItems: any;
+  book_name: any;
+  userEmail: any;
+  chapter: any;
+  freinds$!: Observable<any>;
+  sub!: Subscription;
 
-  
-  public config  = {
+  config2 = {
+    displayKey: "name",
+    search: true,
+    height: 'auto',
+    placeholder: 'Select Users',
+    //customComparator: () => {},
+    limitTo: 0,
+    moreText: 'more',
+    noResultsFound: 'No results found!',
+    searchPlaceholder: 'Search',
+    clearOnSelection: false,
+    inputDirection: 'ltr',
+    multiple: true // Enable multiple selection
+  };
+
+  public config = {
     toolbar: [
       'heading', '|',
       'bold', 'italic', '|',
@@ -139,8 +161,21 @@ export class CustomizeComponent {
       documentColors: 0
     }
   };
-  constructor(private loaderService: LoaderService, public apiService: ApiService, private route: Router, private metaService: Meta) {
+  constructor(private loaderService: LoaderService, public apiService: ApiService, private route: Router, private metaService: Meta, private router: ActivatedRoute) {
     effect(() => {
+      this.userEmail = localStorage.getItem('userDetail');
+      
+      console.log(JSON.parse(this.userEmail));
+      this.sub = this.router.queryParams.subscribe(params => {
+        this.book_name = params['book_name'];
+        this.chapter = params['chapter'];
+        this.verse = params['verse'];
+        this.verse_number = params['verse_number'];
+        console.log(this.chapter);
+        this.editorData = `<h4>${this.book_name} ${this.chapter}:${this.verse_number}</h4>`
+        this.editorData2 = `<p>${this.verse}</p>`
+        console.log(this.editorData);
+      });
       if (this.apiService.verses().length > 0) {
         setTimeout(() => {
           console.log("effect is  working")
@@ -152,10 +187,13 @@ export class CustomizeComponent {
   };
 
   ngOnInit(): void {
+    this.freinds$ = this.apiService.getApi('getFreidns').pipe(tap(value => {
+      this.userList = value.data
+    }))
     this.verseDay$ = this.apiService.getApi('getBibleVerseOfTheDay').pipe(tap(value => {
       this.randomTableID = value.data.id;
       this.verseOftheDay = value.data;
-      console.log('verseOftheDay', this.verseOftheDay);
+
       setTimeout(() => {
         this.updateShareContent()
       }, 1000)
@@ -166,20 +204,27 @@ export class CustomizeComponent {
     this.template$ = this.apiService.getApi('getCardTemplate')
 
     this.loaderService.removeLoaderClass();
-  
+
+  };
+
+  onEditorChange(event: any) {
+    this.editorData = event.editor.getData();
+  };
+  onEditorChange2(event: any) {
+    this.editorData2 = event.editor.getData();
   };
 
   searchShareContent() {
-    console.log("function");
+
     const contentElement = this.searchedDiv?.nativeElement.cloneNode(true);
-    console.log("contentElement", contentElement);
+
     const linkElement = contentElement.querySelector('.ct_searchedDiv');
 
     if (linkElement) {
       linkElement.style.display = 'block';
     }
     const content = contentElement.innerHTML;
-    console.log("content", content);
+
     this.shareText = encodeURIComponent(content);
 
     this.shareUrl = `http://52.204.188.107/content?content=${this.shareText}`;
@@ -231,12 +276,7 @@ export class CustomizeComponent {
     })
 
   };
-  onEditorChange3(event: any) {
-    this.editorData3 = event.editor.getData();
-  };
-  onEditorChange4(event: any) {
-    this.editorData4 = event.editor.getData();
-  };
+
 
   searchedEditedURl() {
     this.shareButton2 = !this.shareButton2
@@ -254,7 +294,7 @@ export class CustomizeComponent {
   };
 
   getEditShortURl(fullUrl: string) {
-    console.log(fullUrl)
+
     const formData = new URLSearchParams();
     formData.set('full_url', fullUrl)
 
@@ -263,14 +303,11 @@ export class CustomizeComponent {
 
     this.apiService.postAPI('getEditshortURl', formData.toString()).subscribe({
       next: res => {
-
         if (res.success == true) {
           this.shareEditUrl = `http://52.204.188.107/content?content=${res.data}`;
-
         }
       }
     })
-
   };
 
   saveEditedVerse2(message: any) {
@@ -284,7 +321,7 @@ export class CustomizeComponent {
     formData.set('bg_image', this.selectedTempalte)
     this.apiService.postAPI('saveEditedBibleVerses', formData.toString()).subscribe({
       next: res => {
-        console.log(res)
+
         if (res.success == true) {
           // document.getElementById('modalClose')?.click()
           this.apiService.showSuccess(res.message)
@@ -293,5 +330,34 @@ export class CustomizeComponent {
         }
       }
     })
-  }
+  };
+
+  sendEmail() {
+    const contentElement = this.customizeDiv?.nativeElement.cloneNode(true);
+    const linkElement = contentElement.querySelector('.ct_page_link');
+
+    if (linkElement) {
+      linkElement.style.display = 'block';
+    }
+    const content = contentElement.innerHTML;
+    console.log(content);
+    this.shareText = encodeURIComponent(content);
+  
+    const selectedMail = this.selectedOption.map(project => project.email);
+
+    const formData = new URLSearchParams();
+    formData.set('html', this.shareText)
+    formData.set('to',  selectedMail.toString())
+    this.apiService.postAPI('sendEmail', formData.toString()).subscribe({
+      next: res => {
+
+        if (res.success == true) {
+          // document.getElementById('modalClose')?.click()
+          this.apiService.showSuccess(res.message)
+          this.customize2 = false;
+          this.selectedTempalte = 'verse_day1.jpg';
+        }
+      }
+    })
+  };
 }
