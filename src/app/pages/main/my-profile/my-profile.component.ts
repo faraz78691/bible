@@ -21,7 +21,7 @@ export class MyProfileComponent {
   constructor(){}
 
   ngOnInit(){
-    this.userDet = localStorage.getItem('userDetail');
+    this.userDet = localStorage.getItem('userDetailMV');
     const userData = JSON.parse(this.userDet);
     this.userFirstName = userData['first_name'];
     this.userLastName = userData['last_name'];

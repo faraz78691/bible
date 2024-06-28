@@ -37,7 +37,11 @@ h4.ct_innerhtml_p{
 .error-message {
     color: red;
   }
-
+  .ct_dlt_btn {
+    background-color: var(--red);
+    border-color: currentColor;
+    color: #fff;
+}
 
   /* Order */
 @layer reset, primeng;

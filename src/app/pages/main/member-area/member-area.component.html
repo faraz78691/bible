@@ -31,9 +31,16 @@
         <div class="tab-content mt-5" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-Saved-Verses" role="tabpanel"
                 aria-labelledby="pills-Saved-Verses-tab" *ngIf="savedverse$ | async as savedVerse">
+                <div class="d-flex justify-content-end align-items-center gap-2 mb-3">
+                    <button data-bs-target="#ct_friends_list" data-bs-toggle="modal" class="ct_custom_btn py-2 px-3 w-auto"><i class="fa-solid fa-paper-plane me-2"></i>Send Verse</button>
+                    <button class="ct_custom_btn py-2 px-3 w-auto " (click)="deleteVerse(2,'saved')"><i class="fa-solid fa-trash me-2"></i> Delete Verse</button>
+                </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-12" *ngFor="let items of savedVerse.data; index as i">
                         <div class="ct_verse_bg mb-4" style="background-color:#3a0d0f;">
+                            <div class="ct_verse_check_box">
+                                <input type="checkbox" (change)="onCheckboxChange(items, $event)">
+                            </div>
                             <img src="{{this.apiService.imageUrl + this.selectedTempalte }}">
                             <div class="ct_verse_overlay">
                                 <span class="ct_saved_verse_date">{{items.created_at | date:'yyyy-MM-dd' }}</span>
@@ -108,39 +115,50 @@
             <div class="tab-pane fade" id="pills-Saved-Edited-Verses" role="tabpanel"
                 aria-labelledby="pills-Saved-Edited-Verses-tab">
                 <div *ngIf="(editedverse$ | async) as editedVerse; else noDataTemplate">
+                    <div class="d-flex justify-content-end align-items-center gap-2 mb-3">
+                        <button data-bs-target="#ct_friends_list_edit" data-bs-toggle="modal" class="ct_custom_btn py-2 px-3 w-auto"><i class="fa-solid fa-paper-plane me-2"></i>Send Verse</button>
+                        <button class="ct_custom_btn py-2 px-3 w-auto " (click)="deleteVerse(1, 'edited')"><i class="fa-solid fa-trash me-2"></i> Delete Verse</button>
+                    </div>
                     <div *ngIf="editedVerse.data?.length > 0; else noDataTemplate">
                         <div class="row">
                             <div class="col-lg-4 col-md-6" *ngFor="let items of editedVerse.data; index as i">
-                                <div class="ct_verse_bg mb-4" style="background-color:#3a0d0f;">
-                                    <img src="{{this.apiService.imageUrl + items.bg_image}}">
-                                    <div class="ct_verse_overlay d-block">
-                                        <div class="">
-                                            <div class="ct_verse_head my-0 ct_verse_scroll_12 w-100">
-                                                <div class="ct_verse_title_clr_12 ct_verse_font_size_custom_12" [innerHTML]="items.verse_number | safeHtml"></div>
-                                                <div class="ct_verse_title_clr_12" [innerHTML]="items.verse | safeHtml"></div>
-
-                                                <p class="text-white mt-4">{{items?.notes}}</p>
-                                            </div>
-                                            <div class="ct_socials_bottom_position" style="z-index: auto;">
-                                                <div class="d-flex align-items-end gap-3">
-                                                    <div class="ct_share_main">
-                                                        <i class="fa-solid fa-share-nodes"
-                                                            (click)="setActiveItem2(items, i+1)"></i>
-                                                        <share-buttons *ngIf="isActive2(i+1)" class="ct_social_icon_clr"
-                                                            theme='modern-dark'
-                                                            [include]="['copy', 'facebook', 'email', 'telegram', 'twitter', 'whatsapp']"
-                                                             [showIcon]="true" [showText]="false"
-                                                            [url]="shareEditUrl" description="Bible Verse" class="pt-5">
-                                                        </share-buttons>
-
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
+                                <div #customizeDiv>
+                                    <div  class="ct_verse_bg mb-4"  style="background-color:#3a0d0f; background-image: url('{{this.apiService.imageUrl + items.bg_image}}');background-position: center;
+                                    background-size: cover;    padding-top: 90px; padding-bottom: 90px; color: #fff;">
+                                        <div class="ct_verse_check_box">
+                                            <input type="checkbox" (change)="onCheckboxChange2(items, $event)">
                                         </div>
-                                       
+                                        <!-- <img src="{{this.apiService.imageUrl + items.bg_image}}"> -->
+                                        <div style="position: relative; margin-inline: 30px; text-align: center;">
+                                            <div class="">
+                                                <div class="ct_verse_head my-0 ct_verse_scroll_12 w-100">
+                                                    <div class="ct_verse_title_clr_12 ct_verse_font_size_custom_12" [innerHTML]="items.verse_number | safeHtml"></div>
+                                                    <div class="ct_verse_title_clr_12" [innerHTML]="items.verse | safeHtml"></div>
+    
+                                                    <p class="text-white mt-4">{{items?.notes}}</p>
+                                                </div>
+                                                <div class="ct_socials_bottom_position" style="z-index: auto;">
+                                                    <div class="d-flex align-items-end gap-3">
+                                                        <div class="ct_share_main">
+                                                            <i class="fa-solid fa-share-nodes"
+                                                                (click)="setActiveItem2(items, i+1)"></i>
+                                                            <share-buttons *ngIf="isActive2(i+1)" class="ct_social_icon_clr"
+                                                                theme='modern-dark'
+                                                                [include]="['copy', 'facebook', 'email', 'telegram', 'twitter', 'whatsapp']"
+                                                                 [showIcon]="true" [showText]="false"
+                                                                [url]="shareEditUrl" description="Bible Verse" class="pt-5">
+                                                            </share-buttons>
+    
+                                                        </div>
+    
+                                                    </div>
+    
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -161,6 +179,7 @@
                         <h4 class="mb-0 ct_h2 ">Friends Email List</h4>
                         <button class="ct_custom_btn py-2 px-3 w-auto" data-bs-target="#ct_frreinds"
                             data-bs-toggle="modal">+ Add Friends</button>
+                            
                     </div>
 
                     <div class="table-responsive ct_custom_table">
@@ -170,6 +189,7 @@
 
                                     <th>Name</th>
                                     <th>Friends Email</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -179,6 +199,9 @@
                                         {{items.name}}
                                     </td>
                                     <td>{{items.email}}</td>
+                                    <td (click)="deleteVerse(items.id , 'freinds')"> 
+                                        <i class="fa-solid fa-trash"></i>
+                                    </td>
                                 </tr>
 
                             </tbody>
@@ -231,6 +254,71 @@
 
 
 <!-- modal -->
+
+<div class="modal fade" id="ct_friends_list" tabindex="-1" aria-labelledby="ct_friends_listLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0 pb-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="modalClose"></button>
+            </div>
+            <div class="modal-body border-0 pt-0">
+                <div class="ct_saved_verse_modal">
+                    <h4 class="mb-5 text-center"><strong>Friend List</strong></h4>
+                    <form [formGroup]="form">
+                       
+                       <div class="form-group">
+                        <label for="" class="mb-2 ct_fw_600">Select Friends</label>
+                        <ng-container style="max-width: 50%;" class="ct_verse_version_drop form-control" *ngIf="freinds$  | async as users ">
+                            <ngx-select-dropdown [instanceId]="'instance1'" [multiple]="true" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="selectedOption" [config]="config2" [options]="userList"></ngx-select-dropdown>
+                        
+                        </ng-container>
+                       </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer border-0 justify-content-center">
+                <button type="button" class="btn-secondary ct_custom_btn text-dark py-2 px-4  w-auto"
+                    style="background-color:  #eee;" data-bs-dismiss="modal" id="modalClose">Close</button>
+                <button (click)="sendEmail('saved')" type="button" class="ct_custom_btn py-2 px-4 w-auto">Save</button>
+                <button hidden type="button" class="btn btn-secondary" #closeModal
+                    data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ct_friends_list_edit" tabindex="-1" aria-labelledby="ct_friends_listLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0 pb-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="modalClose"></button>
+            </div>
+            <div class="modal-body border-0 pt-0">
+                <div class="ct_saved_verse_modal">
+                    <h4 class="mb-5 text-center"><strong>Friend List</strong></h4>
+                    <form [formGroup]="form">
+                       
+                       <div class="form-group">
+                        <label for="" class="mb-2 ct_fw_600">Select Friends</label>
+                        <ng-container style="max-width: 50%;" class="ct_verse_version_drop form-control" *ngIf="freinds$  | async as users ">
+                            <ngx-select-dropdown [instanceId]="'instance1'" [multiple]="true" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="selectedOption" [config]="config2" [options]="userList"></ngx-select-dropdown>
+                        
+                        </ng-container>
+                       </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer border-0 justify-content-center">
+                <button type="button" class="btn-secondary ct_custom_btn text-dark py-2 px-4  w-auto"
+                    style="background-color:  #eee;" data-bs-dismiss="modal" id="modalClose">Close</button>
+                <button (click)="sendEmail('edited')" type="button" class="ct_custom_btn py-2 px-4 w-auto">Save</button>
+                <button hidden type="button" class="btn btn-secondary" #closeModal
+                    data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <div class="modal fade" id="ct_frreinds" tabindex="-1" aria-labelledby="ct_save_verse_modalLabel" aria-hidden="true">
