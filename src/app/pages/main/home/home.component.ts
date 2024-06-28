@@ -63,7 +63,7 @@ export class HomeComponent {
   verseNumber = '';
   getVerse = '';
   randomTableID: any;
-  selectedTempalte: string = 'verse_day1.jpg';
+  selectedTempalte: string = 'mailverse.jpg';
   customMessage: string = '';
   keywordItems: any;
 
@@ -456,7 +456,7 @@ export class HomeComponent {
           // document.getElementById('modalClose')?.click()
           this.apiService.showSuccess(res.message)
           this.customize = false;
-          this.selectedTempalte = 'verse_day1.jpg';
+          this.selectedTempalte = 'mailverse.jpg';
         }
       }
     })
@@ -478,7 +478,7 @@ export class HomeComponent {
           // document.getElementById('modalClose')?.click()
           this.apiService.showSuccess(res.message)
           this.customize2 = false;
-          this.selectedTempalte = 'verse_day1.jpg';
+          this.selectedTempalte = 'mailverse.jpg';
         }
       }
     })

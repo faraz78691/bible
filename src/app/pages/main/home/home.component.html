@@ -11,7 +11,7 @@
             <a class="ct_page_link" (click)="clearResults('single')">Clear Results</a>
         </div>
         <div class="ct_verse_bg" style="background-color:#3a0d0f;">
-            <img src="assets/img/verse_day1.jpg">
+            <img src="assets/img/mailverse.jpg">
             <div class="ct_verse_overlay">
                 <div class="ct_verse_head">
                     <!-- book_name chapter -->
@@ -71,7 +71,7 @@
             <label for="" class="d-block mb-2 mt-3">Select card template</label>
             <select style="max-width: 50%;" class="ct_verse_version_drop form-control" [(ngModel)]="selectedTempalte"
                 *ngIf="template$ | async as template">
-                <option value='verse_day1.jpg'>Select verse</option>
+                <option value='mailverse.jpg'>Select verse</option>
                 <option *ngFor="let option of template.data; index as i" [ngValue]="option.image">
                    Template {{i + 1}}</option>
             </select>
@@ -139,7 +139,7 @@
             <a (click)="getChapter()" class="ct_page_link">Read whole chapter</a>
         </div>
         <div class="ct_verse_bg" style="background-color:#3a0d0f;">
-            <img src="assets/img/verse_day1.jpg">
+            <img src="assets/img/mailverse.jpg">
             <div class="ct_verse_overlay">
                 <div class="ct_verse_head">
                     <h4 class="mb-0">{{verses.data.book_name}} {{verses.data.chapter}}:{{verses.data.verse_number}}</h4>
@@ -196,7 +196,7 @@
             <label for="" class="d-block mb-2 mt-3">Select card template</label>
             <select style="max-width: 50%;" class="ct_verse_version_drop form-control" [(ngModel)]="selectedTempalte"
                 *ngIf="template$ | async as template">
-                <option value="verse_day1.jpg">Select template</option>
+                <option value="mailverse.jpg">Select template</option>
                 <option *ngFor="let option of template.data; index as i" [ngValue]="option.image">
                     Template {{i +1}}</option>
             </select>

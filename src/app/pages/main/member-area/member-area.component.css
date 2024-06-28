@@ -27,3 +27,15 @@
   .ct_verse_scroll_12::-webkit-scrollbar-thumb:hover {
     background: var(--red); 
   }
+
+  .ct_verse_check_box {
+    position: absolute;
+    z-index: 99;
+    left: 15px;
+    top: 15px;
+}
+.ct_verse_check_box input{
+  width: 18px;
+  height: 18px;
+  accent-color: var(--red);
+}

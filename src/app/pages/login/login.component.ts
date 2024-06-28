@@ -43,7 +43,7 @@ export class LoginComponent {
         next: (resp) => {
           if (resp.success == true) {
             this.route.navigateByUrl("/main");
-            localStorage.setItem('userDetail', JSON.stringify(resp.user_info));
+            localStorage.setItem('userDetailMV', JSON.stringify(resp.user_info));
             this.service.setToken(resp.token);
             //this.toastr.success(resp.message);
             //this.loading = false;

@@ -57,7 +57,7 @@ export class SignupComponent {
           console.log(resp)
           if (resp.success == true) {
             //this.route.navigateByUrl("/user/main/dashboard");
-            //localStorage.setItem('userDetail', JSON.stringify(resp.admin));
+            //localStorage.setItem('userDetailMV', JSON.stringify(resp.admin));
             //this.srevice.setToken(resp.token);
             this.service.showSuccess(resp.message);
              this.route.navigateByUrl("/");

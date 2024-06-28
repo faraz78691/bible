@@ -57,7 +57,7 @@ export class CustomizeComponent {
   verseNumber = '';
   getVerse = '';
   randomTableID: any;
-  selectedTempalte: string = 'verse_day1.jpg';
+  selectedTempalte: string = 'mailverse.jpg';
   customMessage: string = '';
   keywordItems: any;
   book_name: any;
@@ -162,20 +162,20 @@ export class CustomizeComponent {
     }
   };
   constructor(private loaderService: LoaderService, public apiService: ApiService, private route: Router, private metaService: Meta, private router: ActivatedRoute) {
+    this.sub = this.router.queryParams.subscribe(params => {
+      this.book_name = params['book_name'];
+      this.chapter = params['chapter'];
+      this.verse = params['verse'];
+      this.verse_number = params['verse_number'];
+      console.log(this.chapter);
+      this.editorData = `<h4>${this.book_name} ${this.chapter}:${this.verse_number}</h4>`
+      this.editorData2 = `<p>${this.verse}</p>`
+      console.log(this.editorData);
+    });
     effect(() => {
-      this.userEmail = localStorage.getItem('userDetail');
+      this.userEmail = localStorage.getItem('userDetailMV');
       
       console.log(JSON.parse(this.userEmail));
-      this.sub = this.router.queryParams.subscribe(params => {
-        this.book_name = params['book_name'];
-        this.chapter = params['chapter'];
-        this.verse = params['verse'];
-        this.verse_number = params['verse_number'];
-        console.log(this.chapter);
-        this.editorData = `<h4>${this.book_name} ${this.chapter}:${this.verse_number}</h4>`
-        this.editorData2 = `<p>${this.verse}</p>`
-        console.log(this.editorData);
-      });
       if (this.apiService.verses().length > 0) {
         setTimeout(() => {
           console.log("effect is  working")
@@ -326,13 +326,18 @@ export class CustomizeComponent {
           // document.getElementById('modalClose')?.click()
           this.apiService.showSuccess(res.message)
           this.customize2 = false;
-          this.selectedTempalte = 'verse_day1.jpg';
+          this.selectedTempalte = 'mailverse.jpg';
         }
       }
     })
   };
 
-  sendEmail() {
+  sendEmail(table_name:string) {
+    console.log(this.selectedOption);
+    if(this.selectedOption.length ==0){
+      this.apiService.showSuccess("Please select user")
+      return
+    }
     const contentElement = this.customizeDiv?.nativeElement.cloneNode(true);
     const linkElement = contentElement.querySelector('.ct_page_link');
 
@@ -348,6 +353,7 @@ export class CustomizeComponent {
     const formData = new URLSearchParams();
     formData.set('html', this.shareText)
     formData.set('to',  selectedMail.toString())
+    formData.set('table_name',  table_name.toString())
     this.apiService.postAPI('sendEmail', formData.toString()).subscribe({
       next: res => {
 
@@ -355,7 +361,7 @@ export class CustomizeComponent {
           // document.getElementById('modalClose')?.click()
           this.apiService.showSuccess(res.message)
           this.customize2 = false;
-          this.selectedTempalte = 'verse_day1.jpg';
+          this.selectedTempalte = 'mailverse.jpg';
         }
       }
     })
